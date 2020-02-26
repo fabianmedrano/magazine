@@ -1,6 +1,6 @@
 
 <?php
-//include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
+//include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 //header("Location: ".VIEW_PATH."/Nosotros/nosotros.php");
 require_once "Controller/nosotros_controller.php";

@@ -1,6 +1,5 @@
 <?php
-
-include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 
 Class DataNosotros{
@@ -22,12 +21,11 @@ Class DataNosotros{
 
 
 
-    static public function updateNosotros( $datos){
+    static public function updateNosotros( $texto){
        
         $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto=:texto WHERE id=:id");
-        $stmt->bind_param(":id",$datos["id"], PDO::PARAM_INT);
-        $stmt->bind_param(":id",$datos["texto"], PDO::PARAM_STR);
+        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto=:texto");
+        $stmt->bind_param(":texto",$texto, PDO::PARAM_STR);
         $stmt->execute();
         $con->getMessage();
         $con->cerrarConexion();
