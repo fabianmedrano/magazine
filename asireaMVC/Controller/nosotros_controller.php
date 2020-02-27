@@ -4,15 +4,18 @@
 include($_SERVER['DOCUMENT_ROOT']."/asirea/asireaMVC/config.php");
 require_once DATA_PATH."/DataNosotros.php";
 
-Class nosotrosController{
+Class NosotrosController{
   
     function __construct() {
        // include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
     }
 
     public function uptateNosotros(){
-       if(isset($_POST["updateNosotros"])){
-           $texto = $_POST["texto_nosotros"];
+     //   $editor_data = $_POST[ 'editor1' ];
+       if(isset($_POST["ckeditor_nosotros"])){
+           $texto = $_POST["ckeditor_nosotros"];
+           echo($texto);
+           var_dump($texto);
         $respuesta = DataNosotros::updateNosotros($texto);
         return $respuesta;
        }
@@ -21,6 +24,7 @@ Class nosotrosController{
         $respuesta = DataNosotros::getNosotros();
         return $respuesta;
     }
+    
 
     
 }
