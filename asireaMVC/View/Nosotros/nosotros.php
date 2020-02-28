@@ -2,6 +2,7 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
+require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
 //require_once(CONTROLLER_PATH . "/template_controller.php");
 
 //$Template = new templateController();
@@ -92,28 +93,13 @@ include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
 
-
     <section>
 
+<?php 
 
-      <div class="about-video-section wf100">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="about-text">
-                <h5>We are Taking Small Steps to Make</h5>
-                <h2>Earth Better Planet</h2>
-                <p><strong>One of the serious issues faced by our modern world is environmental pollution, and it is one the most significant challenges that the world is facing in our day.</strong></p>
-                <p>Environmental pollution has existed for centuries. But, it began to be a severe issue following the industrial revolution in the 19th century. Pollution generally takes place when pollutants pollute the natural surroundings and it can bring about changes that affect our everyday lifestyles unfavorably. </p>
-
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="about-video-img"> <img src="images/aboutimg.jpg" alt=""> </div>
-            </div>
-          </div>
-        </div>
-      </div>
+ $controlador_nosotros = new NosotrosController();
+ echo($controlador_nosotros->getNosotros());
+?>
 
 
     </section>

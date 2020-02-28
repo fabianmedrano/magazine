@@ -2,8 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once(CONTROLLER_PATH . "/nosotros_controller.php");
-
 //$Template = new templateController();
 //$Template->getBase();
 ?>
@@ -13,10 +11,6 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
 
 
 <head>
-
-  <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1">
-
-
 
   <!-- CSS FILES START-->
   <link href="../../public/css/custom.css" rel="stylesheet">
@@ -39,8 +33,6 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
   <script src="../../public/js/isotope.min.js"></script>
   <script src="../../public/js/custom.js"></script>
 
-
-
   <!--CKEDITOR START  -->
 
   <script src="../../ckeditor/ckeditor.js"></script>
@@ -48,7 +40,6 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
   <script type="text/javascript" src="../../ckeditor/config.js?t=JB9C"></script>
   <script type="text/javascript" src="../../ckeditor/lang/es.js?t=JB9C"></script>
   <script type="text/javascript" src="../../ckeditor/styles.js?t=JB9C"></script>
-
   <script src="../../public/js/nosotros/ckeditor_save.js"></script>
 
   <link rel="stylesheet" href="../../ckeditor/custom/css/samples.css">
@@ -68,13 +59,9 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
 
 
 
-  <!--   CKEDITOR END  -->
-
-
-
-
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
+
   <title>Acerca de RECURINFOR (v4)</title>
 
 </head>
@@ -86,7 +73,6 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
 
 
     <!--
-
     <section id="home-slider" class="owl-carousel owl-theme wf100 owl-loaded owl-drag">
 
 
@@ -122,25 +108,19 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
       <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div>
       <div class="owl-dots disabled"></div>
     </section>
-
-
           -->
     <!--   SECCION CKEDITOR START  -->
 
     <section>
 
 
-      <!--  <form data-sample="1" action="https://d1.ckeditor.com/savetextarea/savetextarea.php" method="post" data-sample-short=""> -->
-      <form method="post">
+      <!--<form method="post" action=<?php //echo "../../Controller/nosotros_controller.php" ?>>-->
+  <form method="post" action="../../Controller/nosotros/switch_controller.php">
         <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
             </textarea>
-        <?php
-        $controlador_nosotros = new NosotrosController();
-        $controlador_nosotros->uptateNosotros();
-        ?>
-        <button type="submit" class="btn btn-primary">guardar</button>
-
-
+  
+     
+        <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Update" /> 
         <script>
           CKEDITOR.replace('editor_nosotros');
         </script>

@@ -1,5 +1,14 @@
 <?php
 
+
+
+/** Ruta del proyecto */
+defined("BASE_DIR")
+    or define("BASE_DIR", __DIR__);
+/** Ruta en el navegador */
+defined("BASE_URL")
+    or define("BASE_URL", 'http://localhost/asirea/asireaMVC');
+
 defined("VIEW_PATH")
     or define("VIEW_PATH", realpath(dirname(__FILE__) . '/View'));
 
