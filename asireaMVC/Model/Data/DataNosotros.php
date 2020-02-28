@@ -13,8 +13,19 @@ Class DataNosotros{
         $stmt = $con->getConexion()->prepare("SELECT * FROM nosotros");
   
         $stmt->execute();
-        return $stmt->fetch();
-        $con->getMessage();
+       // echo($stmt->fetch(["texto"]));
+       // return $stmt->fetch();
+
+
+
+        $stmt->bind_result($texto);
+
+        /* obtener los valores */
+       $stmt->fetch();
+         //   printf ("%s \n", $texto);
+        return $texto;
+
+        echo($con->getMessage());
         $con->cerrarConexion();
 
     }
@@ -24,10 +35,10 @@ Class DataNosotros{
     static public function updateNosotros( $texto){
        
         $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto=:texto");
-        $stmt->bind_param(":texto",$texto, PDO::PARAM_STR);
+        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto = ? ");
+        $stmt->bind_param("s", $texto);
         $stmt->execute();
-        $con->getMessage();
+        echo($con->getMessage());
         $con->cerrarConexion();
     }
 

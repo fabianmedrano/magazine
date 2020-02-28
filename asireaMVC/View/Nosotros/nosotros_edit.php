@@ -2,8 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once(CONTROLLER_PATH . "/nosotros_controller.php");
-
+require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 //$Template = new templateController();
 //$Template->getBase();
 ?>
@@ -13,10 +12,8 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
 
 
 <head>
-
-  <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1">
-
-
+  <!-- CSS FILES START-->
+  <link href="../../public/css/general.css" rel="stylesheet">
 
   <!-- CSS FILES START-->
   <link href="../../public/css/custom.css" rel="stylesheet">
@@ -39,42 +36,13 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
   <script src="../../public/js/isotope.min.js"></script>
   <script src="../../public/js/custom.js"></script>
 
-
-
   <!--CKEDITOR START  -->
 
   <script src="../../ckeditor/ckeditor.js"></script>
-  <script src="../../ckeditor/custom/js/sample.js"></script>
-  <script type="text/javascript" src="../../ckeditor/config.js?t=JB9C"></script>
-  <script type="text/javascript" src="../../ckeditor/lang/es.js?t=JB9C"></script>
-  <script type="text/javascript" src="../../ckeditor/styles.js?t=JB9C"></script>
-
-  <script src="../../public/js/nosotros/ckeditor_save.js"></script>
-
-  <link rel="stylesheet" href="../../ckeditor/custom/css/samples.css">
-  <link rel="stylesheet" href="../../ckeditor/custom/toolbarconfigurator/lib/codemirror/neo.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/skins/moono-lisa/editor_gecko.css?t=JB9C">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/scayt/skins/moono-lisa/scayt.css?t=JB9C">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/scayt/dialogs/dialog.css?t=JB9C">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/tableselection/styles/tableselection.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/wsc/skins/moono-lisa/wsc.css?t=JB9C">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/balloontoolbar/skins/default.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/balloontoolbar/skins/moono-lisa/balloontoolbar.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/dialog/styles/dialog.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/copyformatting/styles/copyformatting.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/imagebase/styles/imagebase.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/balloonpanel/skins/moono-lisa/balloonpanel.css">
-  <link rel="stylesheet" type="text/css" href="../../ckeditor/plugins/easyimage/styles/easyimage.css">
-
-
-
-  <!--   CKEDITOR END  -->
-
-
-
 
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
+
   <title>Acerca de RECURINFOR (v4)</title>
 
 </head>
@@ -82,11 +50,10 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
 <body>
   <?php include(TEMPLATES_PATH . "/header.php") ?>
 
-  <main>
+  <div class="container">
 
 
-    <!--
-
+       <!--   Carusel START  -->
     <section id="home-slider" class="owl-carousel owl-theme wf100 owl-loaded owl-drag">
 
 
@@ -100,8 +67,6 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
           $images = glob($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/public/img/event/nosotros_carusel/*.*");
 
           foreach ($images as $image) { ?>
-
-
 
             <div class="owl-item " style="width: 1354px;">
               <div class="item">
@@ -124,32 +89,59 @@ require_once(CONTROLLER_PATH . "/nosotros_controller.php");
     </section>
 
 
-          -->
+
+       <!--   Carusel END  -->
     <!--   SECCION CKEDITOR START  -->
+
+
+
+
+
 
     <section>
 
 
-      <!--  <form data-sample="1" action="https://d1.ckeditor.com/savetextarea/savetextarea.php" method="post" data-sample-short=""> -->
-      <form method="post">
+      <form method="post" action="../../Controller/nosotros/switch_controller.php">
         <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
-            </textarea>
-        <?php
-        $controlador_nosotros = new NosotrosController();
-        $controlador_nosotros->uptateNosotros();
-        ?>
-        <button type="submit" class="btn btn-primary">guardar</button>
+          <?php
+
+          $controlador_nosotros = new NosotrosController();
+          echo ($controlador_nosotros->getNosotros());
+          ?>
+        </textarea>
 
 
-        <script>
-          CKEDITOR.replace('editor_nosotros');
-        </script>
+        <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Update" />
+      <!--  <script>
+          CKEDITOR.replace('editor_nosotros', {
+
+            filebrowserBrowseUrl: '/asirea/asireaMVC/ckfinder/ckfinder.html',
+            filebrowserUploadUrl: '/asirea/asireaMVC/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+
+          });
+        </script>-->
+
+<!--<script> 
+$(function(){
+   CKEDITOR.replace( 'editor_nosotros',{filebrowserBrowseUrl:'/asirea/asireaMVC/fileman/index.html',
+                                filebrowserImageBrowseUrl: '/asirea/asireaMVC/fileman/index.html?type=image',
+                                removeDialogTabs: 'link:upload;image:upload'}); 
+});
+ </script>
+-->
+<script>
+CKEDITOR.replace( 'editor_nosotros' ,{
+	filebrowserBrowseUrl : '/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+	filebrowserUploadUrl : '/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+	filebrowserImageBrowseUrl : '/filemanager/dialog.php?type=1&editor=ckeditor&fldr='
+});
+</script>
       </form>
 
     </section>
     <!--   SECCION CKEDITOR END  -->
 
-  </main>
+  </div>
   <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
