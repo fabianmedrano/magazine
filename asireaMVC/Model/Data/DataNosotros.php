@@ -22,11 +22,7 @@ Class DataNosotros{
 
         /* obtener los valores */
        $stmt->fetch();
-<<<<<<< HEAD
-            printf ("%s \n", $texto);
-=======
-         //   printf ("%s \n", $texto);
->>>>>>> fabian_develop
+
         return $texto;
 
         echo($con->getMessage());

@@ -2,11 +2,7 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-<<<<<<< HEAD
 require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
-=======
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
->>>>>>> fabian_develop
 //require_once(CONTROLLER_PATH . "/template_controller.php");
 
 //$Template = new templateController();
@@ -107,13 +103,7 @@ echo $images;
     <section>
       <div class="container">
 
-<<<<<<< HEAD
-<?php 
 
- $controlador_nosotros = new NosotrosController();
- echo($controlador_nosotros->getNosotros());
-?>
-=======
         <?php
 
         $controlador_nosotros = new NosotrosController();
@@ -121,9 +111,6 @@ echo $images;
         ?>
 
       </div>
->>>>>>> fabian_develop
-
-
     </section>
   </div>
   <?php include(TEMPLATES_PATH . "/footer.php") ?>
