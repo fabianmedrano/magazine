@@ -15,10 +15,17 @@ class NosotrosController
 
     public function uptateNosotros($texto)
     {
+<<<<<<< HEAD
             echo ($texto);
             var_dump($texto);
             echo ("<script>console.log('PHP: " . $texto . "');</script>");
             $respuesta = DataNosotros::updateNosotros($texto);
+=======
+          
+            $respuesta = DataNosotros::updateNosotros($texto);
+        
+
+>>>>>>> fabian_develop
             return $respuesta;
       
     }

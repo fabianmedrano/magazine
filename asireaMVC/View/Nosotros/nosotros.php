@@ -2,7 +2,11 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
+<<<<<<< HEAD
 require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
+=======
+require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
+>>>>>>> fabian_develop
 //require_once(CONTROLLER_PATH . "/template_controller.php");
 
 //$Template = new templateController();
@@ -13,6 +17,11 @@ require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
 <html>
 
 <head>
+
+
+  <!-- CSS FILES START-->
+  <link href="../../public/css/general.css" rel="stylesheet">
+
   <!-- CSS FILES START-->
   <link href="../../public/css/custom.css" rel="stylesheet">
   <link href="../../public/css.css" rel="stylesheet">
@@ -49,23 +58,25 @@ require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
 <body>
   <?php include(TEMPLATES_PATH . "/header.php") ?>
 
-  <main>
+  <div class="container_principal">
 
 
 
 
-    <section id="home-slider" class="owl-carousel owl-theme wf100 owl-loaded owl-drag">
+    <section id="home-slider" class=" carusel owl-carousel owl-theme wf100 owl-loaded owl-drag">
 
 
 
       <div class="owl-stage-outer">
         <div class="owl-stage" style="transform: translate3d(-4062px, 0px, 0px); transition: all 0.25s ease 0s; width: 9478px;">
 
-
+        
 
           <?php
-          $images = glob($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/public/img/event/nosotros_carusel/*.*");
 
+          
+          $images = glob( "../../public/img/event/nosotros_carusel/*.*");
+echo $images;
           foreach ($images as $image) { ?>
 
 
@@ -94,16 +105,27 @@ require_once CONTROLLER_PATH."/nosotros/nosotros_controller.php";
 
 
     <section>
+      <div class="container">
 
+<<<<<<< HEAD
 <?php 
 
  $controlador_nosotros = new NosotrosController();
  echo($controlador_nosotros->getNosotros());
 ?>
+=======
+        <?php
+
+        $controlador_nosotros = new NosotrosController();
+        echo ($controlador_nosotros->getNosotros());
+        ?>
+
+      </div>
+>>>>>>> fabian_develop
 
 
     </section>
-  </main>
+  </div>
   <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 

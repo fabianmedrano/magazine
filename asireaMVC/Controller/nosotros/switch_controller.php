@@ -12,6 +12,11 @@ if (isset($_POST["btn_accion"])) {
         
         case 'Update':
         $controlador_nosotros->uptateNosotros($_POST["editor_nosotros"]);
+<<<<<<< HEAD
+=======
+
+header('Location: '. BASE_URL.'/View/Nosotros/nosotros.php');
+>>>>>>> fabian_develop
             break;
 
         case 'View':
