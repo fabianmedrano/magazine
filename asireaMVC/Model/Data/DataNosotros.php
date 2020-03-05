@@ -1,6 +1,5 @@
 <?php
-
-include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 
 Class DataNosotros{
@@ -14,22 +13,32 @@ Class DataNosotros{
         $stmt = $con->getConexion()->prepare("SELECT * FROM nosotros");
   
         $stmt->execute();
-        return $stmt->fetch();
-        $con->getMessage();
+       // echo($stmt->fetch(["texto"]));
+       // return $stmt->fetch();
+
+
+
+        $stmt->bind_result($texto);
+
+        /* obtener los valores */
+       $stmt->fetch();
+            printf ("%s \n", $texto);
+        return $texto;
+
+        echo($con->getMessage());
         $con->cerrarConexion();
 
     }
 
 
 
-    static public function updateNosotros( $datos){
+    static public function updateNosotros( $texto){
        
         $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto=:texto WHERE id=:id");
-        $stmt->bind_param(":id",$datos["id"], PDO::PARAM_INT);
-        $stmt->bind_param(":id",$datos["texto"], PDO::PARAM_STR);
+        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto = ? ");
+        $stmt->bind_param("s", $texto);
         $stmt->execute();
-        $con->getMessage();
+        echo($con->getMessage());
         $con->cerrarConexion();
     }
 
