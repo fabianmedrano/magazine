@@ -9,14 +9,15 @@ if (isset($_POST["btn_accion"])) {
 
 
     switch ($_POST["btn_accion"]) {
-        
-        case 'Update':
-        $controlador_nosotros->uptateNosotros($_POST["editor_nosotros"]);
 
-header('Location: '. BASE_URL.'/View/Nosotros/nosotros.php');
+        case 'Actualizar':
+            $controlador_nosotros->uptateNosotros($_POST["editor_nosotros"]);
+
+            header('Location: ' . BASE_URL . '/View/Nosotros/nosotros_edit.php');
 
             break;
 
+            
         case 'View':
             $controlador_nosotros->getNosotros($_POST["editor_nosotros"]);
             break;
@@ -25,5 +26,4 @@ header('Location: '. BASE_URL.'/View/Nosotros/nosotros.php');
         default:
             break;
     }
-  
 }
