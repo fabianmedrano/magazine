@@ -97,6 +97,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 
+
     <!--   INICIO CKEDITOR   -->
     <section>
 
@@ -104,7 +105,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
           <?php
 
-          $controlador_nosotros= new NosotrosController();
+          $controlador_nosotros = new NosotrosController();
           echo ($controlador_nosotros->getNosotros());
           ?>
         </textarea>
