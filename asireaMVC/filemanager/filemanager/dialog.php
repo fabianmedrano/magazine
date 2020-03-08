@@ -3,6 +3,35 @@ $time = time();
 
 $config = include 'config/config.php';
 
+// DEFINICION DE ARCHIVO DE carpetas
+if (isset($_GET['configModule'])) {
+    $configModule = strip_tags($_GET['configModule']);
+    switch ($configModule) {
+        case 'nosotros':
+            $config['upload_dir'] ='/public/img/nosotros/principal/' ;
+            $config['current_path'] = '../../public/img/nosotros/principal/';
+            break;
+        case 'noticia':
+            if (isset($_GET['configModule'])) {
+                $numnews = strip_tags($_GET['numnews']);
+                $config['upload_dir'] ='/public/img/noticia/'.$numnews.'/' ;
+                $config['current_path'] = '../../public/img/noticia/'.$numnews.'/';
+            }else{
+                echo ('error numero de noticia no encontrado');
+            }
+            break;
+        default:
+            # code...
+            break;
+    }
+    echo $configModule;
+    echo $$config['upload_dir'];
+    echo $$config['current_path'];
+}
+
+
+
+
 if (USE_ACCESS_KEYS == true){
 	if (!isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])){
 		die('Access Denied!');
@@ -99,13 +128,14 @@ if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != "/") {
     $rfm_subfolder .= "/";
 }
 
+// PARAMETROS DE CONFICURACION DE LAS RUTAS
+
 $ftp = ftp_con($config);
 
 if (($ftp && !$ftp->isDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir)) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
     $subdir = '';
     $rfm_subfolder = "";
 }
-
 
 $cur_dir		= $config['upload_dir'].$rfm_subfolder.$subdir;
 $cur_dir_thumb	= $config['thumbs_upload_dir'].$rfm_subfolder.$subdir;

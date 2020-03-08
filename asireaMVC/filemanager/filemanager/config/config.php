@@ -67,7 +67,9 @@ $config = array(
     | without final / (DON'T TOUCH)
     |
     */
-    'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC/public/img/nosotros", //  ruta para cargar las imagenes
+   // 'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC/public/img/nosotros", //  ruta para cargar las imagenes
+   'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC", //  ruta para cargar las imagenes
+   
     /*
     |--------------------------------------------------------------------------
     | path from base_url to base of upload folder
@@ -76,7 +78,10 @@ $config = array(
     | with start and final /
     |
     */
-    'upload_dir' => '/source/',
+
+    //'upload_dir' => '/public/img/nosotros/source/',
+    'upload_dir' => '',
+
     /*
     |--------------------------------------------------------------------------
     | relative path from filemanager folder to upload folder
@@ -85,7 +90,9 @@ $config = array(
     | with final /
     |
     */
-    'current_path' => '../../public/img/nosotros/source/',
+    
+    //'current_path' => '../../public/img/nosotros/source/',
+    'current_path' => '',
 
     /*
     |--------------------------------------------------------------------------
