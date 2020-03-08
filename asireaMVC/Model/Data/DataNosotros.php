@@ -2,45 +2,46 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 
-Class DataNosotros{
-    
-    function _construct(){
+class DataNosotros
+{
 
+    function _construct()
+    {
     }
-    static public function getNosotros(){
-       
-        $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("SELECT * FROM nosotros");
-  
-        $stmt->execute();
-       // echo($stmt->fetch(["texto"]));
-       // return $stmt->fetch();
+    static public function getNosotros()
+    {
+        try {
+            $con = new Conexion();
 
+            $stmt = $con->getConexion()->prepare("CALL sp_getNosotros();");
 
+            $stmt->execute();
+            $stmt->bind_result($texto);
+            $stmt->fetch();
 
-        $stmt->bind_result($texto);
-
-        /* obtener los valores */
-       $stmt->fetch();
-         //   printf ("%s \n", $texto);
-        return $texto;
-
-        echo($con->getMessage());
-        $con->cerrarConexion();
-
+            return $texto;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
     }
 
 
+    static public function updateNosotros($texto)
+    {
+        try {
+            $con = new Conexion();
 
-    static public function updateNosotros( $texto){
-       
-        $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto = ? ");
-        $stmt->bind_param("s", $texto);
-        $stmt->execute();
-        echo($con->getMessage());
-        $con->cerrarConexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_updateNosotros(?);");
+            $stmt->bind_param("s", $texto);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
     }
-
 }
-?>
