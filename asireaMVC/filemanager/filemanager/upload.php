@@ -2,7 +2,9 @@
 
 try {
     if (!isset($config)) {
-        $config = include 'config/config.php';
+
+$modulo =strip_tags($_GET['modulo']);
+        $config = include 'config/config.php?modulo='.$modulo;
     }
 
     include 'include/utils.php';
@@ -49,8 +51,8 @@ try {
         if ($path == $config['current_path']) {
             $cycle = false;
         }
-        if (file_exists($path . "config.php")) {
-            $configTemp = include $path . 'config.php';
+        if (file_exists($path . "config.php?modulo=".$modulo)) {
+            $configTemp = include $path . 'config.php?modulo='.$modulo;
             $config = array_merge($config, $configTemp);
             //TODO switch to array
             $cycle = false;

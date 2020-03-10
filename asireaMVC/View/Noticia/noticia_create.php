@@ -77,9 +77,9 @@ echo ($controlador_noticia->createFile());
 
       <script>
         CKEDITOR.replace('editor_noticia', {
-          filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-          filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-          filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr='
+          filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=noticia&fldr=',
+          filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=noticia&fldr=',
+          filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&modulo=noticia&fldr='
         });
       </script>
     </form>

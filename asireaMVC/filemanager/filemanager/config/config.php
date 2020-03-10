@@ -1,4 +1,27 @@
 <?php
+// DEFINICION DE ARCHIVO DE carpetas
+if (isset($_GET['modulo'])) {
+    $modulo = strip_tags($_GET['modulo']);
+    switch ( $modulo) {
+        case 'nosotros':
+            $upload_dir ='/public/img/nosotros/principal/' ;
+            $current_path =  '../../public/img/nosotros/principal/';
+            break;
+        case 'noticia':
+            if ( $modulo) {
+                $numnews = strip_tags($_GET['numnews']);
+                $upload_dir ='/public/img/noticia/'.$numnews.'/' ;
+                $current_path = '../../public/img/noticia/'.$numnews.'/';
+            }else{
+                echo ('error numero de noticia no encontrado');
+            }
+            break;
+        default:
+            # code...
+            break;
+    }
+}
+echo  $upload_dir.$current_path;
 $version = "9.14.0";
 if (session_id() == '') {
     session_start();
@@ -11,7 +34,8 @@ mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
 date_default_timezone_set('Europe/Rome');
-setlocale(LC_CTYPE, 'en_US'); //correct transliteration
+setlocale(LC_CTYPE, 'en_EN'); //correct transliteration
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +104,7 @@ $config = array(
     */
 
     //'upload_dir' => '/public/img/nosotros/source/',
-    'upload_dir' => '',
+    'upload_dir' => $upload_dir,
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +116,7 @@ $config = array(
     */
     
     //'current_path' => '../../public/img/nosotros/source/',
-    'current_path' => '',
+    'current_path' => $current_path ,
 
     /*
     |--------------------------------------------------------------------------
@@ -500,7 +524,7 @@ $config = array(
     // set the names of any folders you want hidden (eg "hidden_folder1", "hidden_folder2" ) Remember all folders with these names will be hidden (you can set any exceptions in config.php files on folders)
     'hidden_folders'                          => array(),
     // set the names of any files you want hidden. Remember these names will be hidden in all folders (eg "this_document.pdf", "that_image.jpg" )
-    'hidden_files'                            => array( 'config.php' ),
+    'hidden_files'                            => array( 'config.php?modulo='. $modulo ),
 
     /*******************
     * URL upload

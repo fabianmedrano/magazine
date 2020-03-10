@@ -1,38 +1,17 @@
 <?php
+
+include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 $time = time();
+$modulo;
+if (isset($_GET['modulo'])) { $modulo =strip_tags($_GET['modulo']);}
 
-$config = include 'config/config.php';
-
-// DEFINICION DE ARCHIVO DE carpetas
-if (isset($_GET['configModule'])) {
-    $configModule = strip_tags($_GET['configModule']);
-    switch ($configModule) {
-        case 'nosotros':
-            $config['upload_dir'] ='/public/img/nosotros/principal/' ;
-            $config['current_path'] = '../../public/img/nosotros/principal/';
-            break;
-        case 'noticia':
-            if (isset($_GET['configModule'])) {
-                $numnews = strip_tags($_GET['numnews']);
-                $config['upload_dir'] ='/public/img/noticia/'.$numnews.'/' ;
-                $config['current_path'] = '../../public/img/noticia/'.$numnews.'/';
-            }else{
-                echo ('error numero de noticia no encontrado');
-            }
-            break;
-        default:
-            # code...
-            break;
-    }
-    echo $configModule;
-    echo $$config['upload_dir'];
-    echo $$config['current_path'];
-}
+$config = require_once BASE_URL.'/filemanager/filemanager/config/config.php?modulo='.$modulo;
 
 
 
 
-if (USE_ACCESS_KEYS == true){
+
+if (/*USE_ACCESS_KEYS*/ false== true){
 	if (!isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])){
 		die('Access Denied!');
 	}
@@ -47,9 +26,9 @@ if (USE_ACCESS_KEYS == true){
 $_SESSION['RF']["verify"] = "RESPONSIVEfilemanager";
 
 if (isset($_POST['submit'])) {
-    include 'upload.php';
+    require_once 'upload.php?modulo='.$modulo;
 } else {
-    $available_languages = include 'lang/languages.php';
+    $available_languages = require_once 'lang/languages.php';
 
     list($preferred_language) = array_values(array_filter(array(
         isset($_GET['lang']) ? $_GET['lang'] : null,
@@ -64,7 +43,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-include 'include/utils.php';
+require_once 'include/utils.php';
 
 $subdir_path = '';
 
@@ -160,8 +139,8 @@ if (!$ftp) {
             $parent = "";
         }
 
-        if (file_exists($config['current_path'] . $parent . "config.php")) {
-            $configTemp = include $config['current_path'] . $parent . 'config.php';
+        if (file_exists($config['current_path'] . $parent . "config.php?modulo=".$modulo)) {
+            $configTemp = require_once $config['current_path'] . $parent . 'config.php?modulo='.$modulo;
             $config = array_merge($config, $configTemp);
             $cycle = FALSE;
         }
