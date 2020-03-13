@@ -2,7 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
+require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 ?>
 
@@ -105,8 +105,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
           <?php
 
-          $controlador_nosotros = new NosotrosController();
-          echo ($controlador_nosotros->getNosotros());
+          $controlador_nosotros = new NoticiaController();
+          echo ($controlador_nosotros->getNoticiaID($_POST('ID_noticia')));
           ?>
         </textarea>
 

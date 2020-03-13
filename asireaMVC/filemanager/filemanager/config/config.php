@@ -1,27 +1,4 @@
 <?php
-// DEFINICION DE ARCHIVO DE carpetas
-if (isset($_GET['modulo'])) {
-    $modulo = strip_tags($_GET['modulo']);
-    switch ( $modulo) {
-        case 'nosotros':
-            $upload_dir ='/public/img/nosotros/principal/' ;
-            $current_path =  '../../public/img/nosotros/principal/';
-            break;
-        case 'noticia':
-            if ( $modulo) {
-                $numnews = strip_tags($_GET['numnews']);
-                $upload_dir ='/public/img/noticia/'.$numnews.'/' ;
-                $current_path = '../../public/img/noticia/'.$numnews.'/';
-            }else{
-                echo ('error numero de noticia no encontrado');
-            }
-            break;
-        default:
-            # code...
-            break;
-    }
-}
-echo  $upload_dir.$current_path;
 $version = "9.14.0";
 if (session_id() == '') {
     session_start();
@@ -34,8 +11,7 @@ mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
 date_default_timezone_set('Europe/Rome');
-setlocale(LC_CTYPE, 'en_EN'); //correct transliteration
-
+setlocale(LC_CTYPE, 'en_US'); //correct transliteration
 
 /*
 |--------------------------------------------------------------------------
@@ -91,9 +67,7 @@ $config = array(
     | without final / (DON'T TOUCH)
     |
     */
-   // 'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC/public/img/nosotros", //  ruta para cargar las imagenes
-   'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC", //  ruta para cargar las imagenes
-   
+    'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
     /*
     |--------------------------------------------------------------------------
     | path from base_url to base of upload folder
@@ -102,10 +76,7 @@ $config = array(
     | with start and final /
     |
     */
-
-    //'upload_dir' => '/public/img/nosotros/source/',
-    'upload_dir' => $upload_dir,
-
+    'upload_dir' => '/source/',
     /*
     |--------------------------------------------------------------------------
     | relative path from filemanager folder to upload folder
@@ -114,9 +85,7 @@ $config = array(
     | with final /
     |
     */
-    
-    //'current_path' => '../../public/img/nosotros/source/',
-    'current_path' => $current_path ,
+    'current_path' => '../source/',
 
     /*
     |--------------------------------------------------------------------------
@@ -259,7 +228,7 @@ $config = array(
     | default language file name
     |--------------------------------------------------------------------------
     */
-    'default_language' => "es",
+    'default_language' => "en_EN",
 
     /*
     |--------------------------------------------------------------------------
@@ -368,12 +337,12 @@ $config = array(
     //Permissions configuration
     //******************
     'delete_files'                            => true,
-    'create_folders'                          => false,
-    'delete_folders'                          => false,
+    'create_folders'                          => true,
+    'delete_folders'                          => true,
     'upload_files'                            => true,
     'rename_files'                            => true,
-    'rename_folders'                          => false,
-    'duplicate_files'                         => false,
+    'rename_folders'                          => true,
+    'duplicate_files'                         => true,
     'extract_files'                           => true,
     'copy_cut_files'                          => true, // for copy/cut files
     'copy_cut_dirs'                           => true, // for copy/cut directories
@@ -524,7 +493,7 @@ $config = array(
     // set the names of any folders you want hidden (eg "hidden_folder1", "hidden_folder2" ) Remember all folders with these names will be hidden (you can set any exceptions in config.php files on folders)
     'hidden_folders'                          => array(),
     // set the names of any files you want hidden. Remember these names will be hidden in all folders (eg "this_document.pdf", "that_image.jpg" )
-    'hidden_files'                            => array( 'config.php?modulo='. $modulo ),
+    'hidden_files'                            => array( 'config.php' ),
 
     /*******************
     * URL upload
@@ -590,7 +559,11 @@ return array_merge(
     $config,
     array(
         'ext' => array_merge(
-            $config['ext_img']
+            $config['ext_img'],
+            $config['ext_file'],
+            $config['ext_misc'],
+            $config['ext_video'],
+            $config['ext_music']
         ),
         'tui_defaults_config' => array(
             //'common.bi.image'                   => $config['common.bi.image'],

@@ -4,7 +4,8 @@ include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 $controlador_noticia = new NoticiaController();
-echo ($controlador_noticia->createFile());
+$numnews =$controlador_noticia->createFile();
+echo ($numnews);
 
 ?>
 
@@ -26,7 +27,6 @@ echo ($controlador_noticia->createFile());
   <link href="../../public/css/all.min.css" rel="stylesheet">
 
   <!-- FILE INPUT-->
-  <link href="../../fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="../.../public/css/fontawesome.min.css">
 
   <!--  CSS FILES End -->
@@ -40,12 +40,7 @@ echo ($controlador_noticia->createFile());
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- FILE INPUT-->
-  <script src="../../fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/plugins/purify.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/fileinput.min.js"></script>
-  <script src="../../fileinput/themes/fas/theme.min.js"></script>
-  <script src="../../fileinput/js/locales/LANG.js"></script>
+
 
   <!-- CKEDITOR-->
   <script src="../../ckeditor/ckeditor.js"></script>
@@ -68,18 +63,19 @@ echo ($controlador_noticia->createFile());
   <section>
 
     <form method="post" action="../../Controller/noticia/switch_controller.php">
-      <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
-     
-      </textarea>
 
+      <input type="text" id="titulo_noticia"  name="titulo_noticia"/>
+
+      <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
+      </textarea>
 
       <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Guardar" />
 
       <script>
         CKEDITOR.replace('editor_noticia', {
-          filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=noticia&fldr=',
-          filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=noticia&fldr=',
-          filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&modulo=noticia&fldr='
+          filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews?>&fldr=',
+          filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews?>&fldr=',
+          filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $numnews?>&fldr='
         });
       </script>
     </form>

@@ -8,17 +8,32 @@ class DataNoticia
     function _construct()
     {
     }
-    static public function getNoticia()
+
+
+    static public function getNoticiaID($id)
     {
         try {
             $con = new Conexion();
 
-            $stmt = $con->getConexion()->prepare("CALL sp_getNoticia();");
-
+            $stmt = $con->getConexion()->prepare("CALL sp_getNoticiaID(?);");
+            $stmt->bind_param("i", $id);
             $stmt->execute();
-            $stmt->bind_result($texto);
-            $stmt->fetch();
-            return $texto;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+    static public function getNoticias()
+    {
+        try {
+            $con = new Conexion();
+
+            $stmt = $con->getConexion()->prepare("CALL sp_getNoticias();");
+            $stmt->execute();
+            return $stmt->fetch();
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -42,14 +57,16 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
-    static public function insertNoticia( $titulo , $texto )
+    static public function insertNoticia($titulo, $texto)
     {
+
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?, ?);");
-            $stmt->bind_param("s", $titulo );
-            $stmt->bind_param("s", $texto );
+
+            $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?);");
+            $stmt->bind_param("ss", $titulo, $texto);
             $stmt->execute();
+            echo("por aui");
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -73,5 +90,4 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
-    
 }

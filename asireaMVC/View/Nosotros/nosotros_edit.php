@@ -114,9 +114,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
         <script>
           CKEDITOR.replace('editor_nosotros', {
-            filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=nosotros&fldr=',
-            filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&modulo=nosotros&fldr=',
-            filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&modulo=nosotros&fldr='
+            filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
+            filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
+            filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=1&editor=ckeditor&fldr='
           
           });
         </script>

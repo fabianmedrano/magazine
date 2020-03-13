@@ -43,8 +43,8 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <section>
       <div class="container">
         <?php
-        $controlador_noticia = new NoticiaController();
-        echo ($controlador_noticia->getNoticia());
+          $controlador_nosotros = new NoticiaController();
+          echo ($controlador_nosotros->getNoticiaID($_POST('ID_noticia')));
         ?>
       </div>
     </section>
