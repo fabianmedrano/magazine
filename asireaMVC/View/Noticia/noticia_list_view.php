@@ -86,38 +86,46 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 
 
-<div class="wrapper home2">
+    <div class="wrapper home2">
 
 
-    <section class="news-posts wf100 p80">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                  
-                    <div class="blog-list wf100">
-                        <!--Blog Post Start-->
-                        <?php 
-                        $noticias = NoticiaController::getNoticias();
-                        foreach( $noticias as $noticia=> $value): ?>
-                        <div class="blog-post wf100">
-                            <div class="blog-thumb"> <a href="#"><i class="fas fa-link"></i></a> <img src="images/np1.jpg" alt=""></div>
-                            <div class="blog-txt">
-                                <h5><a href="#"><?php echo $value["titulo"]?>.</a>
-                                </h5>
-                                <ul class="post-meta">
-                                    <li><span>Por:</span> Daniel</li>
-                                    <li><span>Publicado:</span> 29 Setiembre, 2018</li>
-                                </ul>
-                                <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchange it was popularised in letraset sheets.</p>
+        <section class="news-posts wf100 p80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                    
+                        <div class="blog-list wf100">
+                            <!--Blog Post Start-->
+                            <?php 
+                              
+                              $src_img ="../../public/img/noticias/nosticias/";
+                            $noticias = NoticiaController::getNoticias();
+                           foreach( $noticias as $noticia){ 
+                              //  echo$src_img_new;
+                            $images = glob($src_img); // carga la las rutas de las imagenes que estan en la carpeta carrusel
+                            var_dump( $images);
+                       ?>
+                           
+                            <div class="blog-post wf100" id="<?php echo $noticia["idnoticia"] ?>">
+                                <div class="blog-thumb"> <a href="#"><i class="fas fa-link"></i></a> <img s src='<?php echo( $images[0]); ?>'  alt=""></div>
+                                <div class="blog-txt">
+                                    <h5><a href="#"> <?php echo $noticia["titulo"]?> </a>
+                                    </h5>
+                                    <ul class="post-meta">
+                                        <li><span>Por:</span> Daniel</li>
+                                        <li><span>Publicado:</span> 29 Setiembre, 2018</li>
+                                    </ul>
+                                    <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchange it was popularised in letraset sheets.</p>
+                                </div>
                             </div>
+                            <?php } ?>
+                            <!--Blog Post End-->
                         </div>
-                        <!--Blog Post End-->
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
     </div>

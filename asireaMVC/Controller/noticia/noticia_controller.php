@@ -33,9 +33,22 @@ class NoticiaController
 
     public function insertNoticia($titulo,$texto)
     {
+        echo("<script> alert(".$texto.") </script>");
         $respuesta = DataNoticia::insertNoticia($titulo,$texto);
         return $respuesta; 
     }
+
+    public function deleteNoticia($id)
+    {
+        $respuesta = DataNoticia::deleteNoticia($id);
+        return $respuesta; 
+    }
+
+
+
+
+
+
 // Creacion de carpetas para las imagenes
     public function createFile()
     {

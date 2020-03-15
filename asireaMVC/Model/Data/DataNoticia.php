@@ -28,18 +28,39 @@ class DataNoticia
 
     static public function getNoticias()
     {
-        try {
-            $con = new Conexion();
+      //  try {
+$noticias = array();;
+         $con = new Conexion();
+            $resultado = $con->getConexion()->query("CALL sp_getNoticias();");
+            if ($resultado ) {
+                while ($fila = $resultado->fetch_row()) {
+                //    printf("%s (%s,%s)\n", $fila[0], $fila[1], $fila[2]);
+               
 
-            $stmt = $con->getConexion()->prepare("CALL sp_getNoticias();");
-            $stmt->execute();
-            return $stmt->fetch();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        } finally {
-            $con->cerrarConexion();
-        }
+                    array_push($noticias, 
+                        array (
+                        'idnoticia' =>$fila[0],
+                        'titulo' => $fila[1],
+                        'descripcion' => $fila[2]
+                        )
+                    );
+               
+                }
+                $resultado->close();
+            }
+         // var_dump($noticias);
+        
+
+         return $noticias;
+
+          //  return true;
+        
+       // } catch (PDOException $e) {
+       //     echo $e->getMessage();
+        //    return false;
+      //  } finally {
+         //   $con->cerrarConexion();
+       // }
     }
 
 
@@ -66,7 +87,6 @@ class DataNoticia
             $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?);");
             $stmt->bind_param("ss", $titulo, $texto);
             $stmt->execute();
-            echo("por aui");
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -74,6 +94,26 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
+
+
+
+    static public function deleteNoticia($id)
+    {
+        try {
+            $con = new Conexion();
+
+            $stmt = $con->getConexion()->prepare("CALL sp_deleteNoticiaID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
     static public function getLastIdNoticia()
     {
         try {
