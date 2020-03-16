@@ -12,18 +12,26 @@ class DataNoticia
 
     static public function getNoticiaID($id)
     {
-        try {
+  //      try {
             $con = new Conexion();
 
             $stmt = $con->getConexion()->prepare("CALL sp_getNoticiaID(?);");
             $stmt->bind_param("i", $id);
             $stmt->execute();
-        } catch (PDOException $e) {
+
+            $stmt->bind_result($titulo,$descripcion);
+            $stmt->fetch();
+
+            return array('descripcion'=>$descripcion, 'titulo'=>$titulo);
+     /*   } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         } finally {
             $con->cerrarConexion();
         }
+*/
+
+
     }
 
     static public function getNoticias()

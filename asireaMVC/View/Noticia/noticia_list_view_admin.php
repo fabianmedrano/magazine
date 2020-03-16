@@ -91,12 +91,11 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 <!-- inicio Acciones eliminar, editar-->
                                     <div class="btn-group">
                                         <div class="px-1">
-                                        <button onclick="window.location.href='<?php echo BASE_URL ?>/View/noticia/noticia_edit_admin.php$noticia=<?php echo $noticia['idnoticia'] ?>'"><i class="fas fa-pencil-alt "></i></button>
-
-                                        </div>
+                                        <button type="button" onclick="location.href='<?php echo BASE_URL ?>/View/Noticia/noticia_edit_admin.php?noticia=<?php echo $noticia['idnoticia'] ?>'">   www.example.coms<i class="fas fa-pencil-alt "></i></button>
+                                    </div>
                                         <form action="<?php echo BASE_URL ?>/Controller/noticia/switch_controller.php" method="POST">
                                             <input type="hidden" value="<?php echo $noticia["idnoticia"] ?>" name="id_noticia">
-                                            <button type="submit" class="btn btn-danger" name="btn_accion" type="Submit" value="Eliminar" ><i class="fas fa-trash"></i> </button>
+                                            <button class="btn btn-danger" name="btn_accion" type="Submit" value="Eliminar" ><i class="fas fa-trash"></i> </button>
                                            
                                         </form>
                                     </div>
@@ -106,7 +105,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <div class="blog-thumb"> <a href="#"><i class="fas fa-link"></i></a> <img src='<?php echo ($images[0]); ?>' alt=""></div>
                                     <div class="blog-txt">
-                                        <h5><a href="#"> <?php echo $noticia["titulo"] ?> </a>
+                                        <h5><?php echo $noticia["titulo"] ?>
                                         </h5>
                                         <ul class="post-meta">
                                             <li><span>Por:</span> Daniel</li>
