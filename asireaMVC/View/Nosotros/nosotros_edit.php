@@ -38,15 +38,10 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- FILE INPUT-->
-  <script src="../../fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/plugins/purify.min.js" type="text/javascript"></script>
-  <script src="../../fileinput/js/fileinput.min.js"></script>
-  <script src="../../fileinput/themes/fas/theme.min.js"></script>
-  <script src="../../fileinput/js/locales/LANG.js"></script>
+
 
   <!-- CKEDITOR-->
-  <script src="../../ckeditor/ckeditor.js"></script>
+  <script src="../../lib/ckeditor/ckeditor.js"></script>
   <!--   JS Files END  -->
 
 
@@ -114,9 +109,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
         <script>
           CKEDITOR.replace('editor_nosotros', {
-            filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
-            filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
-            filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/nosotros/dialog.php?type=1&editor=ckeditor&fldr='
+            filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
+            filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',
+            filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/nosotros/dialog.php?type=1&editor=ckeditor&fldr='
           
           });
         </script>

@@ -36,19 +36,36 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/header.php");
 
-  <div class="container_principal">
-  <!-- INICIO CUERPO INFORMACION NOSOTROS-->
-    <section>
-      <div class="container">
+  $controlador_noticia = new NoticiaController();
+  $noticia = $controlador_noticia->getNoticiaID($_GET["noticia"]);
+
+  ?>
+
+  <div class="container-flex">
+    <div class="row">
+      <div class="col-md-12">
+    <!-- INICIO CUERPO INFORMACION NOSOTROS-->
+    <div class="page-header">
+      <h1>
         <?php
-          $controlador_nosotros = new NoticiaController();
-          echo ($controlador_nosotros->getNoticiaID($_POST('ID_noticia')));
+        echo ($noticia['titulo']);
         ?>
-      </div>
-    </section>
-<!-- INICIO CUERPO INFORMACION NOSOTROS-->
+      </h1>
+    </div>
+
+    <div class="cuerpo">
+      <?php
+      echo ($noticia['descripcion']);
+      ?>
+    </div>
+
+
+    <!-- INICIO CUERPO INFORMACION NOSOTROS-->
+
+    </div>
+    </div>
 
   </div>
   <?php include(TEMPLATES_PATH . "/footer.php") ?>

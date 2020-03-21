@@ -39,11 +39,6 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <script src="../../public/js/jquery.prettyPhoto.js"></script>
     <script src="../../public/js/custom.js"></script>
 
-    <!-- CKEDITOR-->
-    <script src="../../ckeditor/ckeditor.js"></script>
-    <!--   JS Files END  -->
-
-
 
 
     <?php include(TEMPLATES_PATH . "/metadata.php") ?>
@@ -61,6 +56,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 
 
+<div class="container-flex">
 
 
 
@@ -69,12 +65,12 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <div class="wrapper home2">
 
 
-        <section class="news-posts wf100 p80">
+        <section class="news-posts p80">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
 
-                        <div class="blog-list wf100">
+                        <div class="blog-list ">
                             <!--Blog Post Start-->
                             <?php
 
@@ -86,14 +82,14 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 var_dump($images);
                             ?>
 
-                                <div class="blog-post wf100">
+                                <div class="blog-post">
                                     
-                            
+                         
 
 
                                     <div class="blog-thumb"> <a href="#"><i class="fas fa-link"></i></a> <img src='<?php echo ($images[0]); ?>' alt=""></div>
                                     <div class="blog-txt">
-                                        <h5> <?php echo $noticia["titulo"] ?> 
+                                        <h5><?php echo $noticia["titulo"] ?>
                                         </h5>
                                         <ul class="post-meta">
                                             <li><span>Por:</span> Daniel</li>
@@ -103,12 +99,10 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                         <?php echo strip_tags($noticia["descripcion"] )?> 
 
                                         </div>
-                                      
+                                      <a href="<?php echo BASE_URL ?>/View/Noticia/noticia.php?noticia=<?php echo $noticia['idnoticia'] ?>" >Leer más</a>
                                     </div>
-                                    <a style="left" href="#">Leer más...</a>
                                 </div>
                             <?php } ?>
-
                             <!--Blog Post End-->
                         </div>
 
@@ -118,6 +112,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
         </section>
 
 
+    </div>
     </div>
 
     <?php include(TEMPLATES_PATH . "/footer.php") ?>

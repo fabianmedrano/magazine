@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 $controlador_noticia = new NoticiaController();
-$numnews =$controlador_noticia->createFile();
+$numnews = $controlador_noticia->createFile();
 echo ($numnews);
 
 ?>
@@ -43,7 +43,7 @@ echo ($numnews);
 
 
   <!-- CKEDITOR-->
-  <script src="../../ckeditor/ckeditor.js"></script>
+  <script src="../../lib/ckeditor/ckeditor.js"></script>
   <!--   JS Files END  -->
 
 
@@ -56,34 +56,44 @@ echo ($numnews);
 <body>
   <?php include(TEMPLATES_PATH . "/header.php") ?>
 
-<div class="container">
 
 
-  <!--   INICIO CKEDITOR   -->
-  <section>
+    <!--   INICIO CKEDITOR   -->
+      <div class="container-flex">
 
-    <form method="post" action="../../Controller/noticia/switch_controller.php">
+      
+        <div class="row">
+          <div class="col-md-12">
+            <div class="well well-sm">
 
-      <input type="text" id="titulo_noticia"  name="titulo_noticia"/>
+              <form method="post" action="../../Controller/noticia/switch_controller.php">
+                <fieldset>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3">Título</span>
+                    </div>
+                    <input id="titulo_noticia" name="titulo_noticia" type="text" class="form-control" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="form-group">
+                    <label for="street1_id" class="control-label">Contenido</label>
+                    <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
+                    </textarea>
+                  </div>
+                  <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Guardar" />
+                  <script>
+                    CKEDITOR.replace('editor_noticia', {
+                      filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr=',
+                      filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr=',
+                      filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr='
+                    });
+                  </script>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
 
-      <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
-      </textarea>
-
-      <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Guardar" />
-
-      <script>
-        CKEDITOR.replace('editor_noticia', {
-          filebrowserBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews?>&fldr=',
-          filebrowserUploadUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews?>&fldr=',
-          filebrowserImageBrowseUrl: '/asirea/asireaMVC/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $numnews?>&fldr='
-        });
-      </script>
-    </form>
-
-  </section>
-  <!--   FIN CKEDITOR   -->
-
-
+    <!--   FIN CKEDITOR   -->
 
   </div>
   <?php include(TEMPLATES_PATH . "/footer.php") ?>

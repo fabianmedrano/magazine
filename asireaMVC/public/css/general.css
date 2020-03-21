@@ -1,7 +1,12 @@
-.container {
-	width: 100%;
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
+
+.container-flex {
+	margin: 50px  auto !important;
+	justify-content: center;
+	display: flex;
 }
+
+.row { 
+	display:inline-block;
+	
+	justify-content: center;
+	}
