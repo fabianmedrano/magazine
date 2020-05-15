@@ -12,32 +12,34 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 <head>
 
-    <!-- CSS FILES START-->
-    <link href="../../public/css/general.css" rel="stylesheet">
+  <!-- CSS FILES START-->
+  <link href="../../public/css/general.css" rel="stylesheet">
+
+  <!-- CSS FILES START-->
+  <link href="../../public/css/custom.css" rel="stylesheet">
+  <link href="../../public/css/responsive.css" rel="stylesheet">
+  <link href="../../public/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
+   <link href="../../lib/bootstrap/css/all.min.css" rel="stylesheet">
+
+  <!-- FILE INPUT-->
+  <!--  <link rel="stylesheet" href="../.../lib/fontawesome/css/fontawesome.min.css">-->
 
 
-    <link href="../../public/css/noticias/noticias.css" rel="stylesheet">
+  <!--  CSS FILES End -->
+
+  <!--   JS Files Start  -->
+  <script src="../../lib/jquery/jquery-3.3.1.min.js"></script>
+  <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../../public/js/owl.carousel.min.js"></script>
+  <script src="../../lib/jquery/jquery.prettyPhoto.js"></script>
+  <script src="../../public/js/custom.js"></script>
+
+  <!-- FILE INPUT-->
 
 
-    <!-- CSS FILES START-->
-    <link href="../../public/css/custom.css" rel="stylesheet">
-    <link href="../../public/css/responsive.css" rel="stylesheet">
-    <link href="../../public/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
-
-    <link href="../../public/css/fontawesome/css/all.min.css" rel="stylesheet">
-
-    <!-- FILE INPUT-->
-
-    <!--  CSS FILES End -->
-
-    <!--   JS Files Start  -->
-    <script src="../../public/js/jquery-3.3.1.min.js"></script>
-    <script src="../../public/js/bootstrap.min.js"></script>
-    <script src="../../public/js/owl.carousel.min.js"></script>
-    <script src="../../public/js/jquery.prettyPhoto.js"></script>
-    <script src="../../public/js/custom.js"></script>
+  <!--   JS Files END  -->
 
 
 

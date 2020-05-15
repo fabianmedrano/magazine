@@ -11,33 +11,18 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 
 <head>
+<link href="../../public/css/general.css" rel="stylesheet">
+  <link href="../../public/css/custom.css" rel="stylesheet">
+  <link href="../../public/css/responsive.css" rel="stylesheet">
+  <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="../../lib/jquery/jquery-3.3.1.min.js"></script>
+  <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../../public/js/custom.js"></script>
 
-    <!-- CSS FILES START-->
-    <link href="../../public/css/general.css" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../../public/js/noticia/noticia_delete.js"></script>
+  <script src="../../lib/ckeditor/ckeditor.js"></script>
 
-
-    <link href="../../public/css/noticias/noticias.css" rel="stylesheet">
-
-
-    <!-- CSS FILES START-->
-    <link href="../../public/css/custom.css" rel="stylesheet">
-    <link href="../../public/css/responsive.css" rel="stylesheet">
-    <link href="../../public/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
-
-    <link href="../../public/css/fontawesome/css/all.min.css" rel="stylesheet">
-
-    <!-- FILE INPUT-->
-
-    <!--  CSS FILES End -->
-
-    <!--   JS Files Start  -->
-    <script src="../../public/js/jquery-3.3.1.min.js"></script>
-    <script src="../../public/js/bootstrap.min.js"></script>
-    <script src="../../public/js/owl.carousel.min.js"></script>
-    <script src="../../public/js/jquery.prettyPhoto.js"></script>
-    <script src="../../public/js/custom.js"></script>
 
 
     <?php include(TEMPLATES_PATH . "/metadata.php") ?>
@@ -87,11 +72,10 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                     <div class="btn-group">
                                         <div class="px-1">
                                         <button type="button" onclick="location.href='<?php echo BASE_URL ?>/View/Noticia/noticia_edit_admin.php?noticia=<?php echo $noticia['idnoticia'] ?>'">   www.example.coms<i class="fas fa-pencil-alt "></i></button>
-                                    </div>
-                                        <form action="<?php echo BASE_URL ?>/Controller/noticia/switch_controller.php" method="POST">
+                                        </div>
+                                        <form id="form-noticia-delete" method="post"  action="<?php echo BASE_URL ?>/Controller/noticia/switch_controller.php" >
                                             <input type="hidden" value="<?php echo $noticia["idnoticia"] ?>" name="id_noticia">
-                                            <button class="btn btn-danger" name="btn_accion" type="Submit" value="Eliminar" ><i class="fas fa-trash"></i> </button>
-                                           
+                                             <input class="button btn-danger" id="btn-actualizar" name="btn_accion" type="submit" value="Eliminar" />
                                         </form>
                                     </div>
                                     <!-- fin Acciones eliminar, editar-->

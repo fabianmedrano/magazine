@@ -12,11 +12,12 @@ class NoticiaController
     }
 
 
-    public function uptateNoticia($texto)
+    public function uptateNoticia($id,$titulo,$texto)
     {
-            $respuesta = DataNoticia::updateNoticia($texto);
+            $respuesta = DataNoticia::updateNoticia($id,$titulo,$texto);
             return $respuesta; 
     }
+
     public function getNoticiaID($id)
     {
         $respuesta = DataNoticia::getNoticiaID($id);
@@ -33,7 +34,6 @@ class NoticiaController
 
     public function insertNoticia($titulo,$texto)
     {
-        echo("<script> alert(".$texto.") </script>");
         $respuesta = DataNoticia::insertNoticia($titulo,$texto);
         return $respuesta; 
     }
