@@ -44,46 +44,44 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
     <!--   INICIO CKEDITOR   -->
     <div class="container-flex">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="well well-sm">
-            <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
-              <fieldset>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Título</span>
+      <section class="wrapper news-posts ">
+        <div class="row">
+              <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
+                <fieldset>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3">Título</span>
+                    </div>
+                    <input id="titulo_noticia" name="titulo_noticia" type="text" class="form-control" aria-describedby="basic-addon3" value="<?php echo $noticia['titulo'] ?>">
                   </div>
-                  <input id="titulo_noticia" name="titulo_noticia" type="text" class="form-control" aria-describedby="basic-addon3" value="<?php echo $noticia['titulo'] ?>">
-                </div>
-                <div class="form-group">
-                  <label for="street1_id" class="control-label">Contenido</label>
-                  <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
-                  <?php
+                  <div class="form-group">
+                    <label for="street1_id" class="control-label">Contenido</label>
+                    <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
+                    <?php
 
-                  echo ($noticia['descripcion']);
+                    echo ($noticia['descripcion']);
 
-                  ?>
-                  </textarea>
-                </div>
+                    ?>
+                    </textarea>
+                  </div>
 
-                <input class="button btn btn-primary" id="btn-actualizar" name="btn_accion" type="submit" value="Actualizar" />
+                  <input class="button btn btn-primary" id="btn-actualizar" name="btn_accion" type="submit" value="Actualizar" />
 
-                <script>
-                  CKEDITOR.replace('editor_noticia', {
-                    filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
-                    filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
-                    filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr='
-                  });
-                </script>
-              </fieldset>
-            </form>
-          </div>
+                  <script>
+                    CKEDITOR.replace('editor_noticia', {
+                      filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
+                      filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
+                      filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr='
+                    });
+                  </script>
+                </fieldset>
+              </form>
         </div>
-      </div>
-
-      <!--   FIN CKEDITOR   -->
-
+        <!--   FIN CKEDITOR   -->
+      </section>
     </div>
+
+
     <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 

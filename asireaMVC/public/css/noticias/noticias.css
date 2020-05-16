@@ -13,3 +13,10 @@ white-space: pre-line;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.blog-list .blog-post .blog-txt {
+  width: 60% !important;
+}
+.blog-list .blog-post .blog-thumb{
+  width: 40% !important;
+}
