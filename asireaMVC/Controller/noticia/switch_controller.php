@@ -20,9 +20,8 @@ if (isset($_POST["btn_accion"])) {
 
             break;
 
-        case 'eliminar':
+        case 'Eliminar':
 
-            echo ("por aca");
             $controlador_noticia->deleteNoticia($_POST["id_noticia"]);
 
             header('Location: ' . BASE_URL . '/View/Noticia/noticia_create.php');

@@ -1,4 +1,4 @@
-<!-- <?php
+ <?php
 
       include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
@@ -21,10 +21,10 @@
 <link href="../../public/css/owl.carousel.min.css" rel="stylesheet">
 <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
-<!-- <link href="../../public/css/all.min.css" rel="stylesheet">-->
+<link href="../../public/css/all.min.css" rel="stylesheet">
 
-<!-- FILE INPUT-->
-<!--  <link rel="stylesheet" href="../.../lib/fontawesome/css/fontawesome.min.css">-->
+
+ <link rel="stylesheet" href="../.../lib/fontawesome/css/fontawesome.min.css">
 
 
 <!--  CSS FILES End -->
@@ -35,9 +35,6 @@
 <script src="../../public/js/owl.carousel.min.js"></script>
 <script src="../../lib/jquery/jquery.prettyPhoto.js"></script>
 <script src="../../public/js/custom.js"></script>
-
-<!-- FILE INPUT-->
-
 
 <!--   JS Files END  -->
 
@@ -69,6 +66,8 @@
             echo ($noticia['descripcion']);
             ?>
           </div>
+          <input type="button" onclick="history.back()" name="volver atrás"  class="btn btn-success" value="volver atrás">
+
         </div>
       </div>
     </section>

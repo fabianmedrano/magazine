@@ -18,14 +18,14 @@ echo ($numnews);
 <link href="../../public/css/general.css" rel="stylesheet">
 
 
-<link href="../../public/css/custom.css" rel="stylesheet">
-<link href="../../public/css/responsive.css" rel="stylesheet">
+<link href="../../lib/template/css/custom.css" rel="stylesheet">
+<link href="../../lib/template/css/responsive.css" rel="stylesheet">
 <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
 <script src="../../lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../public/js/custom.js"></script>
+<script src="../../lib/template/js/custom.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
