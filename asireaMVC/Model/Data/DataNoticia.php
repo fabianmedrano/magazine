@@ -112,7 +112,7 @@ class DataNoticia
 
     static public function deleteNoticia($id)
     {
-        //try {
+        try {
             $con = new Conexion();
 
             $stmt = $con->getConexion()->prepare("CALL sp_deleteNoticiaID(?);");
@@ -123,15 +123,15 @@ class DataNoticia
                 'status' => 'success',
                 'msg' => 'noticia eliminada exitosamente'
             ];
-       /* } catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();   
             $response = [
                 'status' => 'error',
                 'errors' => $e->getMessage()
             ];
-        } finally { */
+        } finally { 
             $con->cerrarConexion();
-       // }
+       }
 
         return (json_encode($response));
     }

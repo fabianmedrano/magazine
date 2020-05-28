@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-
+    
+    
     $("#form-noticia-create").submit(function (ev) {
         ev.preventDefault();
         swal({
@@ -40,6 +41,21 @@ $(document).ready(function () {
 
 
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

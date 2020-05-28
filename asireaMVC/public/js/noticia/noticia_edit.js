@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    
 
     $("#form-noticia-edit").submit(function (ev) {
         ev.preventDefault();
@@ -42,6 +43,12 @@ $(document).ready(function () {
 
 
     });
+
+
+
+
+
+
 
 
 

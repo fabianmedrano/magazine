@@ -90,19 +90,15 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
           </div>
           <!-- FIN File Input -->
 
-
           <!--   INICIO CKEDITOR   -->
-          <form method="post" action="../../Controller/nosotros/switch_controller.php">
+          <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
             <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
           <?php
           $controlador_nosotros = new NosotrosController();
           echo ($controlador_nosotros->getNosotros());
           ?>
         </textarea>
-
-
             <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Actualizar" />
-
             <script>
               CKEDITOR.replace('editor_nosotros', {
                 filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/nosotros/dialog.php?type=2&editor=ckeditor&fldr=',

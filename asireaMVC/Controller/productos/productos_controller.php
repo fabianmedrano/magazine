@@ -2,8 +2,8 @@
 
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-require_once DATA_PATH . "/DataNoticia.php";
-class NoticiaController
+require_once DATA_PATH . "/DataProductos.php";
+class ProductosController
 {
 
     function __construct()
@@ -12,35 +12,35 @@ class NoticiaController
     }
 
 
-    public function uptateNoticia($id,$titulo,$texto)
+    public function uptateproductos($id,$titulo,$texto)
     {
-            $respuesta = DataNoticia::updateNoticia($id,$titulo,$texto);
+            $respuesta = DataProductos::updateproductos($id,$titulo,$texto);
             return $respuesta; 
     }
 
-    public function getNoticiaID($id)
+    public function getproductosID($id)
     {
-        $respuesta = DataNoticia::getNoticiaID($id);
+        $respuesta = DataProductos::getproductosID($id);
         return $respuesta;
     }
     
 
 
-    public function getNoticias()
+    public function getproductoss()
     {
-        $respuesta = DataNoticia::getNoticias();
+        $respuesta = DataProductos::getproductoss();
         return $respuesta;
     }
 
-    public function insertNoticia($titulo,$texto)
+    public function insertproductos($titulo,$texto)
     {
-        $respuesta = DataNoticia::insertNoticia($titulo,$texto);
+        $respuesta = DataProductos::insertproductos($titulo,$texto);
         return $respuesta; 
     }
 
-    public function deleteNoticia($id)
+    public function deleteproductos($id)
     {
-        $respuesta = DataNoticia::deleteNoticia($id);
+        $respuesta = DataProductos::deleteproductos($id);
         self:: deleteDirectory($id);
         exit ($respuesta); 
     }
@@ -50,9 +50,9 @@ class NoticiaController
 
 
 
-// eliminar carpetas e imagenes de las noticias
-    function deleteDirectory($idnoticia) {
-       $dir = '../../public/img/noticias/noticias/'.($idnoticia);
+// eliminar carpetas e imagenes de las productoss
+    function deleteDirectory($idproductos) {
+       $dir = '../../public/img/productoss/productoss/'.($idproductos);
         if(!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
             if($current != '.' && $current != '..') {
@@ -69,11 +69,11 @@ class NoticiaController
 // Creacion de carpetas para las imagenes
     public function createFile()
     {
-        $respuesta = DataNoticia::getLastIdNoticia();
-       $carpeta = '../../public/img/noticias/noticias/'.((int)$respuesta);
+        $respuesta = DataProductos::getLastIdproductos();
+       $carpeta = '../../public/img/productoss/productoss/'.((int)$respuesta);
      echo $respuesta;
      if($respuesta == NULL) $respuesta = 0;
-   //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_noticias/'.((int)$respuesta+1);   
+   //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_productoss/'.((int)$respuesta+1);   
         echo $carpeta.'\n';
         if (!file_exists($carpeta)) {
             mkdir($carpeta, 0777, true);

@@ -11,7 +11,8 @@ class Conexion extends mysqli {
 
         try{
 
-            $this->conexion  = new mysqli('107.180.4.72', 'asirea', 'Gel492cnsae', 'asirea');
+//            $this->conexion  = new mysqli('107.180.4.72', 'asirea', 'Gel492cnsae', 'asirea');
+            $this->conexion  = new mysqli('localhost', 'root', '', 'asirea');
         } catch (mysqli_sql_exception $e){
           
             $mensaje = "Error de conexión";

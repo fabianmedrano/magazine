@@ -37,9 +37,21 @@ $(document).ready(function () {
                     swal("Cancelado", "Se ha cancelado la acción de eliminar", "error");
                 }
             });
-
-
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
