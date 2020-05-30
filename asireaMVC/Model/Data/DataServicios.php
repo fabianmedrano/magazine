@@ -21,9 +21,10 @@ class DataServicios {
                     array_push(
                         $servicios,
                         array(
-                            "imagen" => $fila[0],
-                            "nombre" => $fila[1],
-                            "descripcion" => $fila[2]
+                            "id" => $fila[0],
+                            "imagen" => $fila[1],
+                            "nombre" => $fila[2],
+                            "descripcion" => $fila[3]
                         )
                     );
                 }

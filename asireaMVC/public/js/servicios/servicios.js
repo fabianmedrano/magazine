@@ -1,18 +1,51 @@
-$listaServicios = {};
+/*$listaServicios = {};
 $tablaServicios = null;
 $Imagen_N = "http://localhost/asirea/codigo/data/img_o/hknqas9srqutqedzmv1r9yurrwl0u9ad878wss10.jpg";
+*/
+$(document).ready(function() {
 
-$( document ).ready(function() {
+    $('#tbServicios').DataTable({
+        paging: true,
+        
+    });
+
+    
+
+
+});
+
     //validarSesion();
-    obtener_servicios();
+   // obtener_servicios();
+
+   $("#form-sevicios-create").submit(function (ev) {
+    ev.preventDefault();
+    // var imagen =$ ("#imagen").val()
+    var $form = $("form-sevicios-create");
+    var $accion = "&btn_accion=Guardar";
+
+    $.ajax({
+        method: $form.attr("method"),
+        url: $form.attr("action"),
+        data: $form.serialize() + $accion ,
+        success: function (result) {
+            if (result == 1){
+                alert("registro exitoso!");
+                $("#nombreServicio").val("");
+                $("#textarea").val("");
+                obtener_servicios();
+            }else{
+                alert("error al insertar");
+            }
+        }
+    })
 });
 
 
 function obtener_servicios() {
     $.ajax({
-        url: "BDServicios.php",
+        url: "DataServicios.php",
         type: "POST",
-        data: {obtener_servicio: "true"},
+        data: {getServicios: "true"},
         success: function (result) {
             $listaServicios = jQuery.parseJSON(result);
             iniciar_Tabla();
@@ -196,28 +229,7 @@ function editar_datos() {
     })
 
 }
-$("#form-sevicios-create").submit(function (ev) {
-    ev.preventDefault();
-    // var imagen =$ ("#imagen").val()
-    var $form = $("form-sevicios-create");
-    var $accion = "&btn_accion=Guardar";
 
-    $.ajax({
-        method: $form.attr("method"),
-        url: $form.attr("action"),
-        data: $form.serialize() + $accion + $id,
-        success: function (result) {
-            if (result == 1){
-                alert("registro exitoso!");
-                $("#nombreServicio").val("");
-                $("#textarea").val("");
-                obtener_servicios();
-            }else{
-                alert("error al insertar");
-            }
-        }
-    })
-});
 
 function eliminar_servicios(id) {
 
@@ -238,4 +250,3 @@ function eliminar_servicios(id) {
     })
 
 }
-

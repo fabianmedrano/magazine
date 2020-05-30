@@ -12,13 +12,13 @@ class NoticiaController
     }
 
 
-    public function uptateNoticia($id,$titulo,$texto)
+    static public function uptateNoticia($id,$titulo,$texto)
     {
             $respuesta = DataNoticia::updateNoticia($id,$titulo,$texto);
             return $respuesta; 
     }
 
-    public function getNoticiaID($id)
+    static public function getNoticiaID($id)
     {
         $respuesta = DataNoticia::getNoticiaID($id);
         return $respuesta;
@@ -26,19 +26,19 @@ class NoticiaController
     
 
 
-    public function getNoticias()
+    static public function getNoticias()
     {
         $respuesta = DataNoticia::getNoticias();
         return $respuesta;
     }
 
-    public function insertNoticia($titulo,$texto)
+    static public function insertNoticia($titulo,$texto)
     {
         $respuesta = DataNoticia::insertNoticia($titulo,$texto);
         return $respuesta; 
     }
 
-    public function deleteNoticia($id)
+    static public function deleteNoticia($id)
     {
         $respuesta = DataNoticia::deleteNoticia($id);
         self:: deleteDirectory($id);

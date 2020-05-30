@@ -1,6 +1,8 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
+require_once CONTROLLER_PATH . "/servicios/servicios_controller.php";
+
+
 ?>
 <html>
 
@@ -9,7 +11,6 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 <head>
 
-    <script src="../../public/js/servicios/servicios.js"></script>
 
     <link href="../../public/css/general.css" rel="stylesheet">
     <link href="../../public/css/nosotros/nosotros.css" rel="stylesheet">
@@ -25,6 +26,12 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
     <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../lib/jquery/jquery.prettyPhoto.js"></script>
     <script src="../../lib/template/js/custom.js"></script>
+
+    <script src="../../public/js/servicios/servicios.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css"/>
+    <script type="text/javascript" charset="utf8" src="../../lib/DataTables/datatables.js"></script>
 
 </head>
 
@@ -45,10 +52,22 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
                 <table id="tbServicios" class="table table-striped table-bordered dt-responsive display">
                     <thead>
                         <tr>
-
-
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                            $sevicios = ServiciosController::getServicios();
+                            foreach ($sevicios as $sevicio) {
+                        ?>
+                        <tr id="<?php echo $sevicio["id"] ?>">
+                            <td> <?php echo $sevicio["nombre"] ?></td>
+                            <td> <?php echo $sevicio["descripcion"] ?></td>
+                        </tr>
+                        <?php }?>
+                    </tbody>
+
                 </table>
             </div>
         </div>

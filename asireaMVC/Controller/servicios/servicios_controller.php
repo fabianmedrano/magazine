@@ -3,6 +3,7 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once DATA_PATH . "/DataServicios.php";
+
 class ServiciosController
 {
 
@@ -26,7 +27,7 @@ class ServiciosController
     
 */
 
-    public function getServicioss()
+   static public function getServicios()
     {
         $respuesta = DataServicios::getServicios();
         return $respuesta;
