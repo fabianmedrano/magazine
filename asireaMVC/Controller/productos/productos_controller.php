@@ -12,76 +12,39 @@ class ProductosController
     }
 
 
-    public function uptateproductos($id,$titulo,$texto)
+    static public function uptateProductos($id,$categoria, $nombre, $descripcion,$imagen)
     {
-            $respuesta = DataProductos::updateproductos($id,$titulo,$texto);
+            $respuesta = DataProductos::updateProductos($id,$categoria, $nombre, $descripcion,$imagen);
             return $respuesta; 
     }
 
-    public function getproductosID($id)
+    static public function getProductosID($id)
     {
-        $respuesta = DataProductos::getproductosID($id);
-        return $respuesta;
-    }
-    
-
-
-    public function getproductoss()
-    {
-        $respuesta = DataProductos::getproductoss();
+        $respuesta = DataProductos::getProductosID($id);
         return $respuesta;
     }
 
-    public function insertproductos($titulo,$texto)
+
+    static public function getProductos()
     {
-        $respuesta = DataProductos::insertproductos($titulo,$texto);
+        $respuesta = DataProductos::getProductos();
+        return $respuesta;
+    }
+
+    static public function insertProductos($categoria, $nombre, $descripcion,$imagen)
+    {
+        $respuesta = DataProductos::insertProductos($categoria, $nombre, $descripcion,$imagen);
         return $respuesta; 
     }
 
-    public function deleteproductos($id)
+    static public function deleteProductos($id)
     {
-        $respuesta = DataProductos::deleteproductos($id);
-        self:: deleteDirectory($id);
-        exit ($respuesta); 
+        $respuesta = DataProductos::deleteProductos($id);
+        return $respuesta; 
     }
 
 
 
 
-
-
-// eliminar carpetas e imagenes de las productoss
-    function deleteDirectory($idproductos) {
-       $dir = '../../public/img/productoss/productoss/'.($idproductos);
-        if(!$dh = @opendir($dir)) return;
-        while (false !== ($current = readdir($dh))) {
-            if($current != '.' && $current != '..') {
-                echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
-                if (!@unlink($dir.'/'.$current)) 
-                   self:: deleteDirectory($dir.'/'.$current);
-            }       
-        }
-        closedir($dh);
-        echo 'Se ha borrado el directorio '.$dir.'<br/>';
-        @rmdir($dir);
-    }
-    
-// Creacion de carpetas para las imagenes
-    public function createFile()
-    {
-        $respuesta = DataProductos::getLastIdproductos();
-       $carpeta = '../../public/img/productoss/productoss/'.((int)$respuesta);
-     echo $respuesta;
-     if($respuesta == NULL) $respuesta = 0;
-   //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_productoss/'.((int)$respuesta+1);   
-        echo $carpeta.'\n';
-        if (!file_exists($carpeta)) {
-            mkdir($carpeta, 0777, true);
-            echo('no esxiste carpeta ');
-        }else{
-            echo('carpeta existe');
-        }
-        return $respuesta;
-    }
 
 }

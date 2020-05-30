@@ -8,7 +8,25 @@ class DataServicios {
     function _construct()
     {
     }
-  
+    static public function getServicioID($id)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getNoticiaID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+
+            $stmt->bind_result($id, $titulo, $descripcion);
+            $stmt->fetch();
+            return array('id' => $id, 'titulo' => $titulo, 'descripcion' => $descripcion);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
 
     static public function getServicios()
     {
@@ -91,7 +109,7 @@ static public function insertServicios($imagen, $nombre, $descripcion){
         return (json_encode($response));
     }
 
-    static public function editar_servicio($id, $imagen, $nombre, $descripcion)
+    static public function updateServicios($id, $imagen, $nombre, $descripcion)
     {
         try {
             $con = new Conexion();

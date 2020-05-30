@@ -12,20 +12,18 @@ class ServiciosController
   
     }
 
-/*
-    public function uptateServicios($id,$titulo,$texto)
+   static public function uptateServicios($id,$img,$nombre,$descripcion)
     {
-            $respuesta = DataServicios::updateServicios($id,$titulo,$texto);
+            $respuesta = DataServicios::updateServicios($id,$img,$nombre,$descripcion);
             return $respuesta; 
     }
 
-    public function getServiciosID($id)
+    static public function getServicioID($id)
     {
-        $respuesta = DataServicios::getServiciosID($id);
+        $respuesta = DataServicios::getServicioID($id);
         return $respuesta;
     }
     
-*/
 
    static public function getServicios()
     {

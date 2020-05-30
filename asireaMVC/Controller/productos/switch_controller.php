@@ -12,24 +12,16 @@ if (isset($_POST["btn_accion"])) {
     switch ($_POST["btn_accion"]) {
 
         case 'Actualizar':
-            $controlador_productos->uptateproductos($_POST["id_productos"], $_POST["titulo_productos"], $_POST["editor_productos"]);
+            $controlador_productos->uptateProductos($_POST["id"], $_POST["categoria"],  $_POST["nombre"],$_POST["descricion"], "imagen");
             break;
 
         case 'Guardar':
-            $controlador_productos->insertproductos($_POST["titulo_productos"], $_POST["editor_productos"]);
-
+            $controlador_productos->insertProductos($_POST["categoria"], $_POST["nombre"], $_POST["descripcion"] , "Imagen");
             break;
-
         case 'Eliminar':
-
-            $controlador_productos->deleteproductos($_POST["id_productos"]);
-
-            header('Location: ' . BASE_URL . '/View/productos/productos_create.php');
+            $controlador_productos->deleteProductos($_POST["id_productos"]);
             break;
-
         default:
-            echo ("por aqui");
-            //    $controlador_productos->deleteproductos($_get["id_productos"]);
             break;
     }
 }

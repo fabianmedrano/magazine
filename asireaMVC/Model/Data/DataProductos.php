@@ -1,7 +1,8 @@
 <?php
+include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
+require_once CONEXION_PATH;
 
-require_once("conexion.php");
-class DataProductos extends conexion {
+class DataProductos   {
 
 
 
@@ -75,84 +76,108 @@ class DataProductos extends conexion {
          }
     }
 */
-    public function registrar_producto($imagen, $nombre, $descripcion, $idCategoria){
 
-        try{
-            $conexion = $this->get_Conexion()->stmt_init();
-            
+static public function insertproductos($imagen, $nombre, $descripcion, $idCategoria){
+    try{
+        $con = new Conexion();
+        $stmt = $con->getConexion()->prepare("CALL  sp_insertarProductos(?,?,?,?);");
+        $stmt->bind_param("sssi",$imagen, $nombre, $descripcion,$idCategoria);
+        $stmt->execute();
+        
+        $response = [
+            'status' => 'success',
+            'msg' => 'producto insertado exitosamente'
+        ];
 
-            $conexion->prepare("call sp_insertarProductos(?,?,?,?)");
-            $conexion->bind_param("sssd",$imagen, $nombre, $descripcion,$idCategoria);
-
-            $conexion->execute();
-
-            if($conexion->affected_rows > 0){
-                return 1;
-            }else{
-                return 0;
-            }
-
-
-        }catch (Exception $e){
-            return $e;
-
-        } finally {
-            mysqli_close($this->get_Conexion());
-        }
+    } catch (PDOException $e) {
+        //echo $e->getMessage();   
+       $response = [
+            'status' => 'error',
+            'errors' => $e->getMessage()
+        ];
+    } finally {
+        $con->cerrarConexion();
     }
+    exit(json_encode($response));
+}
 
+ 
 
-    public function eliminar_producto($id){
-
-        try{
-            $conexion = $this->get_Conexion()->stmt_init();
-           
-
-            $conexion->prepare("call sp_eliminarProductos(?)");
-            $conexion->bind_param("d",$id);
-
-            $conexion->execute();
-
-            if($conexion->affected_rows > 0){
-                return 1;
-            }else{
-                return 0;
-            }
-
-
-        }catch (Exception $e){
-            return $e;
-
-        } finally {
-            mysqli_close($this->get_Conexion());
-        }
-    }
-
-    public function editar_producto($id, $imagen, $nombre, $descripcion, $idCategoria){
+    static public function deleteProductos($id)
+    {
         try {
-            $conexion = $this->get_Conexion()->stmt_init();
-            $conexion->prepare("call sp_editarProductos(?,?,?,?,?)");
-            $conexion->bind_param("dsssd",$id, $imagen, $nombre, $descripcion, $idCategoria);
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("call sp_eliminarProductos(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $response = [
+                'status' => 'success',
+                'msg' => 'producto eliminado exitosamente'
+            ];
+        } catch (PDOException $e) {
+            echo $e->getMessage();   
+            $response = [
+                'status' => 'error',
+                'errors' => $e->getMessage()
+            ];
+        } finally { 
+            $con->cerrarConexion();
+       }
+        return (json_encode($response));
+    }
+    static public function getProductosID($id)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getProductosID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
 
-            $conexion->execute();
-            if($conexion->affected_rows > 0){
-                return 1;
-            }else{
-                return 0;
-            }
-        }catch (Exception $e){
-            return $e;
+            $stmt->bind_result($id,$categoria, $nombre, $descripcion,$imagen);
+            $stmt->fetch();
+            return array('id' => $id, 'categoria' => $categoria, 'nombre' => $nombre, 'descripcion' => $descripcion, 'imagen' => $imagen);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
         } finally {
-            mysqli_close($this->get_Conexion());
+            $con->cerrarConexion();
         }
     }
 
+
+
+    static public function updateProductos($id,$categoria, $nombre, $descripcion,$imagen)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("call sp_editarProductos(?,?,?,?,?);");
+            $stmt->bind_param("iisss",$id,$categoria, $nombre, $descripcion,$imagen);
+            $stmt->execute();
+
+            $response = [
+                'status' => 'success',
+                'msg' => 'producto actualizado'
+            ];
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+            $response = [
+                'status' => 'error',
+                'errors' => $e->getMessage()
+            ];
+        } finally {
+            $con->cerrarConexion();
+        }
+
+        exit(json_encode($response));
+    }
+ 
 
 
 
 }
 
-
+/*
 
 $producto = new BDProductos();
 
@@ -172,3 +197,4 @@ if(isset($_REQUEST["eliminar_producto"])){
 if(isset($_REQUEST["editar_producto"])){
     echo $prueba->editar_producto($_REQUEST["id"], $_REQUEST["imagen"],$_REQUEST["nombre"], $_REQUEST["descripcion"],$_REQUEST["id_categoria"]);
 }
+*/

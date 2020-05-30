@@ -1,6 +1,6 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
+require_once CONTROLLER_PATH . "/productos/Productos_controller.php";
 ?>
 <html>
 
@@ -9,9 +9,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 <head>
 
-    <script src="../../public/js/productos/productos.js"></script>
-
-    <link href="../../public/css/general.css" rel="stylesheet">
+<link href="../../public/css/general.css" rel="stylesheet">
     <link href="../../public/css/nosotros/nosotros.css" rel="stylesheet">
 
     <link href="../../public/css/custom.css" rel="stylesheet">
@@ -25,6 +23,12 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
     <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../lib/jquery/jquery.prettyPhoto.js"></script>
     <script src="../../lib/template/js/custom.js"></script>
+
+    <script src="../../public/js/productos/productos.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css"/>
+    <script type="text/javascript" charset="utf8" src="../../lib/DataTables/datatables.js"></script>
 
 </head>
 
@@ -42,13 +46,24 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
             </div>
             <!-- se crea la tabla-->
             <div class="mb-5">
-                <table id="tbProductos" class="table table-striped table-bordered dt-responsive display">
+            <table id="tbProductos" class="table table-striped table-bordered dt-responsive display">
                     <thead>
                         <tr>
-
-
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                            $productos = ProductosController::getProductos();
+                            foreach ($productos as $producto) {
+                        ?>
+                        <tr id="<?php echo $producto["id"] ?>">
+                            <td> <?php echo $producto["nombre"] ?></td>
+                            <td> <?php echo $producto["descripcion"] ?></td>
+                        </tr>
+                        <?php }?>
+                    </tbody>
 
                 </table>
 
@@ -71,6 +86,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
                     </div>
                 </div>
                 <!-- se crea el contenido dentro del modal-->
+                
+                <form id="form-productos-create" method="post" action="../../Controller/productos/switch_controller.php">
                 <div class="modal-body" id="contenidoModalProductos">
 
                     <div class="form-group">
@@ -82,15 +99,15 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
                         <!-- contenido-->
                         <label for="categorias">Categorias: </label>
                         <br>
-                        <select id="categoriasProductos">Categorias de productos
+                        <select id="categoriasProductos" name="categoria" >Categorias de productos
                             <option value="planta">Plantas Hornomentales</option>
                         </select>
                         <br>
                         <label for="nombre">Nombre: </label>
-                        <input type="text" class="form-control" id="nombreProductos">
+                        <input type="text" class="form-control" name="nombre"  id="nombreProductos">
                         <br>
                         <label for="descrip">Descripción: </label>
-                        <textarea id="textarea" rows="5" cols="62"></textarea>
+                        <textarea id="textarea" name="descripcion"  rows="5" cols="62"></textarea>
                         <br>
                         <label for="imagen">Imagen: </label>
                         <br>
@@ -113,8 +130,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnProductos"></button>
-                </div>
+                    <input class="btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>

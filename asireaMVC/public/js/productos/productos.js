@@ -3,8 +3,16 @@ $tablaProductos = null;
 $listaCategoriasProductos = {};
 $Imagen_N = "http://localhost/asirea/codigo/data/img_o/hknqas9srqutqedzmv1r9yurrwl0u9ad878wss10.jpg";
 
-$( document ).ready(function() {
-    obtener_productos();
+$(document).ready(function() {
+
+    $('#tbProductos').DataTable({
+        paging: true,
+        
+    });
+
+    
+
+
 });
 
 function obtener_productos() {
