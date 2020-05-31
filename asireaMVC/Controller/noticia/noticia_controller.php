@@ -51,7 +51,7 @@ class NoticiaController
 
 
 // eliminar carpetas e imagenes de las noticias
-    function deleteDirectory($idnoticia) {
+   static function deleteDirectory($idnoticia) {
        $dir = '../../public/img/noticias/noticias/'.($idnoticia);
         if(!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
@@ -67,7 +67,7 @@ class NoticiaController
     }
     
 // Creacion de carpetas para las imagenes
-    public function createFile()
+   static public function createFile()
     {
         $respuesta = DataNoticia::getLastIdNoticia();
        $carpeta = '../../public/img/noticias/noticias/'.((int)$respuesta);

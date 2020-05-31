@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    
-
   $("#form-nosotros-edit").submit(function (ev) {
       ev.preventDefault();
       swal({
@@ -19,14 +17,13 @@ $(document).ready(function () {
               if (value) {
                   var $form = $("#form-nosotros-edit");
                   var $accion = "&btn_accion=Actualizar";
-                  var $id = "&id_noticia=" + $form.attr("name")
-
                   $.ajax({
                       method: $form.attr("method"),
                       url: $form.attr("action"),
-                      data: $form.serialize() + $accion + $id,
+                      data: $form.serialize() + $accion ,
                       async: false,
                       dataType: "json",
+
                       success: function () {
                           swal("Infomacion actualizada de forma exitosa", {
                               icon: "success",

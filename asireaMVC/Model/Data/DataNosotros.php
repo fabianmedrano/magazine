@@ -31,17 +31,29 @@ class DataNosotros
 
     static public function updateNosotros($texto)
     {
+
         try {
             $con = new Conexion();
-
             $stmt = $con->getConexion()->prepare("CALL sp_updateNosotros(?);");
             $stmt->bind_param("s", $texto);
             $stmt->execute();
+
+
+            $response = [
+                'status' => 'success',
+                'msg' => 'noticia actualizada'
+            ];
         } catch (PDOException $e) {
+
             echo $e->getMessage();
-            return false;
+            $response = [
+                'status' => 'error',
+                'errors' => $e->getMessage()
+            ];
         } finally {
             $con->cerrarConexion();
         }
+
+        exit(json_encode($response));
     }
 }
