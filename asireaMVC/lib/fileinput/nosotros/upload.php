@@ -1,118 +1,96 @@
-<?php /* 
-$carpetaAdjunta="imagenes_/";
-$Imagenes =count(isset($_FILES['imagenes']['name'])?$_FILES['imagenes']['name']:0);
-$infoImagenesSubidas = array();
-for($i = 0; $i < $Imagenes; $i++) {
-	$nombreArchivo=isset($_FILES['imagenes']['name'][$i])?$_FILES['imagenes']['name'][$i]:null;
-	$nombreTemporal=isset($_FILES['imagenes']['tmp_name'][$i])?$_FILES['imagenes']['tmp_name'][$i]:null;
-	$rutaArchivo=$carpetaAdjunta.$nombreArchivo;
-	move_uploaded_file($nombreTemporal,$rutaArchivo);
-	$infoImagenesSubidas[$i]=array("caption"=>"$nombreArchivo","height"=>"120px","url"=>"delete.php","key"=>$nombreArchivo);
-	$ImagenesSubidas[$i]="<img  height='120px'  src='$rutaArchivo' class='file-preview-image'>";
+<?php
+// COMPROBACIÓN INICIAL ANTES DE CONTINUAR CON EL PROCESO DE UPLOAD
+// **********************************************************************
+
+// Si no se ha llegado ha definir el array global $_FILES, cancelaremos el resto del proceso
+if (empty($_FILES['input-carrusel'])) {
+	// Devolvemos un array asociativo con la clave error en formato JSON como respuesta	
+    echo json_encode(['error'=>'No hay ficheros para realizar upload.']); 
+	// Cancelamos el resto del script
+    return; 
 }
 
-$arr = array("file_id"=>0,"overwriteInitial"=>true,"initialPreviewConfig"=>$infoImagenesSubidas,
-			 "initialPreview"=>$ImagenesSubidas);
-echo json_encode($arr);*/
+// DEFINICIÓN DE LAS VARIABLES DE TRABAJO (CONSTANTES, ARRAYS Y VARIABLES)
+// ************************************************************************
 
+// Definimos la constante con el directorio de destino de las descargas
+define('DIR_DESCARGAS',realpath(dirname(__FILE__, 4)). '\public\img\nosotros\nosotros_carrusel');
+var_dump(DIR_DESCARGAS);
+// Obtenemos el array de ficheros enviados
+$ficheros = $_FILES['input-carrusel'];
+// Establecemos el indicador de proceso correcto (simplemente no indicando nada)
+$estado_proceso = NULL;
+// Paths para almacenar
+$paths= array();
+// Obtenemos los nombres de los ficheros
+$nombres_ficheros = $ficheros['name'];
 
-// Define file upload path 
-$upload_dir = array( 
-    'img'=> 'uploads/', 
-); 
- 
-// Allowed image properties  
-$imgset = array( 
-    'maxsize' => 2000, 
-    'maxwidth' => 1024, 
-    'maxheight' => 800, 
-    'minwidth' => 10, 
-    'minheight' => 10, 
-    'type' => array('bmp', 'gif', 'jpg', 'jpeg', 'png'), 
-); 
- 
-// If 0, will OVERWRITE the existing file 
-define('RENAME_F', 1); 
- 
-/** 
- * Set filename 
- * If the file exists, and RENAME_F is 1, set "img_name_1" 
- * 
- * $p = dir-path, $fn=filename to check, $ex=extension $i=index to rename 
- */ 
-function setFName($p, $fn, $ex, $i){ 
-    if(RENAME_F ==1 && file_exists($p .$fn .$ex)){ 
-        return setFName($p, F_NAME .'_'. ($i +1), $ex, ($i +1)); 
-    }else{ 
-        return $fn .$ex; 
-    } 
-} 
- 
-$re = ''; 
-if(isset($_FILES['upload']) && strlen($_FILES['upload']['name']) > 1) { 
- 
-    define('F_NAME', preg_replace('/.(.+?)$/i', '', basename($_FILES['upload']['name'])));   
- 
-    // Get filename without extension 
-    $sepext = explode('.', strtolower($_FILES['upload']['name'])); 
-    $type = end($sepext);    /** gets extension **/ 
-     
-    // Upload directory 
-    $upload_dir = in_array($type, $imgset['type']) ? $upload_dir['img'] : $upload_dir['audio']; 
-    $upload_dir = trim($upload_dir, '/') .'/'; 
- 
-    // Validate file type 
-    if(in_array($type, $imgset['type'])){ 
-        // Image width and height 
-        list($width, $height) = getimagesize($_FILES['upload']['tmp_name']); 
- 
-        if(isset($width) && isset($height)) { 
-            if($width > $imgset['maxwidth'] || $height > $imgset['maxheight']){ 
-                $re .= '\n Width x Height = '. $width .' x '. $height .' \n The maximum Width x Height must be: '. $imgset['maxwidth']. ' x '. $imgset['maxheight']; 
-            } 
- 
-            if($width < $imgset['minwidth'] || $height < $imgset['minheight']){ 
-                $re .= '\n Width x Height = '. $width .' x '. $height .'\n The minimum Width x Height must be: '. $imgset['minwidth']. ' x '. $imgset['minheight']; 
-            } 
- 
-            if($_FILES['upload']['size'] > $imgset['maxsize']*1000){ 
-                $re .= '\n Maximum file size must be: '. $imgset['maxsize']. ' KB.'; 
-            } 
-        } 
-    }else{ 
-        $re .= 'The file: '. $_FILES['upload']['name']. ' has not the allowed extension type.'; 
-    } 
-     
-    // File upload path 
-    $f_name = setFName($_SERVER['DOCUMENT_ROOT'] .'/'. $upload_dir, F_NAME, ".$type", 0); 
-    $uploadpath = $upload_dir . $f_name; 
- 
-    // If no errors, upload the image, else, output the errors 
-    if($re == ''){ 
-        if(move_uploaded_file($_FILES['upload']['tmp_name'], $uploadpath)) { 
-            $CKEditorFuncNum = $_GET['CKEditorFuncNum']; 
-            $url = 'ckeditor/'. $upload_dir . $f_name; 
-            $msg = F_NAME .'.'. $type .' successfully uploaded: \n- Size: '. number_format($_FILES['upload']['size']/1024, 2, '.', '') .' KB'; 
-			$re = in_array($type, $imgset['type']) ?
-			"<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>"
-			: 
-			
-			"<script>
-			var cke_ob = window.parent.CKEDITOR; 
-			for(var ckid in cke_ob.instances) {
-				 if(cke_ob.instances[ckid].focusManager.hasFocus) break;
-				}
-				  cke_ob.instances[ckid].insertHtml(' ', 'unfiltered_html');
-				   </script>"; 
-        }else{ 
-            $re = '<script>alert("Unable to upload the file")</script>'; 
-        } 
-    }else{ 
-        $re = '<script>alert("'. $re .'")</script>'; 
-    } 
-} 
- 
-// Render HTML output 
-@header('Content-type: text/html; charset=utf-8'); 
-echo $re;
+// LÍNEAS ENCARGADAS DE REALIZAR EL PROCESO DE UPLOAD POR CADA FICHERO RECIBIDO
+// ****************************************************************************
+
+// Si no existe la carpeta de destino la creamos
+if(!file_exists(DIR_DESCARGAS)) @mkdir(DIR_DESCARGAS);
+// Sólo en el caso de que exista esta carpeta realizaremos el proceso
+if(file_exists(DIR_DESCARGAS)) {
+	// Recorremos el array de nombres para realizar proceso de upload
+	for($i=0; $i < count($nombres_ficheros); $i++){
+		// Extraemos el nombre y la extensión del nombre completo del fichero
+		$nombre_extension = explode('.', basename($nombres_ficheros[$i]));
+		// Obtenemos la extensión
+		$extension=array_pop($nombre_extension);
+		// Obtenemos el nombre
+		$nombre=array_pop($nombre_extension);
+		// Creamos la ruta de destino
+		$archivo_destino = DIR_DESCARGAS . DIRECTORY_SEPARATOR . utf8_decode($nombre) . '.' . $extension;
+		// Mover el archivo de la carpeta temporal a la nueva ubicación
+		if(move_uploaded_file($ficheros['tmp_name'][$i], $archivo_destino)) {
+			// Activamos el indicador de proceso correcto
+			$estado_proceso = true;
+			// Almacenamos el nombre del archivo de destino
+			$paths[] = $archivo_destino;
+		} else {
+			// Activamos el indicador de proceso erroneo		
+			$estado_proceso = false;
+			// Rompemos el bucle para que no continue procesando ficheros
+			break;
+		}
+	}
+}
+// PREPARAR LAS RESPUESTAS SOBRE EL ESTADO DEL PROCESO REALIZADO
+// **********************************************************************
+
+// Definimos un array donde almacenar las respuestas del estado del proceso
+$respuestas = array();
+// Comprobamos si el estado del proceso a finalizado de forma correcta
+if ($estado_proceso === true) {
+	/* Podríamos almacenar información adicional en una base de datos
+	   con el resto de los datos enviados por el método POST */
+
+	// Como mínimo tendremos que devolver una respuesta correcta por medio de un array vacio.
+    $respuestas = array();
+	$respuestas = ['dirupload' => basename(DIR_DESCARGAS), 'total'=>count($paths)]; 
+	/* Podemos devolver cualquier otra información adicional que necesitemos por medio de un array asociativo
+       Por ejemplo, prodríamos devolver la lista de ficheros subidos de esta manera: 
+       	$respuestas = ['ficheros' => $paths]; 
+	   Posteriormente desde el evento fileuploaded del plugin iríamos mostrando el array de ficheros utilizando la propiedad response
+	   del parámetro data: 
+	   	respuesta = data.response; 
+		respuesta.ficheros.forEach(function(nombre) {alert(nombre); });
+	*/
+} elseif ($estado_proceso === false) {
+    $respuestas = ['error'=>'Error al subir los archivos. Póngase en contacto con el administrador del sistema'];
+    // Eliminamos todos los archivos subidos
+    foreach ($paths as $fichero) {
+        unlink($fichero);
+    }
+// Si no se han llegado a procesar ficheros $estado_proceso seguirá siendo NULL
+} else {
+    $respuestas = ['error'=>'No se ha procesado ficheros.'];
+}
+
+// RESPUESTA DEVUELTA POR EL SCRIPT EN FORMATO JSON
+// **********************************************************************
+
+// Devolvemos el array asociativo en formato JSON como respuesta
+echo json_encode($respuestas);
 ?>
