@@ -5,7 +5,7 @@ $(document).ready(function () {
         ev.preventDefault();
         swal({
                 title: "Está seguro?",
-                text: "Se guardara esta noticia.",
+                text: "Se eliminara esta noticia.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonText: "eliminar!",

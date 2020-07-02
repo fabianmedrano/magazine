@@ -66,7 +66,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../../lib/fileinput/js/fileinput.min.js"></script>
+    <script src="../../lib/fileinput/js/fileinput.js"></script>
     <script src="../../lib/fileinput/themes/fas/theme.min.js"></script>
   <script src="../../lib/fileinput/js/locales/es.js"></script>
 
