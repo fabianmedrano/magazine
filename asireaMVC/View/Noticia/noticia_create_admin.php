@@ -34,6 +34,12 @@ echo ($numnews);
 <script src="../../lib/ckeditor/ckeditor.js"></script>
   <!--   JS Files END  -->
 
+<!-- INICIO jquery validation-->
+<script src="../../lib/jquery-validation/jquery.validate.min.js"></script>
+
+<script src="../../lib/jquery-validation/additional-methods.js"></script>
+<script src="../../lib/jquery-validation/localization/messages_es.js"></script>
+<!-- FIN jquery validation-->
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
@@ -56,6 +62,7 @@ echo ($numnews);
                 <form id="form-noticia-create" method="post" action="../../Controller/noticia/switch_controller.php">
                   <fieldset>
                     <div class="input-group mb-3">
+                      
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">Título</span>
                       </div>
@@ -63,6 +70,7 @@ echo ($numnews);
                     </div>
                     <div class="form-group">
                       <label for="street1_id" class="control-label">Contenido</label>
+                      <label for="editor_noticia"></label>
                       <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
                       </textarea>
                     </div>
