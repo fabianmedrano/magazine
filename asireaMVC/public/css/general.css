@@ -10,3 +10,10 @@
 	
 	justify-content: center;
 	}
+
+
+/*ERRORES*/
+.error  > div{
+color: rgb(250, 2, 2);
+}
+/*ERRORES*/

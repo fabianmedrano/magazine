@@ -28,10 +28,6 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!--  CSS FILES End -->
 
-
-
-
-
   <!--   JS Files Start  -->
   <script src="../../lib/jquery/jquery-3.2.1.min.js"></script>
   <script src="../../lib/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -42,22 +38,15 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
   <script src="../../lib/template/js/isotope.min.js"></script>
 
 
-  <script src="../../public/js/nosotros/nosotros_edit.js"></script>
   <!--   JS Files END  -->
 
   <!-- INICIO CKEDITOR-->
   <script src="../../lib/ckeditor/ckeditor.js"></script>
   <!-- FIN CKEDITOR-->
 
-
-
-
-
   <!--INICIO FILE INPUT-->
 
-
    <link href="../../lib/fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
  
     <script src="../../lib/fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
@@ -68,8 +57,17 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="../../lib/fileinput/js/fileinput.js"></script>
     <script src="../../lib/fileinput/themes/fas/theme.min.js"></script>
-  <script src="../../lib/fileinput/js/locales/es.js"></script>
+  <script src="../../lib/fileinput/js/locales/es.js"></script>  
+  <!--FIN FILE INPUT-->
 
+<!-- INICIO jquery validation-->
+  <script src="../../lib/jquery-validation/jquery.validate.min.js"></script>
+
+	<script src="../../lib/jquery-validation/additional-methods.js"></script>
+  <script src="../../lib/jquery-validation/localization/messages_es.js"></script>
+<!-- FIN jquery validation-->
+
+  <script src="../../public/js/nosotros/nosotros_edit.js"></script>
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
@@ -100,8 +98,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
           <!--   INICIO CKEDITOR   -->
           <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
 
-      
-            <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80">
+            <label for="editor_nosotros">...</label>      
+            <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80" require>
                 <?php
                 $controlador_nosotros = new NosotrosController();
                 echo ($controlador_nosotros->getNosotros());
