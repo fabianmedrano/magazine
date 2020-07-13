@@ -63,7 +63,7 @@ echo ($numnews);
         <form id="form-noticia-create" method="post" action="../../Controller/noticia/switch_controller.php">
           <fieldset>
             
-            <div id="error_titulo" class="error" role="alert"></div>
+            <div id="titulo_noticia" class="error" role="alert"></div>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -77,9 +77,7 @@ echo ($numnews);
 
             <div class="form-group">
               <label for="street1_id" class="control-label">Contenido</label>
-              <label for="editor_noticia"></label>
-              <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
-                      </textarea>
+              <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80"></textarea>
             </div>
             <input class="button btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
             <script>
