@@ -15,7 +15,6 @@ if (empty($_FILES['input-carrusel'])) {
 
 // Definimos la constante con el directorio de destino de las descargas
 define('DIR_DESCARGAS',realpath(dirname(__FILE__, 4)). '\public\img\nosotros\nosotros_carrusel');
-var_dump(DIR_DESCARGAS);
 // Obtenemos el array de ficheros enviados
 $ficheros = $_FILES['input-carrusel'];
 // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
@@ -34,6 +33,7 @@ if(!file_exists(DIR_DESCARGAS)) @mkdir(DIR_DESCARGAS);
 if(file_exists(DIR_DESCARGAS)) {
 	// Recorremos el array de nombres para realizar proceso de upload
 	for($i=0; $i < count($nombres_ficheros); $i++){
+		
 		// Extraemos el nombre y la extensión del nombre completo del fichero
 		$nombre_extension = explode('.', basename($nombres_ficheros[$i]));
 		// Obtenemos la extensión
@@ -42,10 +42,12 @@ if(file_exists(DIR_DESCARGAS)) {
 		$nombre=array_pop($nombre_extension);
 		// Creamos la ruta de destino
 		$archivo_destino = DIR_DESCARGAS . DIRECTORY_SEPARATOR . utf8_decode($nombre) . '.' . $extension;
+		
 		// Mover el archivo de la carpeta temporal a la nueva ubicación
 		if(move_uploaded_file($ficheros['tmp_name'][$i], $archivo_destino)) {
 			// Activamos el indicador de proceso correcto
 			$estado_proceso = true;
+			
 			// Almacenamos el nombre del archivo de destino
 			$paths[] = $archivo_destino;
 		} else {
@@ -56,6 +58,7 @@ if(file_exists(DIR_DESCARGAS)) {
 		}
 	}
 }
+
 // PREPARAR LAS RESPUESTAS SOBRE EL ESTADO DEL PROCESO REALIZADO
 // **********************************************************************
 
@@ -65,7 +68,7 @@ $respuestas = array();
 if ($estado_proceso === true) {
 	/* Podríamos almacenar información adicional en una base de datos
 	   con el resto de los datos enviados por el método POST */
-
+	
 	// Como mínimo tendremos que devolver una respuesta correcta por medio de un array vacio.
     $respuestas = array();
 	$respuestas = ['dirupload' => basename(DIR_DESCARGAS), 'total'=>count($paths)]; 
@@ -79,7 +82,6 @@ if ($estado_proceso === true) {
 	*/
 } elseif ($estado_proceso === false) {
     $respuestas = ['error'=>'Error al subir los archivos. Póngase en contacto con el administrador del sistema'];
-    // Eliminamos todos los archivos subidos
     foreach ($paths as $fichero) {
         unlink($fichero);
     }
@@ -92,5 +94,5 @@ if ($estado_proceso === true) {
 // **********************************************************************
 
 // Devolvemos el array asociativo en formato JSON como respuesta
-echo json_encode($respuestas);
+//echo json_encode($respuestas);
 ?>

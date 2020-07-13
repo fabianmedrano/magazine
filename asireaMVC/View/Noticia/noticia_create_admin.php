@@ -15,30 +15,30 @@ echo ($numnews);
 
 <head>
 
-  <link href="../../public/css/general.css" rel="stylesheet">
+  <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
 
-  <link href="../../lib/template/css/custom.css" rel="stylesheet">
-  <link href="../../lib/template/css/responsive.css" rel="stylesheet">
-  <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-  <script src="../../lib/jquery/jquery-3.3.1.min.js"></script>
-  <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../../lib/template/js/custom.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery/jquery-3.3.1.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  <script src="../../public/js/noticia/noticia_create.js"></script>
+  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_create.js"></script>
 
-  <script src="../../lib/ckeditor/ckeditor.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
   <!--   JS Files END  -->
 
   <!-- INICIO jquery validation-->
-  <script src="../../lib/jquery-validation/jquery.validate.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery-validation/jquery.validate.min.js"></script>
 
-  <script src="../../lib/jquery-validation/additional-methods.js"></script>
-  <script src="../../lib/jquery-validation/localization/messages_es.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery-validation/additional-methods.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery-validation/localization/messages_es.js"></script>
   <!-- FIN jquery validation-->
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>

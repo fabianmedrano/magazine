@@ -27,3 +27,9 @@ defined("CONEXION_PATH")
 
 defined("IMG_PATH")
     or define("IMG_PATH", realpath(dirname(__FILE__) . '/public/img'));
+    
+defined("LIB_PATH")
+or define("LIB_PATH", BASE_URL . '/lib');
+
+defined("PUBLIC_PATH")
+or define("PUBLIC_PATH", BASE_URL . '/public');
