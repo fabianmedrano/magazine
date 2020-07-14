@@ -1,4 +1,9 @@
 
+.container{
+	width:72%;
+	max-width: 72%;
+}
+
 .container-flex {
 	margin: 50px  auto !important;
 	justify-content: center;

@@ -11,7 +11,7 @@ $images = glob($directory . "*.*");
   $('#input-carrusel').fileinput({
     language: 'es',
     uploadUrl: "../../lib/fileinput/nosotros/upload.php",
-    uploadAsync: false,
+    uploadAsync: true,
     maxFileCount: 5,
     maxFileSize: 3000,
     removeFromPreviewOnError: true,

@@ -13,7 +13,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 <head>
 
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
-  <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros.css" rel="stylesheet">
+  <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros_edit.css" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
 
@@ -82,7 +82,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
     <div class="container-flex">
       <section class="wrapper">
 
-        <div id="error_titulo" class="error" role="alert"></div>
+        <div id="error_fileinput" class="error" role="alert"></div>
 
         <div class="row">
           <!-- INICIO File Input -->
@@ -96,9 +96,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
           <!--   INICIO CKEDITOR   -->
-          <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
+          <div id="error_edit_nosotros" class="error" role="alert"></div>
 
-            <label for="editor_nosotros">...</label>
+          <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
             <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80" require>
                 <?php
                 $controlador_nosotros = new NosotrosController();
