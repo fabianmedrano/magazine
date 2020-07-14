@@ -1,6 +1,6 @@
 <header class="header-style-2">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.html"><img src="images/h2logo.png" alt=""></a>
+            <a class="navbar-brand" href="index.html"><img src="<?php echo PUBLIC_PATH ?>/img/icon/asirea.png" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i> </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -35,3 +35,4 @@
             </div>
         </nav>
     </header>
+
