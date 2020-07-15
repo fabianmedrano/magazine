@@ -1,7 +1,7 @@
 <?php
-$config = include '../config/config_noticia.php';
+$config = include 'config/config.php';
 
-include '../include/utils.php';
+include 'include/utils.php';
 
 if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
     response(trans('forbidden') . AddErrorLocation())->send();
@@ -14,9 +14,9 @@ if (!checkRelativePath($_POST['path'])) {
 }
 
 if (isset($_SESSION['RF']['language']) && file_exists('lang/' . basename($_SESSION['RF']['language']) . '.php')) {
-    $languages = include '../lang/languages.php';
+    $languages = include 'lang/languages.php';
     if (array_key_exists($_SESSION['RF']['language'], $languages)) {
-        include '../lang/' . basename($_SESSION['RF']['language']) . '.php';
+        include 'lang/' . basename($_SESSION['RF']['language']) . '.php';
     } else {
         response(trans('Lang_Not_Found') . AddErrorLocation())->send();
         exit;
@@ -28,7 +28,7 @@ if (isset($_SESSION['RF']['language']) && file_exists('lang/' . basename($_SESSI
 
 $ftp = ftp_con($config);
 
-$base = $_SESSION['current_path'];
+$base = $config['current_path'];
 $path = $base . $_POST['path'];
 $cycle = true;
 $max_cycles = 50;
@@ -40,8 +40,8 @@ while ($cycle && $i < $max_cycles) {
         $cycle = false;
     }
 
-    if (file_exists($path . "config_noticia.php")) {
-        require_once $path . "config_noticia.php";
+    if (file_exists($path . "config.php")) {
+        require_once $path . "config.php";
         $cycle = false;
     }
     $path = fix_dirname($path) . "/";
@@ -50,11 +50,11 @@ while ($cycle && $i < $max_cycles) {
 function returnPaths($_path, $_name, $config)
 {
     global $ftp;
-    $path = $_SESSION['current_path'] . $_path;
+    $path = $config['current_path'] . $_path;
     $path_thumb = $config['thumbs_base_path'] . $_path;
     $name = null;
     if ($ftp) {
-        $path = $config['ftp_base_folder'] . $_SESSION['upload_dir'] . $_path;
+        $path = $config['ftp_base_folder'] . $config['upload_dir'] . $_path;
         $path_thumb = $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $_path;
     }
     if ($_name) {
@@ -104,7 +104,7 @@ if (isset($info['extension']) && !(isset($_GET['action']) && $_GET['action'] == 
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'delete_file':
-            echo($path);
+
             deleteFile($path, $path_thumb, $config);
 
             break;
@@ -135,7 +135,7 @@ if (isset($_GET['action'])) {
 							foreach($config['fixed_path_from_filemanager'] as $k=>$paths){
 								if ($paths!="" && $paths[strlen($paths)-1] != "/") $paths.="/";
 
-								$base_dir=$paths.substr_replace($path, '', 0, strlen($_SESSION['current_path']));
+								$base_dir=$paths.substr_replace($path, '', 0, strlen($config['current_path']));
 								if (is_dir($base_dir)) deleteDir($base_dir,NULL,$config);
 							}
 						}
@@ -177,7 +177,7 @@ if (isset($_GET['action'])) {
                                 $paths .= "/";
                             }
 
-                            $base_dir = $paths . substr_replace($path, '', 0, strlen($_SESSION['current_path']));
+                            $base_dir = $paths . substr_replace($path, '', 0, strlen($config['current_path']));
                             rename_folder($base_dir, $name, $ftp, $config);
                         }
                     }
@@ -271,7 +271,7 @@ if (isset($_GET['action'])) {
                                 $paths .= "/";
                             }
 
-                            $base_dir = $paths . substr_replace($info['dirname'] . "/", '', 0, strlen($_SESSION['current_path']));
+                            $base_dir = $paths . substr_replace($info['dirname'] . "/", '', 0, strlen($config['current_path']));
                             if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'])) {
                                 rename_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k], $ftp, $config);
                             }
@@ -306,7 +306,7 @@ if (isset($_GET['action'])) {
                                 $paths .= "/";
                             }
 
-                            $base_dir = $paths . substr_replace($info['dirname'] . "/", '', 0, strlen($_SESSION['current_path']));
+                            $base_dir = $paths . substr_replace($info['dirname'] . "/", '', 0, strlen($config['current_path']));
 
                             if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'])) {
                                 duplicate_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k]);
@@ -340,10 +340,10 @@ if (isset($_GET['action'])) {
                 $path_thumb .= basename($data['path']);
                 $path .= basename($data['path']);
                 $data['path_thumb'] = DIRECTORY_SEPARATOR . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $data['path'];
-                $data['path'] = DIRECTORY_SEPARATOR . $config['ftp_base_folder'] . $_SESSION['upload_dir'] . $data['path'];
+                $data['path'] = DIRECTORY_SEPARATOR . $config['ftp_base_folder'] . $config['upload_dir'] . $data['path'];
             } else {
                 $data['path_thumb'] = $config['thumbs_base_path'] . $data['path'];
-                $data['path'] = $_SESSION['current_path'] . $data['path'];
+                $data['path'] = $config['current_path'] . $data['path'];
             }
 
             $pinfo = pathinfo($data['path']);

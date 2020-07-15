@@ -82,9 +82,9 @@ echo ($numnews);
             <input class="button btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
             <script>
               CKEDITOR.replace('editor_noticia', {
-                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr=',
-                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr=',
-                filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $numnews ?>&fldr='
+                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+                filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
               });
             </script>
           </fieldset>
