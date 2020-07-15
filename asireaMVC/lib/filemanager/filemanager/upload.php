@@ -2,25 +2,25 @@
 
 try {
     if (!isset($config)) {
-        $config = include '../config/config_noticia.php';
+        $config = include 'config/config.php';
     }
 
-    include '../include/utils.php';
+    include 'include/utils.php';
 
     if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
         response(trans('forbidden') . AddErrorLocation(), 403)->send();
         exit;
     }
 
-    include '../include/mime_type_lib.php';
+    include 'include/mime_type_lib.php';
 
     $ftp = ftp_con($config);
 
     if ($ftp) {
-        $source_base = $config['ftp_base_folder'] . $_SESSION['upload_dir'];
+        $source_base = $config['ftp_base_folder'] . $config['upload_dir'];
         $thumb_base = $config['ftp_base_folder'] . $config['ftp_thumbs_dir'];
     } else {
-        $source_base = $_SESSION['current_path'];
+        $source_base = $config['current_path'];
         $thumb_base = $config['thumbs_base_path'];
     }
 
@@ -46,11 +46,11 @@ try {
     //GET config
     while ($cycle && $i < $max_cycles) {
         $i++;
-        if ($path == $_SESSION['current_path']) {
+        if ($path == $config['current_path']) {
             $cycle = false;
         }
-        if (file_exists($path . "config_noticia.php")) {
-            $configTemp = include $path . 'config_noticia.php';
+        if (file_exists($path . "config.php")) {
+            $configTemp = include $path . 'config.php';
             $config = array_merge($config, $configTemp);
             //TODO switch to array
             $cycle = false;
@@ -142,7 +142,7 @@ try {
         'storeFolderThumb' => $storeFolderThumb,
         'ftp' => $ftp,
         'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/' . $storeFolder,
-        'upload_url' => $config['base_url'] . $_SESSION['upload_dir'] . $_POST['fldr'],
+        'upload_url' => $config['base_url'] . $config['upload_dir'] . $_POST['fldr'],
         'mkdir_mode' => $config['folderPermission'],
         'max_file_size' => $config['MaxSizeUpload'] * 1024 * 1024,
         'correct_image_extensions' => true,

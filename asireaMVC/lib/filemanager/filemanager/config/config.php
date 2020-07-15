@@ -67,7 +67,7 @@ $config = array(
     | without final / (DON'T TOUCH)
     |
     */
-    'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
+    'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/asirea/asireaMVC", //  ruta para cargar las imagenes
     /*
     |--------------------------------------------------------------------------
     | path from base_url to base of upload folder
@@ -76,7 +76,7 @@ $config = array(
     | with start and final /
     |
     */
-    'upload_dir' => '/source/',
+    'upload_dir' => '/public/img/',
     /*
     |--------------------------------------------------------------------------
     | relative path from filemanager folder to upload folder
@@ -85,7 +85,7 @@ $config = array(
     | with final /
     |
     */
-    'current_path' => '../source/',
+    'current_path' =>  '../../../public/img/',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ $config = array(
     | DO NOT put inside upload folder
     |
     */
-    'thumbs_base_path' => '../thumbs/',
+    'thumbs_base_path' => '../../../public/img/',
 
     /*
     |--------------------------------------------------------------------------
@@ -107,7 +107,7 @@ $config = array(
     | DO NOT put inside upload folder
     |
     */
-    'thumbs_upload_dir' => '/thumbs/',
+    'thumbs_upload_dir' => '/public/img/nosotros/thumbs_principal/',
 
 
     /*
@@ -228,7 +228,7 @@ $config = array(
     | default language file name
     |--------------------------------------------------------------------------
     */
-    'default_language' => "en_EN",
+    'default_language' => "es",
 
     /*
     |--------------------------------------------------------------------------

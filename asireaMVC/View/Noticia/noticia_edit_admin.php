@@ -72,11 +72,13 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                   <input type="button" onclick="location.replace(history.back()); " name="volver atrás"  class="btn btn-success" value="volver atrás">
                   <script>
-                    CKEDITOR.replace('editor_noticia', {
-                      filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
-                      filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=2&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr=',
-                      filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/noticia/dialog.php?type=1&editor=ckeditor&numnews=<?php echo $noticia['id'] ?>&fldr='
-                    });
+
+CKEDITOR.replace('editor_noticia', {
+                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
+                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
+           filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/'
+              });
+
                   </script>
                 </fieldset>
               </form>
