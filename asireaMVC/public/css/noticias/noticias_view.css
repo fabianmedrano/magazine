@@ -1,0 +1,13 @@
+
+.container-flex {
+	margin: 50px  auto !important;
+	justify-content: center;
+	display: flex;
+}
+
+.row { 
+	display:inline-block;
+	
+	justify-content: center;
+	}
+

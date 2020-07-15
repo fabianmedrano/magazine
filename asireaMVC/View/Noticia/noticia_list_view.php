@@ -12,7 +12,8 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 <head>
 
-    <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
+
+<link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
     <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
     
@@ -63,27 +64,29 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                         <?php
 
-                        $folder_path="../../public/img/noticias/noticias/";
                         $noticias = NoticiaController::getNoticias();
                         foreach ($noticias as $noticia) {
+                            
+                        $folder_path="../../public/img/noticias/noticias/";
                             $folder_path = $folder_path.$noticia["idnoticia"]."/";
-                            var_dump($folder_path);
-
+               
+                          
                             $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
+
                             $folder = opendir($folder_path);
 
                             $imgcargada = false;
                             if ($num_files > 0) {
                                 while ((false !== ($file = readdir($folder))) && (!$imgcargada)) {
                                     $file_path = $folder_path .$file;
-                                    echo($file_path);
+                              
                                     $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
                                     if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') {
                         ?>
                                         <div class="blog-post">
                                             <!-- incio imagenes -->
                                             <div class="blog-thumb">
-                                                <a href="#"><i class="fas fa-link"></i></a> <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen de ejemplo" title="Imagen de ejemplo">
+                                               <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen de ejemplo" title="Imagen de ejemplo">
                                             </div>
                                             <!-- Fin imagenes -->
 
@@ -91,8 +94,9 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                         $imgcargada = true;
                                     }
                                 }
+                                closedir($folder);
                             }
-                            closedir($folder);
+                         
                                 ?>
                                 <div class="blog-txt">
 
@@ -104,8 +108,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <!-- Inicio informacion de publicacion -->
                                     <ul class="post-meta">
-                                        <li><span>Por:</span> Daniel</li>
-                                        <li><span>Publicado:</span> 29 Setiembre, 2018</li>
+                                        <li><span>Publicado:</span><?php echo  date("d/m/Y", strtotime($noticia['fecha']));?></li>
                                     </ul>
                                     <!-- Fin informacion de publicacion -->
 
