@@ -1,7 +1,7 @@
 <?php
 $time = time();
 
-$config = include '../config/config_nosotros.php';
+$config = include 'config/config.php';
 
 if (USE_ACCESS_KEYS == true){
 	if (!isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])){
@@ -20,7 +20,7 @@ $_SESSION['RF']["verify"] = "RESPONSIVEfilemanager";
 if (isset($_POST['submit'])) {
     include 'upload.php';
 } else {
-    $available_languages = include '../lang/languages.php';
+    $available_languages = include 'lang/languages.php';
 
     list($preferred_language) = array_values(array_filter(array(
         isset($_GET['lang']) ? $_GET['lang'] : null,
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-include '../include/utils.php';
+include 'include/utils.php';
 
 $subdir_path = '';
 
@@ -52,7 +52,6 @@ if (checkRelativePath($subdir_path)) {
 } else {
     $subdir = '';
 }
-
 
 if ($subdir == "") {
     if (!empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === FALSE) {
@@ -131,8 +130,8 @@ if (!$ftp) {
             $parent = "";
         }
 
-        if (file_exists($config['current_path'] . $parent . "config_nosotros.php")) {
-            $configTemp = include $config['current_path'] . $parent . 'config_nosotros.php';
+        if (file_exists($config['current_path'] . $parent . "config.php")) {
+            $configTemp = include $config['current_path'] . $parent . 'config.php';
             $config = array_merge($config, $configTemp);
             $cycle = FALSE;
         }
@@ -314,16 +313,16 @@ $get_params = http_build_query($get_params);
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta name="robots" content="noindex,nofollow">
         <title>Responsive FileManager</title>
-        <link rel="shortcut icon" href="../img/ico/favicon.ico">
+        <link rel="shortcut icon" href="img/ico/favicon.ico">
         <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-        <link rel="stylesheet" href="../css/jquery.fileupload.css">
-        <link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
+        <link rel="stylesheet" href="css/jquery.fileupload.css">
+        <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
         <!-- CSS adjustments for browsers with JavaScript disabled -->
-        <noscript><link rel="stylesheet" href="../css/jquery.fileupload-noscript.css"></noscript>
-        <noscript><link rel="stylesheet" href="../css/jquery.fileupload-ui-noscript.css"></noscript>
+        <noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
+        <noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.7.1/skin/blue.monday/jplayer.blue.monday.min.css" />
         <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
-        <link href="../css/style.css?v=<?php echo $version; ?>" rel="stylesheet" type="text/css" />
+        <link href="css/style.css?v=<?php echo $version; ?>" rel="stylesheet" type="text/css" />
         <!--[if lt IE 8]>
         <style>
             .img-container span, .img-container-mini span {
@@ -335,7 +334,7 @@ $get_params = http_build_query($get_params);
 
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-        <script src="../js/plugins.js?v=<?php echo $version; ?>"></script>
+        <script src="js/plugins.js?v=<?php echo $version; ?>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
         <link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js"></script>
@@ -343,7 +342,7 @@ $get_params = http_build_query($get_params);
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
         <script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.js"></script>
         <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
-        <script src="../js/modernizr.custom.js"></script>
+        <script src="js/modernizr.custom.js"></script>
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -356,31 +355,31 @@ $get_params = http_build_query($get_params);
         </script>
 
         
-        <script src="../js/include.js?v=<?php echo $version; ?>"></script>
+        <script src="js/include.js?v=<?php echo $version; ?>"></script>
 </head>
 <body>
     <!-- The Templates plugin is included to render the upload/download listings -->
     <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
     <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/2.18.0/load-image.all.min.js"></script>
     <!-- The Canvas to Blob plugin is included for image resizing functionality -->
     <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
     <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-    <script src="../js/jquery.iframe-transport.js"></script>
+    <script src="js/jquery.iframe-transport.js"></script>
     <!-- The basic File Upload plugin -->
-    <script src="../js/jquery.fileupload.js"></script>
+    <script src="js/jquery.fileupload.js"></script>
     <!-- The File Upload processing plugin -->
-    <script src="../js/jquery.fileupload-process.js"></script>
+    <script src="js/jquery.fileupload-process.js"></script>
     <!-- The File Upload image preview & resize plugin -->
-    <script src="../js/jquery.fileupload-image.js"></script>
+    <script src="js/jquery.fileupload-image.js"></script>
     <!-- The File Upload audio preview plugin -->
-    <script src="../js/jquery.fileupload-audio.js"></script>
+    <script src="js/jquery.fileupload-audio.js"></script>
     <!-- The File Upload video preview plugin -->
-    <script src="../js/jquery.fileupload-video.js"></script>
+    <script src="js/jquery.fileupload-video.js"></script>
     <!-- The File Upload validation plugin -->
-    <script src="../js/jquery.fileupload-validate.js"></script>
+    <script src="js/jquery.fileupload-validate.js"></script>
     <!-- The File Upload user interface plugin -->
-    <script src="../js/jquery.fileupload-ui.js"></script>
+    <script src="js/jquery.fileupload-ui.js"></script>
 
     <input type="hidden" id="ftp" value="<?php echo !!$ftp; ?>" />
     <input type="hidden" id="popup" value="<?php echo $popup;?>" />
@@ -1238,7 +1237,7 @@ $files = $sorted;
     <!-- loading div start -->
     <div id="loading_container" style="display:none;">
         <div id="loading" style="background-color:#000; position:fixed; width:100%; height:100%; top:0px; left:0px;z-index:100000"></div>
-        <img id="loading_animation" src="../img/storing_animation.gif" alt="loading" style="z-index:10001; margin-left:-32px; margin-top:-32px; position:fixed; left:50%; top:50%">
+        <img id="loading_animation" src="img/storing_animation.gif" alt="loading" style="z-index:10001; margin-left:-32px; margin-top:-32px; position:fixed; left:50%; top:50%">
     </div>
     <!-- loading div end -->
 

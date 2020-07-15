@@ -1,9 +1,9 @@
 <?php
 
-$config = include '../config/config_noticia.php';
+$config = include 'config/config.php';
 
-include '../include/utils.php';
-include '../include/mime_type_lib.php';
+include 'include/utils.php';
+include 'include/mime_type_lib.php';
 
 if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
     response(trans('forbidden') . AddErrorLocation(), 403)->send();
@@ -23,9 +23,9 @@ if (strpos($_POST['name'], '/') !== false) {
 $ftp = ftp_con($config);
 
 if ($ftp) {
-    $path = $config['ftp_base_url'] . $_SESSION['upload_dir'] . $_POST['path'];
+    $path = $config['ftp_base_url'] . $config['upload_dir'] . $_POST['path'];
 } else {
-    $path = $_SESSION['current_path'] . $_POST['path'];
+    $path = $config['current_path'] . $_POST['path'];
 }
 
 $name = $_POST['name'];
