@@ -14,9 +14,8 @@ function iniciarTabla() {
         language: {"url": "../../lib/DataTables/es.json"}  ,
         select: false,
         columns : [
-            {title :"ID"    , data: "idnoticia" },
             {title :"Titulo", data: "titulo" },
-           
+            {title :"Fecha", data: "fecha" },
             
             { title: "Editar" },
             { title: "Eliminar" },

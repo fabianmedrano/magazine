@@ -42,7 +42,8 @@ class DataNoticia
                         array(
                             'idnoticia' => $fila[0],
                             'titulo' => $fila[1],
-                            'descripcion' => $fila[2]
+                            'descripcion' => $fila[2],
+                            'fecha' => $fila[3],
                         )
                     );
                 }
