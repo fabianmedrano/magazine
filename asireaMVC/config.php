@@ -1,7 +1,5 @@
 <?php
 
-
-
 /** Ruta del proyecto */
 defined("BASE_DIR")
     or define("BASE_DIR", __DIR__);

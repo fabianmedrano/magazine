@@ -13,10 +13,6 @@ Class DataNosotros{
         $stmt = $con->getConexion()->prepare("SELECT * FROM nosotros");
   
         $stmt->execute();
-       // echo($stmt->fetch(["texto"]));
-       // return $stmt->fetch();
-
-
 
         $stmt->bind_result($texto);
 
@@ -33,7 +29,6 @@ Class DataNosotros{
 
 
     static public function updateNosotros( $texto){
-       
         $con = new Conexion();
         $stmt = $con->getConexion()->prepare("UPDATE nosotros SET texto = ? ");
         $stmt->bind_param("s", $texto);

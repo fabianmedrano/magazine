@@ -14,12 +14,9 @@ class NosotrosController
 
     public function uptateNosotros($texto)
     {
-
-          
             $respuesta = DataNosotros::updateNosotros($texto);
         
             return $respuesta;
-      
     }
     public function getNosotros()
     {

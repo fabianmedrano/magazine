@@ -1,5 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
+include($_SERVER['DOCUMENT_ROOT']."/asirea/asireaMVC/config.php");
 ?>
 <!doctype html>
 <html lang="es">

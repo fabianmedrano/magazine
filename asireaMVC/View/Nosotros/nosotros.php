@@ -51,7 +51,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
           <?php
 
-          $images = glob("../../public/img/nosotros/nosotros_carrusel/*.*"); // carga la las rutas de las imagenes que estan en la carpeta carrusel
+          $images = glob("../../public/img/nosotros/nosotros_carrusel/*.*"); 
           echo $images;
           foreach ($images as $image) { ?>
 
