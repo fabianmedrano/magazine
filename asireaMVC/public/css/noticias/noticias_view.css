@@ -11,3 +11,30 @@
 	justify-content: center;
 	}
 
+
+#pagination {
+	display: flex;
+	margin: 50px  auto;
+	justify-content: center;
+}
+.pagination > li > a,
+.pagination > li > span {
+	 color: green !important;
+	 background-color: white !important ;
+	 border-color: white !important;
+}
+.pagination > .active > a{
+color: white;
+background-color: green;
+}
+
+.pagination > .active > a,
+ .pagination > .active > a:focus,
+  .pagination > .active > a:hover, 
+  .pagination > .active > span,
+   .pagination > .active > span:focus, 
+   .pagination > .active > span:hover { 
+	   color:white !important;
+	   background-color: rgb(0, 63, 0) !important;
+	    border-color: rgb(0, 63, 0)  !important;
+	 }

@@ -24,6 +24,15 @@ class NoticiaController
         return $respuesta;
     }
     
+    static public function getNoticiasPaginado($pagina,$noticias_pagina)
+    {
+        $cantidad_noticias = DataNoticia::getNoticiasCantidad();
+        $paginas = ceil($cantidad_noticias / $noticias_pagina);
+
+        $respuesta = DataNoticia::getNoticiasPaginado(($pagina -1)*$noticias_pagina,$noticias_pagina);
+     
+        return array('noticias'=>$respuesta,'paginas'=>$paginas);
+    }
 
 
     static public function getNoticias()

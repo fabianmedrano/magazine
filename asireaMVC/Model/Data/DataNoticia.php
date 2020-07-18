@@ -28,6 +28,56 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
+    static public function getNoticiasCantidad()
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getcantidadNoticia();");
+            $stmt->execute();
+            $stmt->bind_result($cantidad);
+            $stmt->fetch();
+            return $cantidad;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+    static public function getNoticiasPaginado($pagina, $cantidad)
+    {
+        try {
+            $noticias = array();;
+            $con = new Conexion();
+            $resultado = $con->getConexion()->prepare("CALL sp_getNoticiaspaginado(?, ? );");
+            $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
+            $resultado->execute();
+        $resultado->store_result();
+    $resultado->bind_result($idnoticia, $titulo,$descripcion,$fecha);
+           
+            while ($resultado->fetch()) {
+                array_push(
+                    $noticias,
+                    array(
+                        "idnoticia" => $idnoticia,
+                        "titulo" => $titulo,
+                        "descripcion" => $descripcion,
+                        "fecha" => $fecha
+                    )
+                );
+            }
+        
+            /* cerrar la sentencia */
+            $resultado->close();
+             
+            return $noticias;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
 
     static public function getNoticias()
     {

@@ -13,10 +13,10 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 <head>
 
 
-<link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
+    <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
     <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
-    
+
 
 
     <!-- CSS FILES START-->
@@ -46,7 +46,39 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 </head>
 
 <body>
-    <?php include(TEMPLATES_PATH . "/header.php") ?>
+    <?php include(TEMPLATES_PATH . "/header.php");
+
+
+    $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
+
+    $extra = 'noticia_list_view.php?pagina=1';
+    echo (HOST_DIR);
+
+    echo ('---');
+    echo (CONCURRENT_DIR . 'noticia_list_view.php?pagina=1');
+
+    if (!$_GET) {
+
+        header("Location: http://$host$uri/$extra");
+        exit;
+
+        //header("Location:index.php?pagina=1");
+    }
+    if ($_GET['pagina'] > $noticias['paginas'] || $_GET['pagina'] < 1) {
+
+        header("Location: http://$host$uri/$extra");
+        //   header("Location:index.php?pagina=1");
+    }
+    /* 
+    $archivos_por_pagina = 5;
+    $cantidad_noticias = 2;
+    $paginas = ceil($cantidad_noticias / $archivos_por_pagina);
+
+    
+    $inicio = ($_GET['pagina'] -1)*$archivos_por_pagina;
+    $fin = $archivos_por_pagina;*/
+
+    ?>
 
 
 
@@ -64,13 +96,14 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                         <?php
 
-                        $noticias = NoticiaController::getNoticias();
-                        foreach ($noticias as $noticia) {
-                            
-                        $folder_path="../../public/img/noticias/noticias/";
-                            $folder_path = $folder_path.$noticia["idnoticia"]."/";
-               
-                          
+                        $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
+
+                        foreach ($noticias['noticias'] as $noticia) {
+
+                            $folder_path = "../../public/img/noticias/noticias/";
+                            $folder_path = $folder_path . $noticia["idnoticia"] . "/";
+
+
                             $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
 
                             $folder = opendir($folder_path);
@@ -78,15 +111,15 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                             $imgcargada = false;
                             if ($num_files > 0) {
                                 while ((false !== ($file = readdir($folder))) && (!$imgcargada)) {
-                                    $file_path = $folder_path .$file;
-                              
+                                    $file_path = $folder_path . $file;
+
                                     $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
                                     if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') {
                         ?>
                                         <div class="blog-post">
                                             <!-- incio imagenes -->
                                             <div class="blog-thumb">
-                                               <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen de ejemplo" title="Imagen de ejemplo">
+                                                <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen de ejemplo" title="Imagen de ejemplo">
                                             </div>
                                             <!-- Fin imagenes -->
 
@@ -96,7 +129,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 }
                                 closedir($folder);
                             }
-                         
+
                                 ?>
                                 <div class="blog-txt">
 
@@ -108,7 +141,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <!-- Inicio informacion de publicacion -->
                                     <ul class="post-meta">
-                                        <li><span>Publicado:</span><?php echo  date("d/m/Y", strtotime($noticia['fecha']));?></li>
+                                        <li><span>Publicado:</span><?php echo  date("d/m/Y", strtotime($noticia['fecha'])); ?></li>
                                     </ul>
                                     <!-- Fin informacion de publicacion -->
 
@@ -130,8 +163,37 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <!--Blog Post End-->
                     </div>
+
                 </div>
+
             </div>
+            <div id="pagination">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item  <?php echo $_GET['pagina'] > 0 ? 'disabled' : '' ?>">
+                            <a class="page-link" href="index.php?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
+                        </li>
+
+                        <?php for ($i = 0; $i < $noticias['paginas']; $i++) {
+                        ?>
+
+                            <li class="page-item <?php echo $_GET['pagina'] == ($i + 1) ? 'active' : '' ?>">
+                                <a class="page-link" href="index.php?pagina=<?php echo $i + 1  ?> "><?php echo $i + 1 ?> <span class="sr-only"></span></a>
+                            </li>
+
+
+
+                        <?php
+                        }
+                        ?>
+                        <li class="page-item  <?php echo $_GET['pagina'] <= $noticias['paginas'] ? 'disabled' : '' ?>">
+                            <a class="page-link" href="index.php?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
         </section>
     </div>
 
