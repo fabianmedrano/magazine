@@ -18,15 +18,27 @@ $(document).ready(function () {
         return $(element).val().length > 0;  
     }, "This field is required");  
 
-function GetTextFromHtml(html) {  
-        var dv = document.createElement("DIV");  
-        dv.innerHTML = html;  
-        return dv.textContent || dv.innerText || "";  
-    }  
+    jQuery.validator.addMethod("ckrequired", function (value, element) {
+        var idname = $(element).attr('id');
+        var editor = CKEDITOR.instances[idname];
+        var ckValue = GetTextFromHtml(editor.getData()).replace(/<[^>]*>/gi, '').trim();
+        if (ckValue.length === 0) {
+            $(element).val(ckValue);
+        } else {
+            $(element).val(editor.getData());
+        }
+        return $(element).val().length > 0;
+    }, "This field is required");
+
+    function GetTextFromHtml(html) {
+        var dv = document.createElement("DIV");
+        dv.innerHTML = html;
+        return dv.textContent || dv.innerText || "";
+    }
 
 
 
- 
+
 
     $("#form-noticia-create").validate({
         rules: {

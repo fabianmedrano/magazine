@@ -89,14 +89,12 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                         foreach ($noticias['noticias'] as $noticia) {
 
+                            ?> <div class="blog-post">
+                            <?php  
                             $folder_path = "../../public/img/noticias/noticias/";
                             $folder_path = $folder_path . $noticia["idnoticia"] . "/";
-
-
                             $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
-
                             $folder = opendir($folder_path);
-
                             $imgcargada = false;
                             if ($num_files > 0) {
                                 while ((false !== ($file = readdir($folder))) && (!$imgcargada)) {
@@ -105,10 +103,9 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                     $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
                                     if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') { // revisar que pasa cuando no carga imagen
                         ?>
-                                        <div class="blog-post">
                                             <!-- incio imagenes -->
                                             <div class="blog-thumb">
-                                                <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen de ejemplo" title="Imagen de ejemplo">
+                                                <img class="tfoto" src="<?php echo $file_path; ?>" alt="Imagen" title="Imagen">
                                             </div>
                                             <!-- Fin imagenes -->
 
@@ -123,9 +120,9 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 <div class="blog-txt">
 
                                     <!-- Inicio Titulo -->
-                                    <h5>
+                                    <h6>
                                         <?php echo $noticia["titulo"] ?>
-                                    </h5>
+                                    </h6>
                                     <!-- Fin Titulo -->
 
                                     <!-- Inicio informacion de publicacion -->
@@ -136,7 +133,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <!--Inicio Descripcion-->
                                     <div class="resumen_noticia">
-                                        <?php echo preg_replace("[\n|\r|\n\r]", "",trim(strip_tags($noticia["descripcion"]))) ?>
+                                        <?php echo trim(strip_tags($noticia["descripcion"])) ?>
                                     </div>
                                     <!-- Fin Descripcion-->
 
@@ -161,7 +158,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                 <nav>
                     <ul class="pagination">
 
-                        <li class="page-item  <?php echo $_GET['pagina'] > 0 ? 'disabled' : '' ?>">
+                        <li class="page-item  <?php echo $_GET['pagina'] ==1 ? 'disabled' : '' ?>">
                             <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
                         </li>
 
@@ -173,7 +170,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                         <?php } ?>
 
-                        <li class="page-item  <?php echo $_GET['pagina'] <= $noticias['paginas'] ? 'disabled' : '' ?>">
+                        <li class="page-item  <?php echo $_GET['pagina'] >= $noticias['paginas'] ? 'disabled' : '' ?>">
                             <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
                         </li>
 
