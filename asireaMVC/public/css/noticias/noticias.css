@@ -1,5 +1,6 @@
 .resumen_noticia{
-    height: 200px;
+    padding-top: 0% !important;
+    height: 100px;
     overflow: hidden!important;
 overflow: inherit;
     
@@ -13,13 +14,16 @@ white-space: pre-line;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
+.post-meta{
+margin-bottom: 0% !important;
+}
 .blog-list .blog-post .blog-txt {
-  width: 60% !important;
+  width: 70% !important;
 }
 .blog-list .blog-post .blog-thumb{
-  width: 40% !important;
+  width: 30% !important;
 }
 
-
-
+.cuerpo{
+  margin: 40px 10px;
+}

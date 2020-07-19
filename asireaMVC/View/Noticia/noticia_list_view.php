@@ -49,46 +49,35 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <?php include(TEMPLATES_PATH . "/header.php");
 
 
-    $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
 
-    $extra = 'noticia_list_view.php?pagina=1';
-    echo (HOST_DIR);
 
-    echo ('---');
-    echo (CONCURRENT_DIR . 'noticia_list_view.php?pagina=1');
 
     if (!$_GET) {
-
-        header("Location: http://$host$uri/$extra");
+        header("Location:" . CURRENT_DIR . "?pagina=1");
         exit;
-
-        //header("Location:index.php?pagina=1");
     }
-    if ($_GET['pagina'] > $noticias['paginas'] || $_GET['pagina'] < 1) {
-
-        header("Location: http://$host$uri/$extra");
-        //   header("Location:index.php?pagina=1");
-    }
-    /* 
-    $archivos_por_pagina = 5;
-    $cantidad_noticias = 2;
-    $paginas = ceil($cantidad_noticias / $archivos_por_pagina);
 
     
-    $inicio = ($_GET['pagina'] -1)*$archivos_por_pagina;
-    $fin = $archivos_por_pagina;*/
+    $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
+
+
+    if(count($noticias['noticias'])<=0){
+        include(VIEW_PATH."/Noticia/noticia_none.php");
+        include(TEMPLATES_PATH . "/footer.php") ;
+        exit;
+    }
+
+    if ($_GET['pagina'] > $noticias['paginas'] || $_GET['pagina'] < 1) {
+     header("Location:" . CURRENT_DIR . "?pagina=1");
+    }
 
     ?>
 
 
 
-
-
-
-
     <div class="container-flex">
-        <section class="wrapper news-posts p80">
-            <div class="row">
+        <section class="wrapper news-posts">
+            <div class="row list-noticias">
                 <div class="col-md-8">
                     <div class="blog-list ">
 
@@ -96,7 +85,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                         <?php
 
-                        $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
+                        $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 3);
 
                         foreach ($noticias['noticias'] as $noticia) {
 
@@ -114,7 +103,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                     $file_path = $folder_path . $file;
 
                                     $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                                    if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') {
+                                    if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') { // revisar que pasa cuando no carga imagen
                         ?>
                                         <div class="blog-post">
                                             <!-- incio imagenes -->
@@ -147,7 +136,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                                     <!--Inicio Descripcion-->
                                     <div class="resumen_noticia">
-                                        <?php echo strip_tags($noticia["descripcion"]) ?>
+                                        <?php echo preg_replace("[\n|\r|\n\r]", "",trim(strip_tags($noticia["descripcion"]))) ?>
                                     </div>
                                     <!-- Fin Descripcion-->
 
@@ -167,28 +156,27 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                 </div>
 
             </div>
+
             <div id="pagination">
                 <nav>
                     <ul class="pagination">
+
                         <li class="page-item  <?php echo $_GET['pagina'] > 0 ? 'disabled' : '' ?>">
-                            <a class="page-link" href="index.php?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
                         </li>
 
-                        <?php for ($i = 0; $i < $noticias['paginas']; $i++) {
-                        ?>
+                        <?php for ($i = 0; $i < $noticias['paginas']; $i++) { ?>
 
                             <li class="page-item <?php echo $_GET['pagina'] == ($i + 1) ? 'active' : '' ?>">
-                                <a class="page-link" href="index.php?pagina=<?php echo $i + 1  ?> "><?php echo $i + 1 ?> <span class="sr-only"></span></a>
+                                <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo $i + 1  ?> "><?php echo $i + 1 ?> <span class="sr-only"></span></a>
                             </li>
 
+                        <?php } ?>
 
-
-                        <?php
-                        }
-                        ?>
                         <li class="page-item  <?php echo $_GET['pagina'] <= $noticias['paginas'] ? 'disabled' : '' ?>">
-                            <a class="page-link" href="index.php?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
                         </li>
+
                     </ul>
 
                 </nav>

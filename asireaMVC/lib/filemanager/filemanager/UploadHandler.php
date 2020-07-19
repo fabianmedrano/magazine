@@ -1458,7 +1458,7 @@ class UploadHandler
             }
         }else{
             $targetFile = $this->options['config']['ftp_temp_folder'].$res['files'][0]->name;
-            $targetFileThumb =  $this->options['config']['ftp_temp_folder']."thumbs/". $res['files'][0]->name;
+        //    $targetFileThumb =  $this->options['config']['ftp_temp_folder']."thumbs/". $res['files'][0]->name;
         }
 
         //check if image (and supported)

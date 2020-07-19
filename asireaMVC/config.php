@@ -1,6 +1,8 @@
 <?php
 
-
+    
+defined("CURRENT_DIR")
+or define("CURRENT_DIR",'http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
 
 /** Ruta del proyecto */
 defined("BASE_DIR")

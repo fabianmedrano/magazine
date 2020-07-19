@@ -1,35 +1,57 @@
 $(document).ready(function () {
-    jQuery.validator.addMethod("sin caracteres especiales",
+
+    jQuery.validator.addMethod("noSpecialCarter",
         function (value, element) {
-            return /^[A-Za-z\d=#$%@_ -]+$/.test(value);
+            return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(value);
         },
         "Nada de caracteres especiales, por favor"
     );
+    jQuery.validator.addMethod("ckrequired", function (value, element) {  
+        var idname = $(element).attr('id');  
+        var editor = CKEDITOR.instances[idname];  
+        var ckValue = GetTextFromHtml(editor.getData()).replace(/<[^>]*>/gi, '').trim();  
+        if (ckValue.length === 0) {  
+            $(element).val(ckValue);  
+        } else {  
+            $(element).val(editor.getData());  
+        }  
+        return $(element).val().length > 0;  
+    }, "This field is required");  
 
-    
+function GetTextFromHtml(html) {  
+        var dv = document.createElement("DIV");  
+        dv.innerHTML = html;  
+        return dv.textContent || dv.innerText || "";  
+    }  
+
+
+
+ 
+
     $("#form-noticia-create").validate({
         rules: {
             titulo_noticia: {
                 required: true,
                 minlength: 4,
-                maxlength: 90
+                maxlength: 90,
+                noSpecialCarter: true
             },
             editor_noticia: {
-                required: true,
-                minlength: 100,
-                maxlength: 600
+
+                ckrequired: true,
+
             }
+
         },
         messages: {
             titulo_noticia: {
                 required: "Necesitamos que escribas un titulo para la noticia",
                 minlength: "Necesitamos por lo menos {0} caracteres",
-                maxlength: "El titulo debe de ser menor a {0} caracteres"
+                maxlength: "El titulo debe de ser menor a {0} caracteres",
+                noSpecialCarter: "No se permiten caracteres especiales"
             },
             editor_noticia: {
-                required: "Necesitamos que escribas un cuero a esta noticia",
-                minlength: "debe de escribir menos {0} caracteres",
-                maxlength: "El titulo debe de ser menor a {0} caracteres"
+                ckrequired: "Necesitamos que escribas la noticia",
             }
         },
         errorElement: "div",
@@ -42,7 +64,7 @@ $(document).ready(function () {
                     error.appendTo("#error_titulo");
                     break;
                 case "editor_noticia":
-                    error.appendTo("#error_titulo");
+                    error.appendTo("#error_noticia");
                     break;
                 default:
                     break;
@@ -92,6 +114,8 @@ $(document).ready(function () {
 
         }
     });
+
+
 
 
 

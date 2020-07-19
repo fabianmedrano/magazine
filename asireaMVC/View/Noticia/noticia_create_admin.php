@@ -29,9 +29,13 @@ echo ($numnews);
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_create.js"></script>
 
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
+
+
+
+  
+  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_create.js"></script>
   <!--   JS Files END  -->
 
   <!-- INICIO jquery validation-->
@@ -63,7 +67,7 @@ echo ($numnews);
         <form id="form-noticia-create" method="post" action="../../Controller/noticia/switch_controller.php">
           <fieldset>
             
-            <div id="titulo_noticia" class="error" role="alert"></div>
+            <div id="error_titulo" class="error" role="alert"></div>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -73,7 +77,7 @@ echo ($numnews);
             </div>
         
             
-            <div id="editor_titulo" class="error" role="alert"></div>
+            <div id="error_noticia" class="error" role="alert"></div>
 
             <div class="form-group">
               <label for="street1_id" class="control-label">Contenido</label>

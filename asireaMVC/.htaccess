@@ -1,0 +1,4 @@
+    ErrorDocument 500 /View/error_msg.php.html
+    ErrorDocument 401 /View/error_msg.html
+    ErrorDocument 403 /View/error_msg.html
+    ErrorDocument 404 /View/error_msg.html

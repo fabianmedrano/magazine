@@ -52,9 +52,9 @@
   <div class="container-flex">
     <section class="wrapper news-posts ">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
           <div class="page-header">
-            <h1>
+            <h2>
               <?php
               echo ($noticia['titulo']);
               ?>

@@ -18,10 +18,10 @@ try {
 
     if ($ftp) {
         $source_base = $config['ftp_base_folder'] . $config['upload_dir'];
-        $thumb_base = $config['ftp_base_folder'] . $config['ftp_thumbs_dir'];
+    //    $thumb_base = $config['ftp_base_folder'] . $config['ftp_thumbs_dir'];
     } else {
         $source_base = $config['current_path'];
-        $thumb_base = $config['thumbs_base_path'];
+    //    $thumb_base = $config['thumbs_base_path'];
     }
 
     if (isset($_POST["fldr"])) {
@@ -168,9 +168,9 @@ try {
             mkdir($config['ftp_temp_folder'], $config['folderPermission'], true);
         }
 
-        if (!is_dir($config['ftp_temp_folder'] . "thumbs")) {
+      /*  if (!is_dir($config['ftp_temp_folder'] . "thumbs")) {
             mkdir($config['ftp_temp_folder'] . "thumbs", $config['folderPermission'], true);
-        }
+        }*/
 
         $uploadConfig['upload_dir'] = $config['ftp_temp_folder'];
     }

@@ -1,6 +1,6 @@
 
 .container-flex {
-	margin: 50px  auto !important;
+	margin: 50px  auto  0px!important;
 	justify-content: center;
 	display: flex;
 }
@@ -10,11 +10,15 @@
 	
 	justify-content: center;
 	}
+	.list-noticias{
+		min-height: 400px;
+	}
 
 
 #pagination {
 	display: flex;
 	margin: 50px  auto;
+	margin: 50px auto 0px;
 	justify-content: center;
 }
 .pagination > li > a,
@@ -27,6 +31,9 @@
 color: white;
 background-color: green;
 }
+.p80 {
+	padding: 0px !important;
+  }
 
 .pagination > .active > a,
  .pagination > .active > a:focus,
@@ -38,3 +45,20 @@ background-color: green;
 	   background-color: rgb(0, 63, 0) !important;
 	    border-color: rgb(0, 63, 0)  !important;
 	 }
+
+	 .contenedor_msg {
+		text-align: center;
+		padding: 20px 40px;
+		margin: 10% auto;
+	}
+	.mensaje {
+		font-size: 24px;
+		font-weight: 600;
+		margin: 20px 0;
+	}
+	.descripcion_msg {
+		font-size: 16px;
+		line-height: 24px;
+		margin: 16px 0;
+	}
+	

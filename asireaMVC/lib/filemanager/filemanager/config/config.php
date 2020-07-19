@@ -337,15 +337,15 @@ $config = array(
     //Permissions configuration
     //******************
     'delete_files'                            => true,
-    'create_folders'                          => true,
-    'delete_folders'                          => true,
+    'create_folders'                          => false,
+    'delete_folders'                          => false,
     'upload_files'                            => true,
     'rename_files'                            => true,
-    'rename_folders'                          => true,
-    'duplicate_files'                         => true,
+    'rename_folders'                          => false,
+    'duplicate_files'                         => false,
     'extract_files'                           => true,
-    'copy_cut_files'                          => true, // for copy/cut files
-    'copy_cut_dirs'                           => true, // for copy/cut directories
+    'copy_cut_files'                          => false, // for copy/cut files
+    'copy_cut_dirs'                           => false, // for copy/cut directories
     'chmod_files'                             => true, // change file permissions
     'chmod_dirs'                              => true, // change folder permissions
     'preview_text_files'                      => true, // eg.: txt, log etc.
@@ -517,8 +517,8 @@ $config = array(
     'fixed_path_from_filemanager'             => array( '../test/', '../test1/' ), //fixed path of the image folder from the current position on upload folder
     'fixed_image_creation_name_to_prepend'    => array( '', 'test_' ), //name to prepend on filename
     'fixed_image_creation_to_append'          => array( '_test', '' ), //name to appendon filename
-    'fixed_image_creation_width'              => array( 300, 400 ), //width of image
-    'fixed_image_creation_height'             => array( 200, 300 ), //height of image
+    'fixed_image_creation_width'              => array( 700, 800 ), //width of image
+    'fixed_image_creation_height'             => array( 600, 700 ), //height of image
     /*
     #             $option:     0 / exact = defined size;
     #                          1 / portrait = keep aspect set height;
@@ -538,8 +538,8 @@ $config = array(
     'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
     'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
     'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
-    'relative_image_creation_width'           => array( 300, 400 ), //width of image
-    'relative_image_creation_height'          => array( 200, 300 ), //height of image
+    'relative_image_creation_width'           => array( 700, 800 ), //width of image
+    'relative_image_creation_height'          => array( 600, 700 ), //height of image
     /*
      * $option:     0 / exact = defined size;
      *              1 / portrait = keep aspect set height;
