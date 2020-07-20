@@ -12,7 +12,7 @@ $images = glob($directory . "*.*");
   var tipos = ['png', 'jpg'];
 
   
-  $('#input-carrusel').fileinput({
+  $('#inputcarrusel').fileinput({
     language: 'es',
     uploadUrl: "../../lib/fileinput/nosotros/upload.php",
     showUploadedThumbs :false,
@@ -42,15 +42,15 @@ $images = glob($directory . "*.*");
   });
 
 
-  $('#input-carrusel').on('fileuploaded', function(event, previewId, index, fileId) {
+  $('#inputcarrusel').on('fileuploaded', function(event, previewId, index, fileId) {
 
         console.log('File uploaded', previewId, index, fileId);
         
         
-    $('#input-carrusel').fileinput('refresh');
+    $('#inputcarrusel').fileinput('refresh');
     });
 
-  $('#input-carrusel').on('filecleared', function(event) {
+  $('#inputcarrusel').on('filecleared', function(event) {
     $('div.alert').empty();
     $('div.alert').hide();
   });

@@ -3,7 +3,7 @@
 // **********************************************************************
 
 // Si no se ha llegado ha definir el array global $_FILES, cancelaremos el resto del proceso
-if (empty($_FILES['input-carrusel'])) {
+if (empty($_FILES['inputcarrusel'])) {
 	// Devolvemos un array asociativo con la clave error en formato JSON como respuesta	
     echo json_encode(['error'=>'No hay ficheros para realizar upload.']); 
 	// Cancelamos el resto del script
@@ -16,7 +16,7 @@ if (empty($_FILES['input-carrusel'])) {
 // Definimos la constante con el directorio de destino de las descargas
 define('DIR_DESCARGAS',realpath(dirname(__FILE__, 4)). '\public\img\nosotros\nosotros_carrusel');
 // Obtenemos el array de ficheros enviados
-$ficheros = $_FILES['input-carrusel'];
+$ficheros = $_FILES['inputcarrusel'];
 // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
 $estado_proceso = NULL;
 // Paths para almacenar

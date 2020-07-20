@@ -1,30 +1,43 @@
+
 $(document).ready(function () {
 
 
-    $("#form-nosotros-edit").validate({
-        rules: {
-            editor_nosotros: {
-                required: true,
-                minlength: 30,
-                maxlength: 600
-            }
-        },
-        messages: {
-            editor_nosotros: {
-                required: "Necesitamos que escribas una noticia",
-                minlength: "j",
-                maxlength: "ms"
-             
-            }
-        }
+    CKEDITOR.replace('editor_nosotros', {
+        filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=nosotros/principal/',
+        filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=nosotros/principal/',
+        filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=nosotros/principal/'
+
+    });
+
+var $rule = [
+        {
+        error: "required_content",
+        msg: "Debe ingresar más contenido para la pagina"
+    },
+    {
+        error: "max_content",
+        msg: "Excedio el tamaño de la para el contenido de la pagina"
+    },
+];
+
+    var $texto ="";
+
+    var instance = CKEDITOR.instances.editor_nosotros;
+    instance.on('change', function (evt) {
+       $texto = CKEDITOR.instances.editor_nosotros.getData().replace(/<[^>]*>/gi, '').trim();
+        $texto = $texto.replace(/(\r\n|\n|\r)/gm, "");
+
+        validado = validarCkeditor($texto,$rule, $('#error_nosotros'));
     });
 
 
 
-    $("#form-nosotros-edit").submit(function (ev) {
-        ev.preventDefault();
-      
 
+    $("#form-nosotros-edit").submit(function (ev) {
+
+        ev.preventDefault();
+        
+        if(validarCkeditor($texto,$rule, $('#error_nosotros'))){
         swal({
             title: "Está seguro?",
             text: "Se modificara la informacion. Esta acción es irreversible!",
@@ -61,16 +74,17 @@ $(document).ready(function () {
                 }
             });
 
-
+        }
     });
 
 
-
-
-
-
-
-
-
-
 });
+
+
+
+
+
+
+
+
+

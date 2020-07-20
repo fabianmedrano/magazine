@@ -35,15 +35,15 @@ echo ($numnews);
 
 
   
-  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_create.js"></script>
   <!--   JS Files END  -->
 
   <!-- INICIO jquery validation-->
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/jquery.validate.min.js"></script>
-
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/additional-methods.js"></script>
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/localization/messages_es.js"></script>
+  
+  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
   <!-- FIN jquery validation-->
+
+  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_create.js"></script>
+
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
@@ -63,7 +63,6 @@ echo ($numnews);
     <section class="wrapper news-posts ">
       <div class="row">
 
-        <div id="errormessages"></div>
         <form id="form-noticia-create" method="post" action="../../Controller/noticia/switch_controller.php">
           <fieldset>
             
@@ -84,13 +83,7 @@ echo ($numnews);
               <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80"></textarea>
             </div>
             <input class="button btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
-            <script>
-              CKEDITOR.replace('editor_noticia', {
-                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
-                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
-                filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
-              });
-            </script>
+      
           </fieldset>
         </form>
 

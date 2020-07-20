@@ -50,13 +50,18 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
       <section class="wrapper news-posts ">
         <div class="row">
               <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
-                <fieldset>
-                  <div class="input-group mb-3">
+               
+              <fieldset>
+              
+            <div id="error_titulo" class="error" role="alert"></div>
+              <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon3">Título</span>
                     </div>
                     <input id="titulo_noticia" name="titulo_noticia" type="text" class="form-control" aria-describedby="basic-addon3" value="<?php echo $noticia['titulo'] ?>">
                   </div>
+                  
+            <div id="error_noticia" class="error" role="alert"></div>
                   <div class="form-group">
                     <label for="street1_id" class="control-label">Contenido</label>
                     <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">

@@ -48,11 +48,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
   <link href="<?php echo LIB_PATH ?>/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-
   <script src="<?php echo LIB_PATH ?>/fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>
   <script src="<?php echo LIB_PATH ?>/fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
   <script src="<?php echo LIB_PATH ?>/fileinput/js/plugins/purify.min.js" type="text/javascript"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="<?php echo LIB_PATH ?>/fileinput/js/fileinput.js"></script>
@@ -60,12 +58,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
   <script src="<?php echo LIB_PATH ?>/fileinput/js/locales/es.js"></script>
   <!--FIN FILE INPUT-->
 
-  <!-- INICIO jquery validation-->
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/jquery.validate.min.js"></script>
-
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/additional-methods.js"></script>
-  <script src="<?php echo LIB_PATH ?>/jquery-validation/localization/messages_es.js"></script>
-  <!-- FIN jquery validation-->
+  
+  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
 
   <script src="<?php echo PUBLIC_PATH ?>/js/nosotros/nosotros_edit.js"></script>
 
@@ -87,16 +81,20 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         <div class="row">
           <!-- INICIO File Input -->
           <div id="container-fileinput-carrusel">
-            <label for="input-carrusel" role="button">Seleccionar Archivos</label>
-            <input id="input-carrusel" name="input-carrusel[]" type="file" multiple>
+            <label for="inputcarrusel" role="button">Seleccionar Archivos</label>
+            <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
           </div>
           <!-- FIN File Input -->
         </div>
         <div class="row">
 
+            <div id="error_nosotros" class="error" role="alert"></div>
+            </div>
+        <div class="row">
+
 
           <!--   INICIO CKEDITOR   -->
-          <div id="error_edit_nosotros" class="error" role="alert"></div>
+    
 
           <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
             <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80" require>
@@ -107,18 +105,11 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
             </textarea>
 
             <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Actualizar" />
-            <input type="button" onclick="history.back()" name="volver atrás" class="btn btn-success" value="volver atrás">
+        
 
-            <script>
-              CKEDITOR.replace('editor_nosotros', {
-                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=nosotros/principal/',
-                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=nosotros/principal/',
-                filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=nosotros/principal/'
 
-              });
-            </script>
           </form>
-          <!--   FIN CKEDITOR   -->
+          <!--   FIN CKEDITOR     <input type="button" onclick="history.back()" name="volver atrás" class="btn btn-success" value="volver atrás">  -->
 
 
         </div>
