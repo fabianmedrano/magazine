@@ -1,6 +1,8 @@
 <?php
 
-
+    
+defined("CURRENT_DIR")
+or define("CURRENT_DIR",'http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
 
 /** Ruta del proyecto */
 defined("BASE_DIR")
@@ -27,3 +29,9 @@ defined("CONEXION_PATH")
 
 defined("IMG_PATH")
     or define("IMG_PATH", realpath(dirname(__FILE__) . '/public/img'));
+    
+defined("LIB_PATH")
+or define("LIB_PATH", BASE_URL . '/lib');
+
+defined("PUBLIC_PATH")
+or define("PUBLIC_PATH", BASE_URL . '/public');
