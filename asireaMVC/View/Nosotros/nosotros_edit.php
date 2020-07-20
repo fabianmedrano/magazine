@@ -69,7 +69,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
   <div class="container">
   

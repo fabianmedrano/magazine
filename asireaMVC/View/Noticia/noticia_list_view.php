@@ -12,34 +12,11 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 <head>
 
+    <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
     <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
     <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
-
-
-
-    <!-- CSS FILES START-->
-    <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
-    <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
-    <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo LIB_PATH ?>/template/css/prettyPhoto.css" rel="stylesheet">
-    <link href="<?php echo LIB_PATH ?>/fontawesome/css/all.min.css" rel="stylesheet">
-    <!--  CSS FILES End -->
-
-    <!--   JS Files Start  -->
-    <script src="<?php echo LIB_PATH ?>/jquery/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo LIB_PATH ?>/jquery/jquery-migrate-1.4.1.min.js"></script>
-    <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?php echo LIB_PATH ?>/jquery/jquery.prettyPhoto.js"></script>
-    <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
-    <script src="<?php echo LIB_PATH ?>/template/js/popper.min.js"></script>
-    <script src="<?php echo LIB_PATH ?>/template/js/isotope.min.js"></script>
-    <!--   JS Files END  -->
-
-
-
-    <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
     <title>Acerca de RECURINFOR (v4)</title>
 
