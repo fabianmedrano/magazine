@@ -30,7 +30,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link " href="#" > BIBLIOTECA </a>
+                        <a class="nav-link " href="../Biblioteca/biblio_edit.php" > BIBLIOTECA </a>
                     </li>
                 </ul>
             </div>
