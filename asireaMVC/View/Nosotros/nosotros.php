@@ -12,25 +12,32 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 <head>
 
 
-  <!-- CSS FILES START-->
+  <!-- CSS FILES START
   <link href="../../public/css/general.css" rel="stylesheet">
+-->
 
+
+  <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
+  <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros.css" rel="stylesheet">
   <!-- CSS FILES START-->
-  <link href="../../public/css/custom.css" rel="stylesheet">
-  <link href="../../public/css/responsive.css" rel="stylesheet">
-  <link href="../../public/css/owl.carousel.min.css" rel="stylesheet">
-  <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
-  <link href="../../public/css/all.min.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/prettyPhoto.css" rel="stylesheet">
+  <link href="<?php echo LIB_PATH ?>/template/css/all.min.css" rel="stylesheet">
   <!--  CSS FILES End -->
 
-  <!--   JS Files Start  -->
-  <script src="../../public/js/jquery-3.3.1.min.js"></script>
-  <script src="../../public/js/bootstrap.min.js"></script>
-  <script src="../../public/js/owl.carousel.min.js"></script>
-  <script src="../../public/js/jquery.prettyPhoto.js"></script>
-  <script src="../../public/js/custom.js"></script>
 
+  <!--   JS Files Start  -->
+  <script src="<?php echo LIB_PATH ?>/jquery/jquery-3.2.1.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery/jquery-migrate-1.4.1.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/template/js/owl.carousel.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/jquery/jquery.prettyPhoto.js"></script>
+  <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
+  <script src="<?php echo LIB_PATH ?>/template/js/popper.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/template/js/isotope.min.js"></script>
   <!--   JS Files END  -->
 
 
@@ -40,56 +47,73 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/header.php")
+  ?>
+
 
   <div class="container_principal">
 
-<!-- INICIO CARRUSEL -->
-    <section id="home-slider" class=" carusel owl-carousel owl-theme wf100 owl-loaded owl-drag">
-      <div class="owl-stage-outer">
-        <div class="owl-stage" style="transform: translate3d(-4062px, 0px, 0px); transition: all 0.25s ease 0s; width: 9478px;">
 
-          <?php
+    <!-- INICIO CARRUSEL -->
 
-          $images = glob("../../public/img/nosotros/nosotros_carrusel/*.*"); 
-          echo $images;
-          foreach ($images as $image) { ?>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <?php
+        $folder_path = '../../public/img/nosotros/nosotros_carrusel/';
+        $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
+        $folder = opendir($folder_path);
+        $index = 0;
+        if ($num_files > 0) {
+          while (false !== ($file = readdir($folder))) {
+            $file_path = $folder_path . $file;
+            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') {
+        ?>
+              <div class="carousel-item  <?php if ($index == 0) echo ("active");  ?>">
+                <img class="d-block w-100" src="<?php echo $file_path; ?>" alt="First slide">
 
-            <div class="owl-item " style="width: 1354px;">
-              <div class="item">
-                <div class="slider-caption h2slider">
-                  <div class="container">
-
-                  </div>
-                </div>
-                <img src='<?php echo $image; ?>' alt="">
               </div>
-            </div>
+        <?php
+              $index++;
+            }
+          }
+        }
+        closedir($folder);
+        ?>
 
-          <?php } ?>
-
-        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-      <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div>
-      <div class="owl-dots disabled"></div>
-    </section>
-
-<!-- FIN CARRUSEL -->
 
 
-<!-- INICIO CUERPO INFORMACION NOSOTROS-->
-    <section>
-      <div class="container">
+
+
+
+
+
+      <!-- FIN CARRUSEL -->
+
+
+      <!-- INICIO CUERPO INFORMACION NOSOTROS-->
+
+      <div class="nosotros-cuerpo">
         <?php
         $controlador_nosotros = new NosotrosController();
         echo ($controlador_nosotros->getNosotros());
         ?>
       </div>
-    </section>
-<!-- INICIO CUERPO INFORMACION NOSOTROS-->
 
-  </div>
-  <?php include(TEMPLATES_PATH . "/footer.php") ?>
+      <!-- INICIO CUERPO INFORMACION NOSOTROS-->
+
+    </div>
+    <?php include(TEMPLATES_PATH . "/footer.php")
+    ?>
 </body>
 
 </html>
