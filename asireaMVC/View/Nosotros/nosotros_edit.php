@@ -10,6 +10,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 <head>
+<?php/// include(TEMPLATES_PATH . "/metadata.php") ?>
 
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros_edit.css" rel="stylesheet">
@@ -62,7 +63,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
   <script src="<?php echo PUBLIC_PATH ?>/js/nosotros/nosotros_edit.js"></script>
 
-  <?php include(TEMPLATES_PATH . "/metadata.php") ?>
+ 
 
   <title>Acerca de RECURINFOR (v4)</title>
 

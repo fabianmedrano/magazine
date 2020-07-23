@@ -6,16 +6,8 @@ $(document).ready(function () {
         filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
         filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
       });
-      /*
-    jQuery.validator.addMethod("noSpecialCarter",
-        function (value, element) {
-            return /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(value);
-        },
-        "Nada de caracteres especiales, por favor"
-    );
 
-*/
-
+      
 var $ruleti = [
     {
     error: "required_title",

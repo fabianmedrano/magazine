@@ -10,18 +10,22 @@ $images = glob($directory . "*.*");
 ?>
 <script>
   var tipos = ['png', 'jpg'];
-
-  
+  initFileInput();
+  function initFileInput() {
+   
   $('#inputcarrusel').fileinput({
     language: 'es',
     uploadUrl: "../../lib/fileinput/nosotros/upload.php",
     showUploadedThumbs :false,
     showUpload:false, 
-    uploadAsync: false,
+    uploadAsync: true,
+    minFileCount: 1,
     maxFileCount: 5,
     maxFileSize: 3000,
     removeFromPreviewOnError: true,
     allowedFileExtensions: tipos,
+    overwriteInitial: false,
+    browseOnZoneClick: true,
     initialPreview: [
       <?php foreach ($images as $image) { ?> "<img src='<?php echo $image; ?>' height='120px' class='file-preview-image'>",
       <?php } ?>
@@ -39,30 +43,32 @@ $images = glob($directory . "*.*");
         },
       <?php } ?>
     ]
-  });
+  }).on("filebatchselected", function(event, files) {
+    $('#inputcarrusel').fileinput("upload");
+});
+ 
+  }
+  /*
+  $.when(LlamarFuncion()).then(function(){
 
+    self.getFrames(' .kv-file-upload').each(function () {
+    console.log('Cambio');
+});*/
 
-  $('#inputcarrusel').on('fileuploaded', function(event, previewId, index, fileId) {
-
-        console.log('File uploaded', previewId, index, fileId);
-        
-        
-    $('#inputcarrusel').fileinput('refresh');
+/*
+  $('#inputcarrusel').on('filebatchuploadsuccess', function(event, data) {
+        console.log('File batch upload complete');
+        $('#inputcarrusel').fileinput('destroy');
+        initFileInput();
     });
-
+    
   $('#inputcarrusel').on('filecleared', function(event) {
     $('div.alert').empty();
     $('div.alert').hide();
   });
-  // Evento filebatchuploadsuccess del plugin que se ejecuta cuando se han enviado todos los archivos al servidor
-  //    Mostramos un resumen del proceso realizado
-  //    Carpeta donde se han almacenado y total de archivos movidos
-  //    Nombre y tamaño de cada archivo procesado
-  //    Totales de archivos por tipo
-
-
-  // Ocultamos el div de alerta donde se muestra un resumen del proceso
-  $('div.alert').hide();
+  
+    $('div.alert').hide();
+*/
 </script>
 
 
