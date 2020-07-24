@@ -18,7 +18,9 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
   
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
+
   
   <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_edit.js"></script>
   

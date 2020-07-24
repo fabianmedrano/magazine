@@ -13,8 +13,7 @@
 
 
     function validarFileInput($FileInput, $msg, $idError) {
-     
-        return   (($FileInput)[0]) ? pintarError($msg[2], $idError) : borrarError($msg[2], $idError);
+        return   (  !($FileInput)[0]  ) ? pintarError($msg[2], $idError) : borrarError($msg[2], $idError);
     }
 
     

@@ -27,7 +27,9 @@ echo ($numnews);
   <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
+
 
 
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>

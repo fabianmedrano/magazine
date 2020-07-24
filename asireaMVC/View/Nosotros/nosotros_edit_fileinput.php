@@ -16,16 +16,17 @@ $images = glob($directory . "*.*");
   $('#inputcarrusel').fileinput({
     language: 'es',
     uploadUrl: "../../lib/fileinput/nosotros/upload.php",
-    showUploadedThumbs :false,
-    showUpload:false, 
+ 
+    allowedFileExtensions: tipos,
+    
     uploadAsync: true,
+
+    showUpload: false, // hide upload button
+    overwriteInitial: false, // append files to initial preview
     minFileCount: 1,
     maxFileCount: 5,
-    maxFileSize: 3000,
-    removeFromPreviewOnError: true,
-    allowedFileExtensions: tipos,
-    overwriteInitial: false,
     browseOnZoneClick: true,
+    
     initialPreview: [
       <?php foreach ($images as $image) { ?> "<img src='<?php echo $image; ?>' height='120px' class='file-preview-image'>",
       <?php } ?>

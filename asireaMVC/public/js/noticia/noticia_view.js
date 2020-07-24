@@ -28,7 +28,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='modificarServicio' type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-succes'   onclick='goEditNoticia(" + data.idnoticia + ")'><i class='fas fa-pencil-alt' ></i></button>";
+                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-succes'   onclick='goEditNoticia(" + data.idnoticia + ")'><i class='fas fa-pencil-alt' ></i></button>";
                 }
             },
             {
@@ -38,7 +38,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='eliminarServicio' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick='deleteNoticia(" + data.idnoticia + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='"+data.idnoticia+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick='deleteNoticia(" + data.idnoticia + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -72,6 +72,7 @@ function goEditNoticia(id) {
 }
 
 function deleteNoticia(id) {
+
     Swal.fire({
         title: '¿Está seguro?',
         text: "¡Se eliminara esta noticia!",
@@ -95,6 +96,7 @@ function deleteNoticia(id) {
                         'Noticia ha sido eliminada',
                         'success'
                     )
+                    $('#'+id).parent().parent().remove();
 
                 },
                 error: function () {

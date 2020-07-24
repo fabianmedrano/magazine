@@ -48,21 +48,30 @@ var $ruleti = [
 
     $("#form-noticia-create").submit(function (ev) {
         ev.preventDefault();
+
+        $texto = CKEDITOR.instances.editor_noticia.getData().replace(/<[^>]*>/gi, '').trim();
+        $texto = $texto.replace(/(\r\n|\n|\r)/gm, "");
+        $titulo =  $("#titulo_noticia").val().trim();
+        
         if(validarCkeditor($texto,$ruleck, $('#error_noticia')) &&  validarTitle($titulo,$ruleti, $('#error_titulo'))  ){
 
-            swal({
-                title: "Está seguro?",
-                text: "Se guardara esta noticia.",
-                type: "warning",
+
+
+
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: "¡Se guardara esta noticia!",
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: "Guardar!",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Guardar!',
                 cancelButtonText: "Cancelar",
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true,
                 closeOnCancel: false
-            })
-                .then((value) => {
-                    if (value) {
+            }).then((result) => {
+                if (result.value) {
                         var $form = $("#form-noticia-create");
                         var $accion = "&btn_accion=Guardar";
                         $.ajax({
@@ -72,18 +81,34 @@ var $ruleti = [
                             async: false,
                             dataType: "json",
                             success: function () {
-                                swal("Noticia guardada de forma exitosa", {
-                                    icon: "success",
-                                });
+                      
+                                Swal.fire(
+                                    'Guardada!',
+                                    'Noticia guardada de forma exitosa',
+                                    'success'
+                                )
                             },
                             error: function () {
-                                swal("Ha ocurrido un error", "intente refrescar la pagina", "error");
+                                Swal.fire(
+                                    "Ha ocurrido un error",
+                                    "intente refrescar la pagina", 
+                                    "error"
+                                    );
                             }
                         });
                     } else {
-                        swal("Cancelado", "Se ha cancelado la acción de guardar", "error");
+                        Swal.fire(
+                            'Cancelado',
+                            'Se ha cancelado la acción de guardar',
+                            'error'
+                        )
                     }
                 });
+
+
+
+
+
 
         }
     });

@@ -9,10 +9,13 @@ width: auto;
    word-wrap: break-word;
  
 }
+.error{
 
 
 
-
+max-width: 70%;
+min-width: 70%;
+}
 .file-preview-thumbnails{
     word-wrap: break-word;
   
