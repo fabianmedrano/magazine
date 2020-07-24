@@ -81,6 +81,14 @@ echo ($numnews);
             <div class="form-group">
               <label for="street1_id" class="control-label">Contenido</label>
               <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80"></textarea>
+              <script>    
+              
+              CKEDITOR.replace('editor_noticia', {
+        filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+        filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+        filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
+      });
+      </script>
             </div>
             <input class="button btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
       

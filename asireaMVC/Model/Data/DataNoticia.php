@@ -174,8 +174,7 @@ class DataNoticia
                 'status' => 'success',
                 'msg' => 'noticia eliminada exitosamente'
             ];
-        } catch (PDOException $e) {
-            echo $e->getMessage();   
+        } catch (PDOException $e) {  
             $response = [
                 'status' => 'error',
                 'errors' => $e->getMessage()

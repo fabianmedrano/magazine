@@ -1,11 +1,7 @@
 $(document).ready(function () {
 
 
-    CKEDITOR.replace('editor_noticia', {
-        filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
-        filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
-        filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
-      });
+
 
       
 var $ruleti = [
@@ -33,6 +29,7 @@ var $ruleti = [
 
 
     var $texto ="";
+    var $titulo ="";
 
     var instance = CKEDITOR.instances.editor_noticia;
     instance.on('change', function (evt) {

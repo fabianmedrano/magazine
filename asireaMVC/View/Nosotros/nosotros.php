@@ -12,6 +12,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 <head>
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
+
+  <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
+  <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros.css" rel="stylesheet">
   <title>Nosotros</title>
 
 </head>
@@ -21,12 +24,11 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
   ?>
 
 
-  <div class="container_principal">
 
 
     <!-- INICIO CARRUSEL -->
 
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carousel-nosotros" class="carousel slide flex" data-ride="carousel">
       <div class="carousel-inner">
         <?php
         $folder_path = '../../public/img/nosotros/nosotros_carrusel/';
@@ -39,8 +41,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
             $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') {
         ?>
-              <div class="carousel-item  <?php if ($index == 0) echo ("active");  ?>">
-                <img class="d-block w-100" src="<?php echo $file_path; ?>" alt="First slide">
+              <div class="carousel-item banner-altura-200 <?php if ($index == 0) echo ("active");  ?>">
+                <img class="d-block w-100 " src="<?php echo $file_path; ?>" alt="First slide">
 
               </div>
         <?php
@@ -51,24 +53,25 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         closedir($folder);
         ?>
 
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carousel-nosotros" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carousel-nosotros" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
       </div>
 
 
-
+    </div>
 
 
 
 
       <!-- FIN CARRUSEL -->
 
+      <div class="container">
 
       <!-- INICIO CUERPO INFORMACION NOSOTROS-->
 

@@ -18,7 +18,16 @@ var $rule = [
         error: "max_content",
         msg: "Excedio el tamaño de la para el contenido de la pagina"
     },
+    {
+        error: "min_img",
+        msg: "Debe de agregar almenos una imagen"
+    },
 ];
+
+$('.file-preview-initial').on('change', function (evt) {
+     validado = validarFileInput($('.file-preview-initial') , $rule , $('#error_fileinput'));
+ });
+
 
     var $texto ="";
 

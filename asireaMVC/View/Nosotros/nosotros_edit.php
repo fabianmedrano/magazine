@@ -10,14 +10,14 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 <head>
-<?php/// include(TEMPLATES_PATH . "/metadata.php") ?>
+  <?php/// include(TEMPLATES_PATH . "/metadata.php") ?>
 
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros_edit.css" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
 
-  
+
   <!-- CSS FILES START-->
   <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
   <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
@@ -58,12 +58,12 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
   <script src="<?php echo LIB_PATH ?>/fileinput/js/locales/es.js"></script>
   <!--FIN FILE INPUT-->
 
-  
-  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
+
+  <script src="<?php echo PUBLIC_PATH ?>/js/validacion.js"></script>
 
   <script src="<?php echo PUBLIC_PATH ?>/js/nosotros/nosotros_edit.js"></script>
 
- 
+
 
   <title>Acerca de RECURINFOR (v4)</title>
 
@@ -72,59 +72,59 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 <body>
   <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
+
+
   <div class="container">
-  
-      <section class="wrapper">
+  <div class="row">
+  <h3>
+    ¿Que es ASIREA?
+</h3>
+  </div>
 
-        <div id="error_fileinput" class="error" role="alert"></div>
-
-        <div class="row">
-          <!-- INICIO File Input -->
-          <div id="container-fileinput-carrusel">
-            <label for="inputcarrusel" role="button">Seleccionar Archivos</label>
-            <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
-          </div>
-          <!-- FIN File Input -->
+      <div class="row">
+        <!-- INICIO File Input -->
+        
+      <div id="error_fileinput" class="error" role="alert"></div>
+        
+        <div id="container-fileinput-carrusel">
+        <div class="form-group">
+              <label for="inputcarrusel" class="control-label">Carrusel</label>
+          <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
         </div>
-        <div class="row">
-
-            <div id="error_nosotros" class="error" role="alert"></div>
-            </div>
-        <div class="row">
-
-
-          <!--   INICIO CKEDITOR   -->
+        </div>
     
+        <!-- FIN File Input -->
+      </div>
+      <div class="row">
+        <div id="error_nosotros" class="error" role="alert"></div>
+      </div>
+      <div class="row">
+        <!--   INICIO CKEDITOR   -->
 
-          <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
-            <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80" require>
+
+        <form id="form-nosotros-edit" method="post" action="../../Controller/nosotros/switch_controller.php">
+        
+        <div class="form-group">
+              <label for="editor_nosotros" class="control-label">Contenido</label>
+          <textarea name="editor_nosotros" id="editor_nosotros" rows="10" cols="80" require>
                 <?php
                 $controlador_nosotros = new NosotrosController();
                 echo ($controlador_nosotros->getNosotros());
                 ?>
             </textarea>
-
-            <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Actualizar" />
-        
-
-
-          </form>
-          <!--   FIN CKEDITOR     <input type="button" onclick="history.back()" name="volver atrás" class="btn btn-success" value="volver atrás">  -->
-
-
         </div>
-      </section>
+          <input class="button btn btn-primary" name="btn_accion" type="Submit" value="Actualizar" />
+        </form>
+        <!--   FIN CKEDITOR     <input type="button" onclick="history.back()" name="volver atrás" class="btn btn-success" value="volver atrás">  -->
+      </div>
+  
 
- 
 
   </div>
-
-
   <?php include(TEMPLATES_PATH . "/footer.php") ?>
-
-
 </body>
 
 
 <?php include(VIEW_PATH . "/Nosotros/nosotros_edit_fileinput.php") ?>
+
 </html>

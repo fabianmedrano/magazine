@@ -1,22 +1,22 @@
-$(document).ready( function () {
- 
-    iniciarTabla() ;
+$(document).ready(function () {
+
+    iniciarTabla();
 
 
 
 
-} );  
+});
 
 
 function iniciarTabla() {
-    $('#noticias_list').dataTable( {
-        data : getNoticias() ,
-        language: {"url": "../../lib/DataTables/es.json"}  ,
+    $('#noticias_list').dataTable({
+        data: getNoticias(),
+        language: { "url": "../../lib/DataTables/es.json" },
         select: false,
-        columns : [
-            {title :"Titulo", data: "titulo" },
-            {title :"Fecha", data: "fecha" },
-            
+        columns: [
+            { title: "Titulo", data: "titulo" },
+            { title: "Fecha", data: "fecha" },
+
             { title: "Editar" },
             { title: "Eliminar" },
         ],
@@ -47,63 +47,72 @@ function iniciarTabla() {
 
 
 function getNoticias() {
-    respuesta=[];
+    respuesta = [];
     $.ajax({
         url: "../../Controller/noticia/switch_controller.php",
         type: "POST",
         dataType: "json",
-        data: {"btn_accion": "Obtener"},
-        async:false,
-        success: function(data){
-            respuesta=data;
+        data: { "btn_accion": "Obtener" },
+        async: false,
+        success: function (data) {
+            respuesta = data;
         },
-        error: function(error){
-             console.log("Error:");
-             console.log(error);
+        error: function (error) {
+            console.log("Error:");
+            console.log(error);
         }
     });
-   return respuesta;
+    return respuesta;
 }
 
 
 
 function goEditNoticia(id) {
-    location.href="http://localhost/asirea/asireaMVC/View/Noticia/noticia_edit_admin.php?noticia="+id
+    location.href = "http://localhost/asirea/asireaMVC/View/Noticia/noticia_edit_admin.php?noticia=" + id
 }
 
 function deleteNoticia(id) {
-    swal({
-        title: "Está seguro?",
-        text: "Se eliminara esta noticia.",
-        type: "warning",
+    Swal.fire({
+        title: '¿Está seguro?',
+        text: "¡Se eliminara esta noticia!",
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: "eliminar!",
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar!',
         cancelButtonText: "Cancelar",
-        closeOnConfirm: false,
-        showLoaderOnConfirm: true,
-        closeOnCancel: false
-    })
-    .then((value) => {
-        if (value) {
-            //var $form = $("#form-noticia-delete"); solo el id
-            var $accion = "&btn_accion=Eliminar";
+    }).then((result) => {
+        if (result.value) {
             $.ajax({
-                method:  "POST",
+                method: "POST",
                 url: "../../Controller/noticia/switch_controller.php",
-                data:  {"btn_accion": "Eliminar","id_noticia":id},
+                data: { "btn_accion": "Eliminar", "id_noticia": id },
                 async: false,
                 dataType: "json",
                 success: function () {
-                    swal("Noticia eliminada de forma exitosa", {
-                        icon: "success",
-                    });
+                    Swal.fire(
+                        'Eliminada!',
+                        'Noticia ha sido eliminada',
+                        'success'
+                    )
+
                 },
                 error: function () {
-                    swal("Ha ocurrido un error", "intente refrescar la pagina", "error");
+                    Swal.fire(
+                        'Ha ocurrido un error',
+                        'intente refrescar la pagina',
+                        'error'
+                    )
+
                 }
             });
-        } else {
-            swal("Cancelado", "Se ha cancelado la acción de eliminar", "error");
+        }
+        else {
+            Swal.fire(
+                'Cancelado',
+                'Se ha cancelado la acción de eliminar',
+                'error'
+            )
         }
     });
 
