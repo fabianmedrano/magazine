@@ -1,19 +1,19 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 ?>
 
 <!DOCTYPE html>
+<html>
 
-<html lang="es">
 
 <head>
 
 <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
-<link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
+<link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
   
@@ -22,7 +22,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
 
   
-  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_edit.js"></script>
+  <script src="<?php echo PUBLIC_PATH ?>/js/proyectos/proyecto_edit.js"></script>
   
   <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
@@ -37,8 +37,8 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
   <div class="container">
     <?php
 
-    $controlador_noticia = new NoticiaController();
-    $noticia = $controlador_noticia->getNoticiaID($_GET["noticia"]);
+    $controlador_proyecto = new proyectoController();
+    $proyecto = $controlador_proyecto->getproyectoID($_GET["proyecto"]);
 
     ?>
 
@@ -47,7 +47,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <div class="container-flex">
       <section class="wrapper news-posts ">
         <div class="row">
-              <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
+              <form id="form-proyecto-edit" name="<?php echo $proyecto['id'] ?>" method="post" action="../../Controller/proyectos/switch_controller.php">
                
               <fieldset>
               
@@ -56,16 +56,16 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon3">Título</span>
                     </div>
-                    <input id="titulo_noticia" name="titulo_noticia" type="text" class="form-control" aria-describedby="basic-addon3" value="<?php echo $noticia['titulo'] ?>">
+                    <input id="titulo_proyecto" name="titulo_proyecto" type="text" class="form-control" aria-describedby="basic-addon3" value="<?php echo $proyecto['titulo'] ?>">
                   </div>
                   
-            <div id="error_noticia" class="error" role="alert"></div>
+            <div id="error_proyecto" class="error" role="alert"></div>
                   <div class="form-group">
                     <label for="street1_id" class="control-label">Contenido</label>
-                    <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
+                    <textarea name="editor_proyecto" id="editor_proyecto" rows="10" cols="80">
                     <?php
 
-                    echo ($noticia['descripcion']);
+                    echo ($proyecto['descripcion']);
 
                     ?>
                     </textarea>
@@ -76,10 +76,10 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                   <input type="button" onclick="location.replace(history.back()); " name="volver atrás"  class="btn btn-success" value="volver atrás">
                   <script>
 
-CKEDITOR.replace('editor_noticia', {
-                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
-                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
-           filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/'
+CKEDITOR.replace('editor_proyecto', {
+                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=proyectos/proyectos/<?php echo($proyecto['id']) ?>/',
+                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=proyectos/proyectos/<?php echo($proyecto['id']) ?>/',
+           filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=proyectos/proyectos/<?php echo($proyecto['id']) ?>/'
               });
 
                   </script>

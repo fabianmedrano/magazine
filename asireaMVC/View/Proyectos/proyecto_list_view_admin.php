@@ -2,20 +2,20 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 ?>
 
-
 <!DOCTYPE html>
-<html lang="es">
+<html>
+
 
 <head>
 
     <?php include(TEMPLATES_PATH . "/metadata.php") ?>
-    <html lang="es">
+    
     <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
-    <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
+    <link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos.css" rel="stylesheet">
 
 
 
@@ -27,7 +27,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
 
-    <script type="text/javascript" charset="utf8" src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_view.js"></script>
+    <script type="text/javascript" charset="utf8" src="<?php echo PUBLIC_PATH ?>/js/proyectos/proyecto_view.js"></script>
 
     <!--   JS Files END  -->
 
@@ -41,7 +41,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <?php include(TEMPLATES_PATH . "/header.php") ?>
     <div class="container-flex">
         <div class="row">
-            <table id="noticias_list">
+            <table id="proyectos_list">
                 <thead></thead>
                 <tbody></tbody>
             </table>

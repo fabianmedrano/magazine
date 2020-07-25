@@ -27,7 +27,8 @@ if (isset($_POST["btn_accion"])) {
         break;
 
         case 'Obtener':
-            echo(json_encode(  $controlador_noticia->getNoticias()));;
+            
+            echo( json_encode( $controlador_noticia->getNoticias()));;
             break;
 
 

@@ -2,7 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 
-class DataNoticia
+class DataProyecto
 {
 
     function _construct()
@@ -10,11 +10,11 @@ class DataNoticia
     }
 
 
-    static public function getNoticiaID($id)
+    static public function getProyectoID($id)
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_getNoticiaID(?);");
+            $stmt = $con->getConexion()->prepare("CALL sp_getProyectoID(?);");
             $stmt->bind_param("i", $id);
             $stmt->execute();
 
@@ -28,11 +28,11 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
-    static public function getNoticiasCantidad()
+    static public function getProyectosCantidad()
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_getcantidadNoticia();");
+            $stmt = $con->getConexion()->prepare("CALL sp_getCantidadProyecto();");
             $stmt->execute();
             $stmt->bind_result($cantidad);
             $stmt->fetch();
@@ -44,22 +44,22 @@ class DataNoticia
             $con->cerrarConexion();
         }
     }
-    static public function getNoticiasPaginado($pagina, $cantidad)
+    static public function getProyectosPaginado($pagina, $cantidad)
     {
         try {
-            $noticias = array();;
+            $Proyectos = array();;
             $con = new Conexion();
-            $resultado = $con->getConexion()->prepare("CALL sp_getNoticiaspaginado(?, ? );");
+            $resultado = $con->getConexion()->prepare("CALL sp_getProyectosPaginado(?, ? );");
             $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
             $resultado->execute();
         $resultado->store_result();
-    $resultado->bind_result($idnoticia, $titulo,$descripcion,$fecha);
+    $resultado->bind_result($idProyecto, $titulo,$descripcion,$fecha);
            
             while ($resultado->fetch()) {
                 array_push(
-                    $noticias,
+                    $Proyectos,
                     array(
-                        "idnoticia" => $idnoticia,
+                        "idProyecto" => $idProyecto,
                         "titulo" => $titulo,
                         "descripcion" => $descripcion,
                         "fecha" => $fecha
@@ -70,7 +70,7 @@ class DataNoticia
             /* cerrar la sentencia */
             $resultado->close();
              
-            return $noticias;
+            return $Proyectos;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -79,18 +79,18 @@ class DataNoticia
         }
     }
 
-    static public function getNoticias()
+    static public function getProyectos()
     {
         try {
-            $noticias = array();;
+            $Proyectos = array();;
             $con = new Conexion();
-            $resultado = $con->getConexion()->query("CALL sp_getNoticias();");
+            $resultado = $con->getConexion()->query("CALL sp_getProyectos();");
             if ($resultado) {
                 while ($fila = $resultado->fetch_row()) {
                     array_push(
-                        $noticias,
+                        $Proyectos,
                         array(
-                            'idnoticia' => $fila[0],
+                            'idProyecto' => $fila[0],
                             'titulo' => $fila[1],
                             'descripcion' => $fila[2],
                             'fecha' => $fila[3],
@@ -99,7 +99,7 @@ class DataNoticia
                 }
                 $resultado->close();
             }
-            return $noticias;
+            return $Proyectos;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -109,18 +109,18 @@ class DataNoticia
     }
 
 
-    static public function updateNoticia($id, $titulo, $texto)
+    static public function updateProyecto($id, $titulo, $texto)
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_updateNoticia(?,?,?);");
+            $stmt = $con->getConexion()->prepare("CALL sp_updateProyecto(?,?,?);");
             $stmt->bind_param("iss", $id, $titulo, $texto);
             $stmt->execute();
 
 
             $response = [
                 'status' => 'success',
-                'msg' => 'noticia actualizada'
+                'msg' => 'Proyecto actualizada'
             ];
         } catch (PDOException $e) {
 
@@ -135,17 +135,16 @@ class DataNoticia
 
         exit(json_encode($response));
     }
-    static public function insertNoticia($titulo, $texto)
+    static public function insertProyecto($titulo, $texto)
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?);");
+            $stmt = $con->getConexion()->prepare("CALL sp_insertProyecto(?,?);");
             $stmt->bind_param("ss", $titulo, $texto);
             $stmt->execute();
-            
             $response = [
                 'status' => 'success',
-                'msg' => 'noticia insertada exitosamente'
+                'msg' => 'Proyecto insertada exitosamente'
             ];
         } catch (PDOException $e) {
             echo $e->getMessage();   
@@ -162,18 +161,18 @@ class DataNoticia
 
 
 
-    static public function deleteNoticia($id)
+    static public function deleteProyecto($id)
     {
         try {
             $con = new Conexion();
 
-            $stmt = $con->getConexion()->prepare("CALL sp_deleteNoticiaID(?);");
+            $stmt = $con->getConexion()->prepare("CALL sp_deleteProyectoID(?);");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             
             $response = [
                 'status' => 'success',
-                'msg' => 'noticia eliminada exitosamente'
+                'msg' => 'Proyecto eliminada exitosamente'
             ];
         } catch (PDOException $e) {  
             $response = [
@@ -187,11 +186,11 @@ class DataNoticia
         return (json_encode($response));
     }
 
-    static public function getLastIdNoticia()
+    static public function getLastIdProyecto()
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_getLastIdNoticia();");
+            $stmt = $con->getConexion()->prepare("CALL sp_getLastIdProyecto();");
             $stmt->execute();
             $stmt->bind_result($id);
             $stmt->fetch();

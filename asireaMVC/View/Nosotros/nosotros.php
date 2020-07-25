@@ -7,7 +7,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
 

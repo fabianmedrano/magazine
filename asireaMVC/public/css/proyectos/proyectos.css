@@ -1,0 +1,29 @@
+.resumen_proyecto{
+    padding-top: 0% !important;
+    height: 100px;
+    overflow: hidden!important;
+overflow: inherit;
+    
+  word-wrap: break-word;
+white-space: pre-line;
+    text-overflow: ellipsis;
+
+    text-align: justify;
+    text-justify: inter-word; 
+    background: -webkit-linear-gradient(#5c5353, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.post-meta{
+margin-bottom: 0% !important;
+}
+.blog-list .blog-post .blog-txt {
+  width: 70% !important;
+}
+.blog-list .blog-post .blog-thumb{
+  width: 30% !important;
+}
+
+.cuerpo{
+  margin: 40px 10px;
+}

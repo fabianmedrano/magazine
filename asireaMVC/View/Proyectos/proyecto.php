@@ -2,18 +2,19 @@
 
       include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-      require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+      require_once CONTROLLER_PATH . "/proyecto/proyecto_controller.php";
 
-?>
+      ?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
 
 <!-- CSS FILES START-->
 <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
-<link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
+<link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos.css" rel="stylesheet">
 <!-- CSS FILES START-->
   <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
 <link href="<?php echo LIB_PATH  ?>/template/css/responsive.css" rel="stylesheet">
@@ -43,8 +44,8 @@
 <body>
   <?php include(TEMPLATES_PATH . "/header.php");
 
-  $controlador_noticia = new NoticiaController();
-  $noticia = $controlador_noticia->getNoticiaID($_GET["noticia"]);
+  $controlador_proyecto = new proyectoController();
+  $proyecto = $controlador_proyecto->getproyectoID($_GET["proyecto"]);
 
   ?>
 
@@ -55,14 +56,14 @@
           <div class="page-header">
             <h2>
               <?php
-              echo ($noticia['titulo']);
+              echo ($proyecto['titulo']);
               ?>
             </h1>
           </div>
 
           <div class="cuerpo">
             <?php
-            echo ($noticia['descripcion']);
+            echo ($proyecto['descripcion']);
             ?>
           </div>
           <input type="button" onclick="history.back()" name="volver atrás"  class="btn btn-success" value="volver atrás">

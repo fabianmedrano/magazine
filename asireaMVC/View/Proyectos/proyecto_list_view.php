@@ -2,19 +2,19 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 
 <head>
 
     <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
-    <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
+    <link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos_view.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
     <title>Acerca de RECURINFOR (v4)</title>
@@ -34,16 +34,16 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     }
 
 
-    $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 5);
+    $proyectos = ProyectoController::getproyectosPaginado($_GET['pagina'], 5);
 
 
-    if (count($noticias['noticias']) <= 0) {
-        include(VIEW_PATH . "/Noticia/noticia_none.php");
+    if (count($proyectos['proyectos']) <= 0) {
+        include(VIEW_PATH . "/proyectos/proyecto_none.php");
         include(TEMPLATES_PATH . "/footer.php");
         exit;
     }
 
-    if ($_GET['pagina'] > $noticias['paginas'] || $_GET['pagina'] < 1) {
+    if ($_GET['pagina'] > $proyectos['paginas'] || $_GET['pagina'] < 1) {
         header("Location:" . CURRENT_DIR . "?pagina=1");
     }
 
@@ -59,16 +59,16 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                     <?php
 
-                    $noticias = NoticiaController::getNoticiasPaginado($_GET['pagina'], 3);
+                    $proyectos = ProyectoController::getproyectosPaginado($_GET['pagina'], 3);
 
-                    foreach ($noticias['noticias'] as $noticia) {
+                    foreach ($proyectos['proyectos'] as $proyecto) {
 
                     ?>
                     <div class="card">
                         <div class="blog-post">
                             <?php
-                            $folder_path = "../../public/img/noticias/noticias/";
-                            $folder_path = $folder_path . $noticia["idnoticia"] . "/";
+                            $folder_path = "../../public/img/proyectos/proyectos/";
+                            $folder_path = $folder_path . $proyecto["idproyecto"] . "/";
                             $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
                             $folder = opendir($folder_path);
                             $imgcargada = false;
@@ -102,25 +102,25 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 <h7>
                                     <strong >
 
-                                    <?php echo $noticia["titulo"] ?>
+                                    <?php echo $proyecto["titulo"] ?>
                                     </strong>
                                 </h7>
                                 <!-- Fin Titulo -->
 
                                 <!-- Inicio informacion de publicacion -->
                                 <ul class="post-meta">
-                                    <li><span>Publicado:</span><?php echo  date("d/m/Y", strtotime($noticia['fecha'])); ?></li>
+                                    <li><span>Publicado:</span><?php echo  date("d/m/Y", strtotime($proyecto['fecha'])); ?></li>
                                 </ul>
                                 <!-- Fin informacion de publicacion -->
 
                                 <!--Inicio Descripcion-->
-                                <div class="resumen_noticia">
-                                    <?php echo trim(strip_tags($noticia["descripcion"])) ?>
+                                <div class="resumen_proyecto">
+                                    <?php echo trim(strip_tags($proyecto["descripcion"])) ?>
                                 </div>
                                 <!-- Fin Descripcion-->
 
                                 <!-- Inicio Leer mas-->
-                                <a  class="float-right" href="<?php echo BASE_URL ?>/View/Noticia/noticia.php?noticia=<?php echo $noticia['idnoticia'] ?>">Leer más</a>
+                                <a  class="float-right" href="<?php echo BASE_URL ?>/View/proyecto/proyecto.php?proyecto=<?php echo $proyecto['idproyecto'] ?>">Leer más</a>
                                 <!-- Fin Leer mas-->
 
                             </div>
@@ -143,7 +143,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                         <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
                     </li>
 
-                    <?php for ($i = 0; $i < $noticias['paginas']; $i++) { ?>
+                    <?php for ($i = 0; $i < $proyectos['paginas']; $i++) { ?>
 
                         <li class="page-item <?php echo $_GET['pagina'] == ($i + 1) ? 'active' : '' ?>">
                             <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo $i + 1  ?> "><?php echo $i + 1 ?> <span class="sr-only"></span></a>
@@ -151,7 +151,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
                     <?php } ?>
 
-                    <li class="page-item  <?php echo $_GET['pagina'] >= $noticias['paginas'] ? 'disabled' : '' ?>">
+                    <li class="page-item  <?php echo $_GET['pagina'] >= $proyectos['paginas'] ? 'disabled' : '' ?>">
                         <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
                     </li>
 
