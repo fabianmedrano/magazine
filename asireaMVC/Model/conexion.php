@@ -11,8 +11,10 @@ class Conexion extends mysqli {
 
         try{
 
-         //   $this->conexion  = new mysqli('160.153.63.133', 'asirea', 'w3}WOAY;4jV2', 'db_asirea');
-            $this->conexion  = new mysqli('localhost', 'root', '', 'asirea');
+           $this->conexion  = new mysqli('160.153.63.133', 'asirea', 'w3}WOAY;4jV2', 'db_asirea');
+         //   $this->conexion  = new mysqli('localhost', 'root', '', 'asirea');
+       //  $this->conexion ->set_charset("utf8");
+
         } catch (mysqli_sql_exception $e){
           
             $mensaje = "Error de conexión";

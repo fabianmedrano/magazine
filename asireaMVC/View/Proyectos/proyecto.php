@@ -2,7 +2,7 @@
 
       include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-      require_once CONTROLLER_PATH . "/proyecto/proyecto_controller.php";
+      require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
       ?>
 

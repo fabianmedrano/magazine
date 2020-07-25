@@ -22,7 +22,7 @@ if (isset($_POST["btn_accion"])) {
 
         case 'Eliminar':
 
-            $controlador_Proyecto->deleteProyecto($_POST["id_Proyecto"]);
+            $controlador_Proyecto->deleteProyecto($_POST["id_proyecto"]);
 
         break;
 

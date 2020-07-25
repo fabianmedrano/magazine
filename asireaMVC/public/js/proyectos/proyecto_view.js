@@ -28,7 +28,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar proyecto' class='btn btn-outline-succes'   onclick='goEditproyecto(" + data.idproyecto + ")'><i class='fas fa-pencil-alt' ></i></button>";
+                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar proyecto' class='btn btn-outline-succes'   onclick='goEditproyecto(" + data.idProyecto + ")'><i class='fas fa-pencil-alt' ></i></button>";
                 }
             },
             {
@@ -38,7 +38,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='"+data.idproyecto+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar proyecto' onclick='deleteproyecto(" + data.idproyecto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='"+data.idproyecto+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar proyecto' onclick='deleteproyecto(" + data.idProyecto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -49,7 +49,7 @@ function iniciarTabla() {
 function getproyectos() {
     respuesta = [];
     $.ajax({
-        url: "../../Controller/proyecto/switch_controller.php",
+        url: "../../Controller/proyectos/switch_controller.php",
         type: "POST",
         dataType: "json",
         data: { "btn_accion": "Obtener" },
@@ -68,14 +68,14 @@ function getproyectos() {
 
 
 function goEditproyecto(id) {
-    location.href = "http://localhost/asirea/asireaMVC/View/proyecto/proyecto_edit_admin.php?proyecto=" + id
+    location.href = "http://localhost/asirea/asireaMVC/View/proyectos/proyecto_edit_admin.php?proyecto=" + id
 }
 
 function deleteproyecto(id) {
 
     Swal.fire({
         title: '¿Está seguro?',
-        text: "¡Se eliminara esta proyecto!",
+        text: "¡Se eliminara este proyecto!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -86,7 +86,7 @@ function deleteproyecto(id) {
         if (result.value) {
             $.ajax({
                 method: "POST",
-                url: "../../Controller/proyecto/switch_controller.php",
+                url: "../../Controller/proyectos/switch_controller.php",
                 data: { "btn_accion": "Eliminar", "id_proyecto": id },
                 async: false,
                 dataType: "json",
