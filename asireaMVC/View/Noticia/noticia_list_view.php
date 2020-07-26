@@ -64,7 +64,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                     foreach ($noticias['noticias'] as $noticia) {
 
                     ?>
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-white">
                         <div class="blog-post">
                             <?php
                             $folder_path = "../../public/img/noticias/noticias/";
@@ -114,7 +114,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                                 <!-- Fin informacion de publicacion -->
 
                                 <!--Inicio Descripcion-->
-                                <div class="resumen_noticia">
+                                <div class="resumen_noticia ">
                                     <?php echo trim(strip_tags($noticia["descripcion"])) ?>
                                 </div>
                                 <!-- Fin Descripcion-->

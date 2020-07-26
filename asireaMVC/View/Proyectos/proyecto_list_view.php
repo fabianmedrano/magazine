@@ -34,7 +34,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
     }
 
 
-    $proyectos = ProyectoController::getproyectosPaginado($_GET['pagina'], 5);
+    $proyectos = ProyectoController::getproyectosPaginado($_GET['pagina'], 3);
 
 
     if (count($proyectos['proyectos']) <= 0) {
@@ -65,7 +65,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
             ?>
 
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-white ">
                         <?php
                         $folder_path = "../../public/img/proyectos/proyectos/";
                         $folder_path = $folder_path . $proyecto["idProyecto"] . "/";
@@ -95,8 +95,8 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
                         ?>
                         <h5> <?php echo $proyecto["titulo"] ?> </h5>
-                        <div class="contenedor_resumen_proyecto">
-                            <p class="resumen_proyecto"><?php echo  trim(strip_tags($proyecto["descripcion"])); ?>...</p>
+                        <div class="contenedor_resumen_proyecto wrapper ">
+                            <p class="resumen_proyecto "><?php echo  trim(strip_tags($proyecto["descripcion"])); ?>...</p>
                         </div>
                         <a href="<?php echo BASE_URL ?>/View/Proyectos/proyecto.php?proyecto=<?php echo $proyecto['idProyecto'] ?>" role="button">Leer más...</a>
 

@@ -12,8 +12,11 @@
 padding: 15px;
 	margin:15px 50px 15px;
 	height: 220px;
+	border-color: rgb(177, 177, 177);
+
 
 }
+
 .blog-post{
 	width: 800px;
 }
@@ -39,7 +42,7 @@ white-space: pre-line;
 
 	text-align: justify;
 	text-justify: inter-word; 
-	background: -webkit-linear-gradient(#5c5353, #ffffff);
+	background: -webkit-linear-gradient(#2f2e2e, #757575);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }

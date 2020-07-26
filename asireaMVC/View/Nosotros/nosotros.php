@@ -74,14 +74,14 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
       <div class="container">
 
       <!-- INICIO CUERPO INFORMACION NOSOTROS-->
-
+      <div class="card shadow p-3 mb-5 bg-white ">
       <div class="nosotros-cuerpo">
         <?php
         $controlador_nosotros = new NosotrosController();
         echo ($controlador_nosotros->getNosotros());
         ?>
       </div>
-
+      </div>
       <!-- INICIO CUERPO INFORMACION NOSOTROS-->
 
     </div>

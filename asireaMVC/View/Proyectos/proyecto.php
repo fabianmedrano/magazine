@@ -53,6 +53,8 @@
     <section class="wrapper news-posts ">
       <div class="row">
         <div class="col-md-7">
+        <div class="card shadow p-3 mb-5 bg-white ">
+
           <div class="page-header">
             <h2>
               <?php
@@ -67,7 +69,7 @@
             ?>
           </div>
           <input type="button" onclick="history.back()" name="volver atrás"  class="btn btn-success" value="volver atrás">
-
+        </div>
         </div>
       </div>
     </section>
