@@ -44,6 +44,7 @@ class DataNosotros
                 'status' => 'success',
                 'msg' => 'noticia actualizada'
             ];
+            
         } catch (PDOException $e) {
 
             echo $e->getMessage();

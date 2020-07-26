@@ -20,7 +20,7 @@
 
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="../Proyectos/proyectos.php"> PROYECTOS </a>
+                        <a class="nav-link " href="../Proyectos/proyecto_list_view.php"> PROYECTOS </a>
 
                     </li>
                     <li class="nav-item dropdown">

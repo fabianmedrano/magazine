@@ -55,6 +55,7 @@ class NoticiaController
     {
         $respuesta = DataNoticia::deleteNoticia($id);
         self:: deleteDirectory($id);
+    
         exit ($respuesta); 
     }
 
@@ -69,13 +70,11 @@ class NoticiaController
         if(!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
             if($current != '.' && $current != '..') {
-                echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
                 if (!@unlink($dir.'/'.$current)) 
                    self:: deleteDirectory($dir.'/'.$current);
             }       
         }
         closedir($dh);
-        echo 'Se ha borrado el directorio '.$dir.'<br/>';
         @rmdir($dir);
     }
     

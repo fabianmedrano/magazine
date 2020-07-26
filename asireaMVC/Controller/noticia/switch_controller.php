@@ -24,11 +24,11 @@ if (isset($_POST["btn_accion"])) {
 
             $controlador_noticia->deleteNoticia($_POST["id_noticia"]);
 
-            header('Location: ' . BASE_URL . '/View/Noticia/noticia_create.php');
-            break;
+        break;
 
         case 'Obtener':
-            echo(json_encode(  $controlador_noticia->getNoticias()));;
+            
+            echo( json_encode( $controlador_noticia->getNoticias()));;
             break;
 
 

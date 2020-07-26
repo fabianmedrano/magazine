@@ -3,7 +3,7 @@ include($_SERVER['DOCUMENT_ROOT']."/asireaMVC/config.php");
 ?>
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

@@ -10,8 +10,8 @@ echo ($numnews);
 ?>
 
 <!DOCTYPE html>
-<html>
 
+<html lang="es">
 
 <head>
 
@@ -27,7 +27,9 @@ echo ($numnews);
   <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
+
 
 
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
@@ -81,6 +83,14 @@ echo ($numnews);
             <div class="form-group">
               <label for="street1_id" class="control-label">Contenido</label>
               <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80"></textarea>
+              <script>    
+              
+              CKEDITOR.replace('editor_noticia', {
+        filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+        filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/',
+        filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo $numnews ?>/'
+      });
+      </script>
             </div>
             <input class="button btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
       
