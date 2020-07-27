@@ -8,7 +8,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 <!DOCTYPE html>
 <html>
 
-
+<title>Edición proyecto</title>
 <head>
 
 <?php include(TEMPLATES_PATH . "/metadata.php") ?>
@@ -27,7 +27,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
   <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
 
-  <title>Acerca de RECURINFOR (v4)</title>
+
 
 </head>
 
@@ -72,8 +72,8 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
                   </div>
 
                   <input class="button btn btn-primary" id="btn-actualizar" name="btn_accion" type="submit" value="Actualizar" />
-
-                  <input type="button" onclick="location.replace(history.back()); " name="volver atrás"  class="btn btn-success" value="volver atrás">
+                  <a class="btn btn-success" href="../Proyectos/proyecto_list_view_admin.php">volver atrás</a>
+    
                   <script>
 
 CKEDITOR.replace('editor_proyecto', {

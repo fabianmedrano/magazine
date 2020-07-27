@@ -14,6 +14,7 @@
 <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
 <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
 <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 <link href="<?php echo LIB_PATH ?>/template/css/prettyPhoto.css" rel="stylesheet">
 <link href="<?php echo LIB_PATH ?>/fontawesome/css/all.min.css" rel="stylesheet">
 <!--  CSS FILES End -->

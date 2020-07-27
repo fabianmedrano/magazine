@@ -9,13 +9,15 @@
 	}
 
 .card{
-padding: 15px;
-	margin:15px 50px 15px;
+padding: 3px;
+	margin:5px 50px 10px;
 	height: 220px;
 	border-color: rgb(177, 177, 177);
 
 
 }
+
+
 
 .blog-post{
 	width: 800px;
@@ -26,6 +28,7 @@ padding: 15px;
 }
 
 .blog-list .blog-post .blog-txt {
+	margin-top: 5px !important;
     width: auto;
 	float: none;
     padding-left: 0px;

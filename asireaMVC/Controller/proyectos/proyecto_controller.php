@@ -83,15 +83,13 @@ class ProyectoController
     {
         $respuesta = DataProyecto::getLastIdProyecto();
        $carpeta = '../../public/img/proyectos/proyectos/'.((int)$respuesta);
-     echo $respuesta;
+  
      if($respuesta == NULL) $respuesta = 0;
    //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_Proyectos/'.((int)$respuesta+1);   
-        echo $carpeta.'\n';
+  
         if (!file_exists($carpeta)) {
             mkdir($carpeta, 0777, true);
-            echo('no esxiste carpeta ');
         }else{
-            echo('carpeta existe');
         }
         return $respuesta;
     }

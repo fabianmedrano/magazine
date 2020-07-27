@@ -17,7 +17,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
     <link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos_view.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
-    <title>Acerca de RECURINFOR (v4)</title>
+    <title>Proyectos)</title>
 
 </head>
 

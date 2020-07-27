@@ -5,7 +5,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 $controlador_proyecto = new ProyectoController();
 $numnews = $controlador_proyecto->createFile();
-echo ($numnews);
+
 
 ?>
 
@@ -15,18 +15,14 @@ echo ($numnews);
 
 <head>
 
+
+
+<?php include(TEMPLATES_PATH . "/metadata.php") ?>
+
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
 
-  <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
-  <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
-  <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-  <script src="<?php echo LIB_PATH ?>/jquery/jquery-3.3.1.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
-
+  
   <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
 
@@ -47,9 +43,7 @@ echo ($numnews);
   <script src="<?php echo PUBLIC_PATH ?>/js/proyectos/proyecto_create.js"></script>
 
 
-  <?php include(TEMPLATES_PATH . "/metadata.php") ?>
-
-  <title>Acerca de RECURINFOR (v4)</title>
+  <title>Nuevo proyecto</title>
 
 </head>
 

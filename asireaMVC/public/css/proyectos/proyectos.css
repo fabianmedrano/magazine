@@ -27,3 +27,11 @@ margin-bottom: 0% !important;
 .cuerpo{
   margin: 40px 10px;
 }
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+.container_list_view_admin{
+  width: 800px;
+  min-height: 300px;
+}

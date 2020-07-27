@@ -17,7 +17,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias_view.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
-    <title>Acerca de RECURINFOR (v4)</title>
+    <title>noticias</title>
 
 </head>
 
@@ -64,7 +64,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                     foreach ($noticias['noticias'] as $noticia) {
 
                     ?>
-                    <div class="card shadow p-3 mb-5 bg-white">
+                    <div class="card shadow p-3  bg-white">
                         <div class="blog-post">
                             <?php
                             $folder_path = "../../public/img/noticias/noticias/";

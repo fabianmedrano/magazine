@@ -10,44 +10,25 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 <head>
-  <?php/// include(TEMPLATES_PATH . "/metadata.php") ?>
+  <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros_edit.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
-
-
-
   <!-- CSS FILES START-->
-  <link href="<?php echo LIB_PATH ?>/template/css/custom.css" rel="stylesheet">
-  <link href="<?php echo LIB_PATH ?>/template/css/responsive.css" rel="stylesheet">
   <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?php echo LIB_PATH ?>/template/css/prettyPhoto.css" rel="stylesheet">
   <link href="<?php echo LIB_PATH ?>/fontawesome/css/all.min.css" rel="stylesheet">
 
-  
+
+
   <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
-  <!--  CSS FILES End -->
+<link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
 
-  <!--   JS Files Start  -->
-  <script src="<?php echo LIB_PATH ?>/jquery/jquery-3.2.1.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/jquery/jquery-migrate-1.4.1.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/jquery/jquery.prettyPhoto.js"></script>
-  <script src="<?php echo LIB_PATH ?>/template/js/custom.js"></script>
-  <script src="<?php echo LIB_PATH ?>/template/js/popper.min.js"></script>
-  <script src="<?php echo LIB_PATH ?>/template/js/isotope.min.js"></script>
-
-
-  <!--   JS Files END  -->
 
   <!-- INICIO CKEDITOR-->
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
   <!-- FIN CKEDITOR-->
 
   <!--INICIO FILE INPUT-->
-
   <link href="<?php echo LIB_PATH ?>/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
   <script src="<?php echo LIB_PATH ?>/fileinput/js/plugins/piexif.min.js" type="text/javascript"></script>

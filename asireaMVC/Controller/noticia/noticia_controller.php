@@ -83,15 +83,15 @@ class NoticiaController
     {
         $respuesta = DataNoticia::getLastIdNoticia();
        $carpeta = '../../public/img/noticias/noticias/'.((int)$respuesta);
-     echo $respuesta;
+    
      if($respuesta == NULL) $respuesta = 0;
    //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_noticias/'.((int)$respuesta+1);   
-        echo $carpeta.'\n';
+      
         if (!file_exists($carpeta)) {
             mkdir($carpeta, 0777, true);
-            echo('no esxiste carpeta ');
+         
         }else{
-            echo('carpeta existe');
+          
         }
         return $respuesta;
     }
