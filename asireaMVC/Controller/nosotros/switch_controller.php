@@ -13,7 +13,7 @@ if (isset($_POST["btn_accion"])) {
         case 'Actualizar':
             $controlador_nosotros->uptateNosotros($_POST["editor_nosotros"]);
 
-            header('Location: ' . BASE_URL . '/View/Nosotros/nosotros_edit.php');
+          //  header('Location: ' . BASE_URL . '/View/Nosotros/nosotros_edit.php');
 
             break;
 

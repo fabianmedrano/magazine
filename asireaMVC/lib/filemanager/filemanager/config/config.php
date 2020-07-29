@@ -107,7 +107,7 @@ $config = array(
     | DO NOT put inside upload folder
     |
     */
-    'thumbs_upload_dir' => '/public/img/nosotros/thumbs_principal/',
+    'thumbs_upload_dir' => '/public/img/thumbs/',
 
 
     /*
@@ -211,7 +211,7 @@ $config = array(
     | in Megabytes
     |
     */
-    'MaxSizeUpload' => 10,
+    'MaxSizeUpload' => 4,
 
     /*
     |--------------------------------------------------------------------------
@@ -239,7 +239,7 @@ $config = array(
     | Can be set to custom icon inside filemanager/img
     |
     */
-    'icon_theme' => "ico",
+    'icon_theme' => "ico_dark ",
 
 
     //Show or not total size in filemanager (is possible to greatly increase the calculations)
@@ -247,7 +247,7 @@ $config = array(
     //Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
     'show_folder_size'						=> false,
     //Show or not show sorting feature in filemanager
-    'show_sorting_bar'						=> true,
+    'show_sorting_bar'						=> false,
     //Show or not show filters button in filemanager
     'show_filter_buttons'                   => true,
     //Show or not language selection feature in filemanager
@@ -272,7 +272,7 @@ $config = array(
     // set maximum pixel width and/or maximum pixel height for all images
     // If you set a maximum width or height, oversized images are converted to those limits. Images smaller than the limit(s) are unaffected
     // if you don't need a limit set both to 0
-    'image_max_width'                         => 0,
+    'image_max_width'                         => 700,
     'image_max_height'                        => 0,
     'image_max_mode'                          => 'auto',
     /*
@@ -287,8 +287,8 @@ $config = array(
     // If you set $image_resizing to TRUE the script converts all uploaded images exactly to image_resizing_width x image_resizing_height dimension
     // If you set width or height to 0 the script automatically calculates the other dimension
     // Is possible that if you upload very big images the script not work to overcome this increase the php configuration of memory and time limit
-    'image_resizing'                          => false,
-    'image_resizing_width'                    => 0,
+    'image_resizing'                          => true,
+    'image_resizing_width'                    => 950,
     'image_resizing_height'                   => 0,
     'image_resizing_mode'                     => 'auto', // same as $image_max_mode
     'image_resizing_override'                 => false,
@@ -559,11 +559,8 @@ return array_merge(
     $config,
     array(
         'ext' => array_merge(
-            $config['ext_img'],
-            $config['ext_file'],
-            $config['ext_misc'],
-            $config['ext_video'],
-            $config['ext_music']
+            $config['ext_img']
+          
         ),
         'tui_defaults_config' => array(
             //'common.bi.image'                   => $config['common.bi.image'],

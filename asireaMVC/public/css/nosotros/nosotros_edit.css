@@ -5,14 +5,17 @@ height:auto;
 width: auto;
    max-width:70%;
    min-width:70%;
-   margin-bottom: 30px;
+   margin-bottom: 0px;
    word-wrap: break-word;
  
 }
+.error{
 
 
 
-
+max-width: 70%;
+min-width: 70%;
+}
 .file-preview-thumbnails{
     word-wrap: break-word;
   

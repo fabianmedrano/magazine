@@ -1,5 +1,6 @@
 
 .container{
+	margin: 50px  auto !important;
 	width:72%;
 	max-width: 72%;
 }

@@ -55,6 +55,7 @@ class NoticiaController
     {
         $respuesta = DataNoticia::deleteNoticia($id);
         self:: deleteDirectory($id);
+    
         exit ($respuesta); 
     }
 
@@ -69,13 +70,11 @@ class NoticiaController
         if(!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
             if($current != '.' && $current != '..') {
-                echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
                 if (!@unlink($dir.'/'.$current)) 
                    self:: deleteDirectory($dir.'/'.$current);
             }       
         }
         closedir($dh);
-        echo 'Se ha borrado el directorio '.$dir.'<br/>';
         @rmdir($dir);
     }
     
@@ -84,15 +83,15 @@ class NoticiaController
     {
         $respuesta = DataNoticia::getLastIdNoticia();
        $carpeta = '../../public/img/noticias/noticias/'.((int)$respuesta);
-     echo $respuesta;
+    
      if($respuesta == NULL) $respuesta = 0;
    //  $carpeta = $_SERVER["DOCUMENT_ROOT"].'/img_noticias/'.((int)$respuesta+1);   
-        echo $carpeta.'\n';
+      
         if (!file_exists($carpeta)) {
             mkdir($carpeta, 0777, true);
-            echo('no esxiste carpeta ');
+         
         }else{
-            echo('carpeta existe');
+          
         }
         return $respuesta;
     }

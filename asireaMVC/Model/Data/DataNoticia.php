@@ -142,6 +142,7 @@ class DataNoticia
             $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?);");
             $stmt->bind_param("ss", $titulo, $texto);
             $stmt->execute();
+            
             $response = [
                 'status' => 'success',
                 'msg' => 'noticia insertada exitosamente'
@@ -174,8 +175,7 @@ class DataNoticia
                 'status' => 'success',
                 'msg' => 'noticia eliminada exitosamente'
             ];
-        } catch (PDOException $e) {
-            echo $e->getMessage();   
+        } catch (PDOException $e) {  
             $response = [
                 'status' => 'error',
                 'errors' => $e->getMessage()

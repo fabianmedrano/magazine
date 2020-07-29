@@ -552,7 +552,7 @@ $get_params = http_build_query($get_params);
                                     {% } %}
                                 </p>
                                 {% if (file.error) { %}
-                                    <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                                  
                                 {% } %}
                             </td>
                             <td>
