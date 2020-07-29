@@ -2,9 +2,6 @@ $(document).ready(function () {
 
     iniciarTabla();
 
-
-
-
 });
 
 
@@ -13,6 +10,8 @@ function iniciarTabla() {
         data: getNoticias(),
         language: { "url": "../../lib/DataTables/es.json" },
         select: false,
+        destroy: true,
+        "scrollx": true,
         columns: [
             { title: "Titulo", data: "titulo" },
             { title: "Fecha", data: "fecha" },
@@ -28,7 +27,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-succes'   onclick='goEditNoticia(" + data.idnoticia + ")'><i class='fas fa-pencil-alt' ></i></button>";
+                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-success'   onclick='goEditNoticia(" + data.idnoticia + ")'><i class=\"fas fa-edit\"></i></button>";
                 }
             },
             {

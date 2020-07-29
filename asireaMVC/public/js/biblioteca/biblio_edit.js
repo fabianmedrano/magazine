@@ -212,7 +212,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-secondary' onclick='getDescripcion("+data.id+")'><i class=\"fas fa-info-circle\"></i></button>"
+                        "<button class='btn btn-outline-secondary' onclick='getDescripcion("+data.id+")'><i class=\"fas fa-info-circle\"></i></button>"
                     );
                 }
             },
@@ -223,7 +223,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-info' ><i class=\"fas fa-file\"></i></button>"
+                        "<button class='btn btn-outline-info' ><i class=\"fas fa-file\"></i></button>"
                     );
                 }
             },
@@ -234,7 +234,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-primary' onclick='abrirModalEditar("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
+                        "<button class='btn btn-outline-primary' onclick='abrirModalEditar("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
                     );
                 }
             },
@@ -245,7 +245,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-danger' onclick='eliminarDoc("+data.id+")'><i class=\"fas fa-trash-alt\"></i></button>"
+                        "<button class='btn btn-outline-danger' onclick='eliminarDoc("+data.id+")'><i class=\"fas fa-trash-alt\"></i></button>"
                     );
                 }
             }

@@ -162,7 +162,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-info' onclick='abrirModalFotos("+data.id+")'><i class=\"fas fa-images\"></i></button>"
+                        "<button class='btn btn-outline-info' onclick='abrirModalFotos("+data.id+")'><i class=\"fas fa-images\"></i></button>"
                     );
                 }
             },
@@ -173,7 +173,7 @@ function initTable() {
                 "orderable": false,
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-primary' onclick='abrirAlertaRegistro("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
+                        "<button class='btn btn-outline-primary' onclick='abrirAlertaRegistro("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
                     );
                 }
             },
@@ -184,7 +184,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-danger' onclick='eliminarCategoria("+data.id+")'><i class=\"fas fa-trash-alt\"></i></button>"
+                        "<button class='btn btn-outline-danger' onclick='eliminarCategoria("+data.id+")'><i class=\"fas fa-trash-alt\"></i></button>"
                     );
                 }
             }

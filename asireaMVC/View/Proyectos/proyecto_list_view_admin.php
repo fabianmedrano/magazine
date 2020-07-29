@@ -38,27 +38,18 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 <body>
     <?php include(TEMPLATES_PATH . "/header.php") ?>
-    <div class="container container_list_view_admin">
-        <div class="row ">
+    <div class="container">
+        <div class="row mb-3">
 
-            <a class="btn btn-success " href="../Proyectos/proyecto_create_admin.php"><i class="far fa-plus-square"></i></a>
+            <a class="btn btn-success " href="../Proyectos/proyecto_create_admin.php"><i class="far fa-plus-square"></i> Proyecto</a>
         </div>
 
-        <div class="container-flex">
-
-            <div class="row">
-                <table id="proyectos_list">
-                    <thead></thead>
-                    <tbody></tbody>
-                </table>
-
-            </div>
-
-        </div>
-
+        <table id="proyectos_list" class="table table-striped table-bordered dt-responsive display">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
 
     </div>
-    <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 </html>

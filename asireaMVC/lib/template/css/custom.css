@@ -1472,7 +1472,8 @@ Home Page 2 Start
 	font-family: 'Roboto', sans-serif;
 }
 header.header-style-2 {
-	background: #1b5e20;
+	background: #00a072;
+
 }
 header.header-style-2 .navbar {
 	padding: 0px;
@@ -1523,12 +1524,12 @@ ul.topnav-right li {
 	left: 0;
 }
 .mdonate:hover span {
-	color: #1b5e20;
+	color: #0d4e0c;
 	position: relative;
 	z-index: 99;
 }
 a.cart-icon, a.search-icon {
-	border: 1px solid #64b868;
+	border: 1px solid #d5f8d5;
 	width: 34px;
 	height: 34px;
 	display: block;
@@ -1548,11 +1549,11 @@ a.cart-icon, a.search-icon {
 	line-height: 44px;
 }
 a.cart-icon:hover, a.search-icon:hover {
-	background: #64b868;
+	background: #0d4e0c;
 	color: #fff;
 }
 .login-reg a:hover {
-	color: #66bb6a;
+	color: #0d4e0c;
 }
 .header-style-2 .navbar-nav li.nav-item {
 	position: relative;
@@ -1666,9 +1667,6 @@ section.services-area ul li.active:after {
 }
 /***************  About  *****************/
 
-.home2-about {
-	background: url(../images/factsbg.png) bottom center #fff no-repeat;
-}
 .pt80 {
 	padding-top: 80px;
 }

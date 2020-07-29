@@ -39,9 +39,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 <br>
 
-<div class="container mt-5 mb-5">
-    <h3 class="color-1">Biblioteca</h3>
-    <hr>
+<div class="container mt-5">
     <div>
         <button class="btn btn-success" onclick="abrirModalRegistro()"><i class="fas fa-plus-square"></i> Documento</button>
         <div class="mt-3">

@@ -1,31 +1,31 @@
 <div class="wrapper home2">
     <header class="header-style-2">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.html"><img src="images/h2logo.png" alt=""></a>
+            <a class="ml-3" href="../Nosotros/nosotros.php"><img src="<?php echo PUBLIC_PATH ?>/img/icon/asirea2.png" alt="" width="80" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i> </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse ml-lg-5" id="navbarSupportedContent">
 
                 <ul class="navbar-nav mr-auto">
                   
                     <li class="nav-item ">
-                        <a class="nav-link " href="Productos.html"> PRODUCTOS </a>
+                        <a class="nav-link " href=""> PRODUCTOS </a>
 
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link " href="Servicios.html"> SERVICIOS </a>
+                        <a class="nav-link " href=""> SERVICIOS </a>
 
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="Noticia.html"> NOTICIAS </a>
+                        <a class="nav-link " href="../Noticia/noticia_list_view_admin.php"> NOTICIAS </a>
 
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="Proyectos.html"> PROYECTOS </a>
+                        <a class="nav-link " href="../Proyectos/proyecto_list_view_admin.php"> PROYECTOS </a>
 
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link"  href="Galeria.html"> GALERIA </a>
+                        <a class="nav-link"  href="../Galeria/galeria_admin.php"> GALERIA </a>
 
                     </li>
 

@@ -28,7 +28,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar proyecto' class='btn btn-outline-succes'   onclick='goEditproyecto(" + data.idProyecto + ")'><i class='fas fa-pencil-alt' ></i></button>";
+                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar proyecto' class='btn btn-outline-success'   onclick='goEditproyecto(" + data.idProyecto + ")'><i class='fas fa-edit' ></i></button>";
                 }
             },
             {

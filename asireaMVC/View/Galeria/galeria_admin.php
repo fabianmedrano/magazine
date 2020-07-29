@@ -38,8 +38,6 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 ?>
 
 <div class="container mt-5 mb-5">
-    <h3 class="color-1">Galeria de Fotos</h3>
-    <hr>
     <div>
         <button class="btn btn-success" onclick="abrirAlertaRegistro(0)"><i class="fas fa-plus-square"></i> Categoría</button>
         <div class="mt-3">
