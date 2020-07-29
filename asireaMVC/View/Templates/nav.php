@@ -13,7 +13,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link " href=""> SERVICIOS </a>
+                        <a class="nav-link " href="../Servicios/servicios_edit.php"> SERVICIOS </a>
 
                     </li>
                     <li class="nav-item ">

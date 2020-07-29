@@ -1,191 +1,277 @@
+<!DOCTYPE html lang="es">
+<html lang="es">
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-require_once CONTROLLER_PATH . "/productos/Productos_controller.php";
+include("public/head.php");
 ?>
-<html>
-
+<script src="productos_edit.js"></script>
 
 <title>Productos</title>
-
-<head>
-
-<link href="../../public/css/general.css" rel="stylesheet">
-    <link href="../../public/css/nosotros/nosotros.css" rel="stylesheet">
-
-    <link href="../../public/css/custom.css" rel="stylesheet">
-    <link href="../../public/css/responsive.css" rel="stylesheet">
-    <link href="../../lib//bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/css/prettyPhoto.css" rel="stylesheet">
-    <link href="../../lib/fontawesome/css/all.min.css" rel="stylesheet">
-
-
-    <script src="../../lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../lib/jquery/jquery.prettyPhoto.js"></script>
-    <script src="../../lib/template/js/custom.js"></script>
-
-    <script src="../../public/js/productos/productos.js"></script>
-
-
-    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css"/>
-    <script type="text/javascript" charset="utf8" src="../../lib/DataTables/datatables.js"></script>
-
 </head>
+<body style="background-color:#c3fff7;">
+<!-- nav -->
+<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+  <ul class="navbar-nav">
+  <li class="nav-item active">
+      <a class="nav-link" href="index.php">Inicio</a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="servicios_edit.php">Administrador de Servicios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Administrador de Productos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Servicios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="#">Productos</a>
+    </li>
+  </ul>
+</nav>
 
-<body>
 
-    <?php include(TEMPLATES_PATH . "/header.php") ?>
+<!-- tabla -->
+<div class="container mt-5 mb-5">
+    <h3 class="color-1">Registro de Productos</h3>
+    <hr></hr>
+    <div id="listadoProductos">
+        <div class="mb-3">
+            <a id="registarProductos" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar Productos" onclick="abrirModal()"><i class="far fa-plus-square"></i></a>
+        </div>
+        <div class="mb-5">
+            <table id="tbproducto" class="table table-striped table-bordered dt-responsive display">
+                <thead>
+                <tr>
 
 
-    <div class="conteiner mt-5 mb-5">
-        <h3 class="color-1">Registro de Productos</h3>
-        <hr>
-        <div id="listaProductos">
-            <div class="mb-3">
-                <a id="registrarProductos" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar Productos" onclick=abrirModalProductos()><i class="far fa-plus-square"></i></a>
-            </div>
-            <!-- se crea la tabla-->
-            <div class="mb-5">
-            <table id="tbProductos" class="table table-striped table-bordered dt-responsive display">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $productos = ProductosController::getProductos();
-                            foreach ($productos as $producto) {
-                        ?>
-                        <tr id="<?php echo $producto["id"] ?>">
-                            <td> <?php echo $producto["nombre"] ?></td>
-                            <td> <?php echo $producto["descripcion"] ?></td>
-                        </tr>
-                        <?php }?>
-                    </tbody>
-
-                </table>
-
-            </div>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
-
-    <!-- se crea el modal para agregar productos-->
-    <div class="modal fade" id="modalProductos" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="col-sm-11">
-                        <h3 class="modal-title" id="tituloModalProductos"></h3>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="modalProductos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-sm-11">
+                    <h3 class="modal-title" id="tituloModal"></h3>
                 </div>
-                <!-- se crea el contenido dentro del modal-->
+                <div class="col-sm-1">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="contenidoModalProductos">
                 
-                <form id="form-productos-create" method="post" action="../../Controller/productos/switch_controller.php">
-                <div class="modal-body" id="contenidoModalProductos">
-
-                    <div class="form-group">
-                        <!-- boton para abrir el modal de categorias-->
-                        <div class="mb-3">
-                            <a id="registrarCategorias" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar Categorias de Productos" onclick=abrirModalCategorias()><i class="far fa-plus-square"></i></a>
-                        </div>
-
-                        <!-- contenido-->
-                        <label for="categorias">Categorias: </label>
-                        <br>
-                        <select id="categoriasProductos" name="categoria" >Categorias de productos
-                            <option value="planta">Plantas Hornomentales</option>
-                        </select>
-                        <br>
-                        <label for="nombre">Nombre: </label>
-                        <input type="text" class="form-control" name="nombre"  id="nombreProductos">
-                        <br>
-                        <label for="descrip">Descripción: </label>
-                        <textarea id="textarea" name="descripcion"  rows="5" cols="62"></textarea>
-                        <br>
-                        <label for="imagen">Imagen: </label>
-                        <br>
-                        <div class="form-group">
-                            <div id="vizualizarImagenProductos">
-                            </div>
-                        </div>
-
-
+                <div class="form-group">
+                    
+                    <div class="mb-3">
+                        <a id="registarCategoria" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar Productos" onclick="abrirModalCategoria()"><i class="far fa-plus-square"></i></a>
                     </div>
-                    <div class="form-group">
+                    <br>
+                    <label for="categorias">Categorias: </label>
+                    <br>
+                    <select id="categoriasProductos" name="categoria" class="form-control">
+                        
+                    </select>
+                    <br>
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" class="form-control" id="nombre" >
+                    <br>
+                    <label for="iden">Descripcion: </label>
+                    <textarea id="textarea" rows="5" cols="62"></textarea>
+                    
 
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-switch">
-
-                        </div>
-                    </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <input class="btn btn-primary" id="btn-guardar" name="btn_accion" type="submit" value="Guardar" />
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+
                     </div>
-                </form>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnProductos"></button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- se crea el modal para agregar categorias-->
 
-    <div class="modal fade" id="modalCategoriasProductos" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="col-sm-11">
-                        <h3 class="modal-title" id="tituloModalCategorias"></h3>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
+<!-- modal editar-->
+<div class="modal fade" id="modalProductosEditar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-sm-11">
+                    <h3 class="modal-title" id="tituloModalEditar"></h3>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="contenidoModalProductosEditar">
+               
+                <div class="form-group">
+                    <label for="categorias">Categorias: </label>
+                    <br>
+                    <select id="categoriasProductos" name="categoria" >Categorias de productos
+                        <option value="planta">Plantas Hornomentales</option>
+                    </select>
+                    <br>
+                    <label for="iden">Identificación: </label>
+                    <input class="form-control" type="text"  id="txt_id">
+                    <br>
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" class="form-control" id="nombreEditar" >
+                    <br>
+                    <label for="iden">Descripcion: </label>
+                    <textarea id="textareaEditarS" rows="5" cols="62"></textarea>
+                    
+
+
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+
                     </div>
                 </div>
-                <!-- se crea el contenido dentro del modal-->
-                <div class="modal-body" id="contenidoModalCategorias">
 
-                    <div class="form-group">
-
-                        <label for="nombreCategoria">Nombre de la Categoria: </label>
-                        <input type="text" class="form-control" id="nombreCategoriasProductos">
-                        <br>
-
-                    </div>
-                    <div class="form-group">
-
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-switch">
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnCategoriasProductos"></button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnProductosEditar"></button>
             </div>
         </div>
     </div>
+</div>
+
+<!--Modal Categorias-->
+
+<div class="modal fade" id="modalCategorias" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-sm-11">
+                    <h3 class="modal-title" id="tituloModalCategoria"></h3>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="contenidoModalCategoria">
+                
+                <div class="form-group">
+                    
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" class="form-control" id="cat" >
+
+                   <div class="container mt-5 mb-5">
+                        <h3 class="color-1">Registro de Categorias</h3>
+                        <hr></hr>
+                         <div id="listadoCategorias">
+                             
+                         <div class="mb-5">
+                         <table id="tbcategorias" class="table table-striped table-bordered dt-responsive display">
+                         <thead>
+                         <tr>
 
 
+                        </tr>
+                        </thead>
+                        </table>
+                    </div>
+                </div>
+             </div>
+                   
+                </div>
+                <div class="form-group">
 
-    <?php include(TEMPLATES_PATH . "/footer.php") ?>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnCategorias"></button>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
 
 
+<!--Modal Editar Categorias-->
+
+<div class="modal fade" id="modalEditarCategorias" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-sm-11">
+                    <h3 class="modal-title" id="tituloModalEditarCategoria"></h3>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="contenidoModalEditarCategoria">
+                
+                <div class="form-group">
+                <label for="id">Codigo: </label>
+                    <input type="text" class="form-control" id="idEditar" >
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" class="form-control" id="catEditar" >
+
+                  
+                   
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnCategoriasEditar"></button>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
 
 </body>
 
 </html>
+
+
