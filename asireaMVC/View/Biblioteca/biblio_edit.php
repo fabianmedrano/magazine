@@ -23,7 +23,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
     <script src="../../lib/alertifyjs/alertify.min.js"></script>
 
     <script src="../../public/js/biblioteca/biblio_edit.js"></script>
-
+    
     <title>Biblioteca</title>
 
     <style>
