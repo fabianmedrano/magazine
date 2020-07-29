@@ -48,19 +48,19 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 
-  <title>Acerca de RECURINFOR (v4)</title>
+  <title>Asirea</title>
 
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/nav.php") ?>
+  <?php include(TEMPLATES_PATH . "/header.php") ?>
 
 
 
   <div class="container  ">
   <div class="row">
   <h3>
-    ¿Que es ASIREA?
+    Nosotros
 </h3>
   </div>
 

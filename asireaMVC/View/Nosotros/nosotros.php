@@ -8,7 +8,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 <!DOCTYPE html>
 <html lang="es">
-
+<title>Asirea</title>
 <head>
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>

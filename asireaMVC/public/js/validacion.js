@@ -10,7 +10,12 @@
         max = ($texto.length > 150) ? pintarError($msg[1], $idError) : borrarError($msg[1], $idError);
         return (min && max);
     }
-
+    function validarAutor($texto, $msg, $idError) {
+        min = ($texto.length < 1) ? pintarError($msg[0], $idError) : borrarError($msg[0], $idError);
+        max = ($texto.length > 200) ? pintarError($msg[1], $idError) : borrarError($msg[1], $idError);
+        especiales =  (!/^[ a-záéíóúüñ]*$/i.test($texto)) ? pintarError($msg[2], $idError) : borrarError($msg[2], $idError);
+        return (min && max && especiales);
+    }
 
     function validarFileInput($FileInput, $msg, $idError) {
         return   (  !($FileInput)[0]  ) ? pintarError($msg[2], $idError) : borrarError($msg[2], $idError);

@@ -9,6 +9,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 <!DOCTYPE html>
 <html>
 
+<title>Proyectos</title>
 
 <head>
 
@@ -17,7 +18,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
     <link href="<?php echo PUBLIC_PATH ?>/css/proyectos/proyectos_view.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo LIB_PATH ?>/fontawesome/css/fontawesome.min.css">
 
-    <title>Proyectos)</title>
+
 
 </head>
 
@@ -70,29 +71,30 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
                         $folder_path = "../../public/img/proyectos/proyectos/";
                         $folder_path = $folder_path . $proyecto["idProyecto"] . "/";
                         $num_files = glob($folder_path . "*.{JPG,jpeg,gif,png,bmp}", GLOB_BRACE);
-                        $folder = opendir($folder_path);
-                        $imgcargada = false;
-                        if ($num_files > 0) {
-                            while ((false !== ($file = readdir($folder))) && (!$imgcargada)) {
-                                $file_path = $folder_path . $file;
+                        if (file_exists($folder_path)) {
+                            $folder = opendir($folder_path);
+                            $imgcargada = false;
+                            if ($num_files > 0) {
+                                while ((false !== ($file = readdir($folder))) && (!$imgcargada)) {
+                                    $file_path = $folder_path . $file;
 
-                                $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                                if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') { // revisar que pasa cuando no carga imagen
+                                    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                    if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif' || $extension == 'bmp') { // revisar que pasa cuando no carga imagen
                         ?>
 
-                                    <!-- incio imagenes -->
-                                    <img class="" src="<?php echo $file_path; ?>" alt="Generic placeholder image" height="150">
-                                    <br>
+                                        <!-- incio imagenes -->
+                                        <img class="" src="<?php echo $file_path; ?>" alt="Generic placeholder image" height="150">
+                                        <br>
 
-                                    <!-- Fin imagenes -->
+                                        <!-- Fin imagenes -->
 
                         <?php
-                                    $imgcargada = true;
+                                        $imgcargada = true;
+                                    }
                                 }
+                                closedir($folder);
                             }
-                            closedir($folder);
                         }
-
                         ?>
                         <h5> <?php echo $proyecto["titulo"] ?> </h5>
                         <div class="contenedor_resumen_proyecto wrapper ">
@@ -102,13 +104,13 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
 
 
-                        </div>
+                    </div>
                 </div>
-                    <?php } ?>
+            <?php } ?>
 
-                    <!--Blog Post End-->
+            <!--Blog Post End-->
 
-            
+
         </div>
 
 
@@ -116,28 +118,39 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 
         <div class="row">
 
-            <div id="pagination">
+            <div class="gt-pagination">
                 <nav>
                     <ul class="pagination">
 
                         <li class="page-item  <?php echo $_GET['pagina'] == 1 ? 'disabled' : '' ?>">
-                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1">anterior</a>
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo 1;  ?>" tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
                         </li>
+                    </ul>
+                    <ul class="pagination">
 
-                        <?php for ($i = 0; $i < $proyectos['paginas']; $i++) { ?>
+                        <li class="page-item  <?php echo $_GET['pagina'] == 1 ? 'disabled' : '' ?>">
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina'])  - 1);  ?>" tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                        </li>
+                    </ul>
 
+                    <?php for ($i = 0; $i < $proyectos['paginas']; $i++) { ?>
+                        <ul class="pagination">
                             <li class="page-item <?php echo $_GET['pagina'] == ($i + 1) ? 'active' : '' ?>">
                                 <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo $i + 1  ?> "><?php echo $i + 1 ?> <span class="sr-only"></span></a>
                             </li>
-
-                        <?php } ?>
-
+                        </ul>
+                    <?php } ?>
+                    <ul class="pagination">
                         <li class="page-item  <?php echo $_GET['pagina'] >= $proyectos['paginas'] ? 'disabled' : '' ?>">
-                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>">siguiente</a>
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo (intval($_GET['pagina']) + 1);  ?>"><i class="fas fa-angle-right"></i></a>
                         </li>
-
                     </ul>
+                    <ul class="pagination">
 
+                        <li class="page-item  <?php echo $_GET['pagina'] == $proyectos['paginas'] ? 'disabled' : '' ?>">
+                            <a class="page-link" href="<?PHP echo CURRENT_DIR ?>?pagina=<?php echo $proyectos['paginas'];  ?>" tabindex="-1"><i class="fas fa-angle-double-right"></i></a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
 

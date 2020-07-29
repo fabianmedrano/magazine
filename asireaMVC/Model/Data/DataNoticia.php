@@ -18,9 +18,9 @@ class DataNoticia
             $stmt->bind_param("i", $id);
             $stmt->execute();
 
-            $stmt->bind_result($id, $titulo, $descripcion);
+            $stmt->bind_result($id, $titulo, $descripcion, $fecha ,$autor);
             $stmt->fetch();
-            return array('id' => $id, 'titulo' => $titulo, 'descripcion' => $descripcion);
+            return array('id' => $id, 'titulo' => $titulo, 'descripcion' => $descripcion, 'fecha' => $fecha,'autor' => $autor);
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -53,7 +53,7 @@ class DataNoticia
             $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
             $resultado->execute();
         $resultado->store_result();
-    $resultado->bind_result($idnoticia, $titulo,$descripcion,$fecha);
+    $resultado->bind_result($idnoticia, $titulo,$descripcion,$fecha,$autor);
            
             while ($resultado->fetch()) {
                 array_push(
@@ -62,7 +62,8 @@ class DataNoticia
                         "idnoticia" => $idnoticia,
                         "titulo" => $titulo,
                         "descripcion" => $descripcion,
-                        "fecha" => $fecha
+                        "fecha" => $fecha,
+                        "autor"=> $autor
                     )
                 );
             }
@@ -94,6 +95,8 @@ class DataNoticia
                             'titulo' => $fila[1],
                             'descripcion' => $fila[2],
                             'fecha' => $fila[3],
+                            'autor' => $fila[4]
+                        
                         )
                     );
                 }
@@ -109,12 +112,12 @@ class DataNoticia
     }
 
 
-    static public function updateNoticia($id, $titulo, $texto)
+    static public function updateNoticia($id, $titulo, $texto,$autor)
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_updateNoticia(?,?,?);");
-            $stmt->bind_param("iss", $id, $titulo, $texto);
+            $stmt = $con->getConexion()->prepare("CALL sp_updateNoticia(?,?,?,?);");
+            $stmt->bind_param("isss", $id, $titulo, $texto,$autor);
             $stmt->execute();
 
 
@@ -135,12 +138,12 @@ class DataNoticia
 
         exit(json_encode($response));
     }
-    static public function insertNoticia($titulo, $texto)
+    static public function insertNoticia($titulo, $texto, $autor)
     {
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?);");
-            $stmt->bind_param("ss", $titulo, $texto);
+            $stmt = $con->getConexion()->prepare("CALL sp_insertNoticia(?,?,?);");
+            $stmt->bind_param("sss", $titulo, $texto,$autor);
             $stmt->execute();
             
             $response = [
@@ -184,7 +187,7 @@ class DataNoticia
             $con->cerrarConexion();
        }
 
-        return (json_encode($response));
+        return $response;
     }
 
     static public function getLastIdNoticia()

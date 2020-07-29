@@ -24,8 +24,8 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
   
   <script src="<?php echo PUBLIC_PATH ?>/js/proyectos/proyecto_edit.js"></script>
   
-  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
+  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
 
 
 

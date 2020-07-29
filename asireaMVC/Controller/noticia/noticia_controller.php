@@ -12,9 +12,9 @@ class NoticiaController
     }
 
 
-    static public function uptateNoticia($id,$titulo,$texto)
+    static public function uptateNoticia($id,$titulo,$texto,$autor)
     {
-            $respuesta = DataNoticia::updateNoticia($id,$titulo,$texto);
+            $respuesta = DataNoticia::updateNoticia($id,$titulo,$texto,$autor);
             return $respuesta; 
     }
 
@@ -45,18 +45,19 @@ class NoticiaController
         return $respuesta;
     }
 
-    static public function insertNoticia($titulo,$texto)
+    static public function insertNoticia($titulo,$texto,$autor)
     {
-        $respuesta = DataNoticia::insertNoticia($titulo,$texto);
+        $respuesta = DataNoticia::insertNoticia($titulo,$texto,$autor);
         return $respuesta; 
     }
 
     static public function deleteNoticia($id)
     {
         $respuesta = DataNoticia::deleteNoticia($id);
-        self:: deleteDirectory($id);
-    
-        exit ($respuesta); 
+        if(strcmp ($respuesta['status'] , 'success' ) == 0){
+            self:: deleteDirectory($id);
+        }
+        exit(json_encode($respuesta)); 
     }
 
 
