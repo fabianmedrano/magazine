@@ -8,3 +8,7 @@
     max-height: 500px !important;
     
 }
+img {
+    max-width: 100% !important;
+    height: auto !important;
+  }

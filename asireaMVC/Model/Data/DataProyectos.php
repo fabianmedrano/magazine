@@ -183,7 +183,7 @@ class DataProyecto
             $con->cerrarConexion();
        }
 
-        return (json_encode($response));
+        return $response;
     }
 
     static public function getLastIdProyecto()

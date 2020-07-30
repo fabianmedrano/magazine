@@ -14,20 +14,12 @@ white-space: pre-line;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.post-meta{
-margin-bottom: 0% !important;
-}
-.blog-list .blog-post .blog-txt {
-  width: 70% !important;
-}
-.blog-list .blog-post .blog-thumb{
-  width: 30% !important;
-}
-
 .cuerpo{
   margin: 40px 10px;
 }
-
+.card{
+  width: auto;
+}
 img {
   max-width: 100% !important;
   height: auto !important;
@@ -35,4 +27,10 @@ img {
 .container_list_view_admin{
   width: 800px;
   min-height: 300px;
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }

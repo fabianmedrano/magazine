@@ -53,10 +53,14 @@ class ProyectoController
 
     static public function deleteProyecto($id)
     {
+
         $respuesta = DataProyecto::deleteProyecto($id);
-        self:: deleteDirectory($id);
+        
+        if(strcmp ($respuesta['status'] , 'success' ) == 0){
+            self:: deleteDirectory($id);
+        }
     
-        exit ($respuesta); 
+        exit (json_encode($respuesta));; 
     }
 
 
