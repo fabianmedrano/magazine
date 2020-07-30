@@ -234,7 +234,7 @@ function initTable() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        "<button class='btn btn-outline-primary' onclick='abrirModalEditar("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
+                "<button class='btn btn-outline-primary' onclick='abrirModalEditar("+data.id+")'><i class=\"fas fa-edit\"></i></button>"
                     );
                 }
             },

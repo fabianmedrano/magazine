@@ -1,17 +1,17 @@
-/*$listaCategorias = {};
-
+$listaCategorias = {};
 
 $(document).ready(function() {
-    alert("hola");
     obtener_categorias();
 });
 
 function obtener_categorias() {
+    $('#divCargando').css('visibility', 'visible');
     $.ajax({
-        url: "../../Controller/productos/categorias_controller.php",
+        url: "../../Controller/productos/Categorias_controller.php",
         type: "POST",
         data: {obtener_categoria: "true"},
         success: function (result) {
+            $('#divCargando').css('visibility', 'hidden');
             $listaCategorias = jQuery.parseJSON(result);
             iniciar_TablaCategorias();
         }
@@ -19,7 +19,6 @@ function obtener_categorias() {
 }
 
 function iniciar_TablaCategorias() {
-    
 
     $('#tbcategorias').DataTable({
         destroy: true,
@@ -27,48 +26,41 @@ function iniciar_TablaCategorias() {
         "lengthMenu": [ 5 ],
         data: $listaCategorias,
         columns: [
-
-            { title: "ID", data: "id"  },
             { title: "Nombre", data: "nombre"  },
-           
             { title: "Editar" },
             { title: "Eliminar" },
-
         ],
-        "language": {"url": "json/configDatatable.json"},
+        "language": {"url": "../../public/configDatatable.json"},
         "columnDefs": [
             {
-                "targets": 2,
-                "data": null,
-                "orderable": false,
+                "targets": 1,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "orderable": false,
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='modificarCategoria' type='button' data-toggle='tooltip' data-placement='top' title='Modificar selección' class='cont-icono btn btn-outline-succes'><i class='fas fa-edit' onclick='abrirEditarCategoria(" + data.id + ")' ></i></button>";
+                    return (
+                        '<button class="btn btn-outline-primary" onclick="abrirEditarCategoria('+data.id+')">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</button>'
+                    );
                 }
             },
             {
-                "targets": 3,
-                "data": null,
+                "targets": 2,
                 "orderable": false,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='eliminarCategoria' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar selección' class='cont-icono btn btn-outline-danger'><i class='far fa-trash-alt' onclick='eliminar_servicios(" + data.id + ")'></i></button>";
+                    return (
+                        '<button class="btn btn-outline-danger" onclick="eliminarCategoria('+data.id+')">' +
+                            '<i class="fas fa-trash-alt"></i>' +
+                        '</button>'
+                    );
                 }
             }
         ],
-        "order": [[0, "asc"]],
+        "order": [[0, "desc"]],
         "autoWidth": false,
-        "preDrawCallback": function(settings) {
-            $("#tbcategorias tbody tr").removeClass("seleccionado");
-            $("#tbcategorias tbody tr td").removeClass("selected");
-        },
-        "drawCallback": function(settings) {
-        
-            $("#tbcategorias tbody tr").removeClass("selected");
-            $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
-        }
     });
 
 
@@ -77,85 +69,106 @@ function iniciar_TablaCategorias() {
 function abrirModalCategoria() {
     $('#tituloModalCategoria').text('Registrar Categorias');
     $('#btnCategorias').text('Agregar');
+    $('#cat').val('');
     $('#btnCategorias').attr('onclick', 'registrar_categorias()');
     $('#modalCategorias').modal('show');
-    
 }
 
-
-function abrirEditarCategoria($id) {
-    $('#tituloModalEditarCategoria').text('Editar Categoria');
-    $('#btnCategoriasEditar').text('Guardar Edición');
-
-
-    for (var i=0; i < $listaCategorias.length; i++){
-        if($listaCategorias[i].id == $id){
-            $("#idEditar").val($listaCategorias[i].id);
-            $("#idEditar").attr("disabled", true);
-            $("#catEditar").val($listaCategorias[i].nombre);
-            
-
-            i = $listaCategorias.length;
-        }
-
-    }
-
-
-    $('#btnCategoriasEditar').attr('onclick', 'editar_categoria()');
-    $('#modalEditarCategorias').modal('show');
-
-
+function abrirEditarCategoria(id) {
+    $('#tituloModalCategoria').text('Editar Categorias');
+    $('#btnCategorias').text('Guardar');
+    $('#cat').val($listaCategorias.filter(x => x.id === id)[0].nombre);
+    $('#btnCategorias').attr('onclick', 'editar_categoria('+id+')');
+    $('#modalCategorias').modal('show');
 }
 
-function editar_categoria() {
-    var nombre =$ ("#catEditar").val()
-    var id =$ ("#idEditar").val()
-    
-
+function editar_categoria(id) {
+    var nombre = $("#cat").val();
+    $('#spinerCargar').css('visibility', 'visible');
     $.ajax({
-        url:"../../Controller/productos/categorias_controller.php",
+        url:"../../Controller/productos/Categorias_controller.php",
         type: "POST",
         data: {editar_categoria: "true",id: id, nombre: nombre},
         success: function (result) {
             if (result == 1){
-                alert("edición exitoso!");
-                $("#catEditar").val("");
-                $("#idEditar").val("");
-                $("#idEditar").attr("disabled", false);
+                $('#spinerCargar').css('visibility', 'hidden');
+                $('#modalCategorias').modal('hide');
+
+                alertify.success("Categoría editada exitosamente.");
 
                 obtener_categorias();
             }else{
-                alert("error al editar");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al editar la categoría'
+                })
             }
-
         }
     })
-
 }
 
 function registrar_categorias() {
-    var nombre =$ ("#cat").val()
-
-
+    var nombre = $("#cat").val();
+    $('#spinerCargar').css('visibility', 'visible');
     $.ajax({
-        url:"../../Controller/productos/categorias_controller.php",
+        url:"../../Controller/productos/Categorias_controller.php",
         type: "POST",
         data: {registrar_categoria: "true", nombre: nombre},
         success: function (result) {
             if (result == 1){
-                alert("registro exitoso!");
-                $("#cat").val("");
-                
+
+                $('#spinerCargar').css('visibility', 'hidden');
+                $('#modalCategorias').modal('hide');
+
+                alertify.success("Categoría registrada exitosamente.");
+
                 obtener_categorias();
             }else{
-                alert("error al insertar");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al registrar la categoría.'
+                })
             }
 
         }
     })
+}
 
-}*/
+function eliminarCategoria(id) {
+    Swal.fire({
+        title: 'Eliminar',
+        text: "Esta acción no es reversible.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:"../../Controller/productos/Categorias_controller.php",
+                type: "POST",
+                data: {eliminar_producto: "true", id: id},
+                success: function (result) {
+                    console.log(result);
+                    if (result === 1){
 
-$(document).ready(function(){
-    alert("Hola");
-});
+                        alertify.success("Categoría eliminada exitosamente.");
+
+                        obtener_categorias();
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Error al eliminar la categoría.'
+                        })
+                    }
+
+                }
+            })
+        }
+    })
+}

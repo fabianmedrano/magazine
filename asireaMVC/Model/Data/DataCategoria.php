@@ -5,10 +5,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 class DataCategoria {
 
-
-  
-
-    public function obtener_categoria(){
+    static public function obtener_categoria(){
 
         $conexion = null;
 
@@ -16,15 +13,13 @@ class DataCategoria {
             $conexion = new Conexion();
             //crear conexion para obtener lista
 
-            $conexion->prepare("call leer_categoria()");
-
-            $conexion->execute();
-
-            $conexion->bind_result($id,  $nombre);
+            $stmt = $conexion->getConexion()->prepare("call sp_leerCategoriaProductos()");
+            $stmt->execute();
+            $stmt->bind_result($id,  $nombre);
 
             $lista = array();
 
-            while($conexion->fetch()){
+            while($stmt->fetch()){
                 $categoria =(object)[
                     "id" => $id,
                     "nombre" => ($nombre)
@@ -45,18 +40,18 @@ class DataCategoria {
         }
     }
 
-    public function registrar_categoria($nombre){
+    static public function registrar_categoria($nombre){
 
         $conexion = null;
 
         try{
             $conexion = new Conexion();
-            $conexion->prepare("call insertar_Categoria(?)");
-            $conexion->bind_param("s",$nombre);
+            $stmt = $conexion->getConexion()->prepare("call sp_registrarCategoriaProductos(?)");
+            $stmt->bind_param("s",$nombre);
 
-            $conexion->execute();
+            $stmt->execute();
 
-            if($conexion->affected_rows > 0){
+            if($stmt->affected_rows > 0){
                 return 1;
             }else{
                 return 0;
@@ -71,20 +66,19 @@ class DataCategoria {
         }
     }
 
-    public function eliminar_producto($id){
+    static public function eliminar_categoria($id){
 
         $conexion = null;
 
         try{
             $conexion = new Conexion();
-            //crear conexion para obtener lista
 
-            $conexion->prepare("call eliminar_productos(?)");
-            $conexion->bind_param("d",$id);
+            $stmt = $conexion->getConexion()->prepare("call sp_eliminarCategoriaProductos(?)");
+            $stmt->bind_param("i",$id);
 
-            $conexion->execute();
+            $stmt->execute();
 
-            if($conexion->affected_rows > 0){
+            if($stmt->affected_rows > 0){
                 return 1;
             }else{
                 return 0;
@@ -99,30 +93,22 @@ class DataCategoria {
         }
     }
 
-    public function editar_categoria($id, $nombre){
+    static public function editar_categoria($id, $nombre){
         $conexion = null;
 
         try{
             $conexion = new Conexion();
-            $conexion->prepare("call editar_categorias(?,?)");
-            $conexion->bind_param("ds", $id, $nombre);
+            $stmt = $conexion->getConexion()->prepare("call sp_editarCategoriaProductos(?,?)");
+            $stmt->bind_param("ds", $id, $nombre);
 
-            $conexion->execute();
-            if($conexion->affected_rows > 0){
-                return 1;
-            }else{
-                return 0;
-            }
+            $stmt->execute();
+            return 1;
         }catch (Exception $e){
             return $e;
         } finally {
             $conexion->cerrarConexion();
         }
     }
-
-
-
-
 }
 
 
