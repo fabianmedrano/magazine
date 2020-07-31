@@ -7,12 +7,12 @@
                 <ul class="navbar-nav mr-auto">
                   
                     <li class="nav-item ">
-                        <a class="nav-link " href=""> PRODUCTOS </a>
+                        <a class="nav-link " href="../Productos/productos_list_view.php"> PRODUCTOS </a>
 
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link " href="../Servicios/servicios_edit.php"> SERVICIOS </a>
+                        <a class="nav-link " href="../Servicios/servicios_list_view.php"> SERVICIOS </a>
 
                     </li>
                     <li class="nav-item ">

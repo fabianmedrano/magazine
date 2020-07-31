@@ -220,6 +220,26 @@ class DataServicios {
     }
 
 
+    static public function getServicioID($id)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getServicioID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+
+            $stmt->bind_result($id, $imagen, $nombre, $descripcion);
+            $stmt->fetch();
+            return array('id' => $id, 'imagen' => $imagen, 'nombre' => $nombre, 'descripcion' => $descripcion);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+
 
 
 }

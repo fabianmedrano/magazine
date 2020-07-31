@@ -206,8 +206,88 @@ class DataProductos   {
 
         exit(json_encode($response));
     }
+
+
+<<<<<<< HEAD
+}
+=======
+    static public function getProductosCantidad()
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getCantidadProducto();");
+            $stmt->execute();
+            $stmt->bind_result($cantidad);
+            $stmt->fetch();
+            return $cantidad;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+    static public function getProductosPaginado($pagina, $cantidad)
+    {
+        try {
+            $Productos = array();;
+            $con = new Conexion();
+            $resultado = $con->getConexion()->prepare("CALL sp_getProductosPaginado(?, ? );");
+            $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
+            $resultado->execute();
+        $resultado->store_result();
+    $resultado->bind_result($id, $imagen, $nombre,$descripcion, $id_categoria, $nombre_categoria);
+           
+            while ($resultado->fetch()) {
+                array_push(
+                    $Productos,
+                    array(
+                        "id" => $id,
+                        "imagen" => $imagen,
+                        "nombre" => $nombre,
+                        "descripcion" => $descripcion,
+                        "id_categoria" => $id_categoria,
+                        "nombre_categoria" => $nombre_categoria
+                        
+                    )
+                );
+            }
+        
+            /* cerrar la sentencia */
+            $resultado->close();
+             
+            return $Productos;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+    static public function getProductoID($id)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getProductoID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+
+            $stmt->bind_result($id, $imagen, $nombre, $descripcion, $id_categoria, $nombre_categoria);
+            $stmt->fetch();
+            return array('id' => $id, 'imagen' => $imagen, 'nombre' => $nombre, 'descripcion' => $descripcion, 'id_categoria' => $id_categoria, 'nombre_categoria' => $nombre_categoria);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
  
 
 
 
 }
+
+>>>>>>> develop
