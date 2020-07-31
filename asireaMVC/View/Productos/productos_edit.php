@@ -41,6 +41,17 @@ include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
             <div class="mt-5">
                 <table id="tbproducto" class="table table-striped table-bordered dt-responsive display"></table>
+                <div id="divCargando" style="visibility: hidden">
+                    <div class="spinner-grow" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                    <div class="spinner-grow" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                    <div class="spinner-grow" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

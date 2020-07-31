@@ -1,22 +1,33 @@
 $listaProductos = {};
-$listaCate = [
-    {"id": 1, "nombre": "Peces"},
-    {"id": 2, "nombre": "Animales"},
-    {"id": 3, "nombre": "Plantas"},
-];
+$listaCate = [];
 
 $(document).ready(function () {
-    //obtener_productos();
+    obtener_categorias();
+    obtener_productos();
 });
 
 function obtener_productos() {
+    $('#divCargando').css('visibility', 'visible');
     $.ajax({
         url: "../../Controller/productos/switch_controller.php",
         type: "POST",
         data: {accion: 'get'},
         success: function (result) {
+            $('#divCargando').css('visibility', 'hidden');
+            console.log(result);
             $listaProductos = jQuery.parseJSON(result);
             iniciar_Tabla();
+        }
+    });
+}
+
+function obtener_categorias() {
+    $.ajax({
+        url: "../../Controller/productos/Categorias_controller.php",
+        type: "POST",
+        data: {obtener_categoria: "true"},
+        success: function (result) {
+            $listaCate = jQuery.parseJSON(result);
         }
     });
 }
@@ -32,6 +43,23 @@ function abriModalRegistrar() {
 
     $('#btnGuardarPro').attr('onclick', "registrarProducto()");
     $("#modalProductos").modal('show');
+}
+
+function abrirModalEditar(id) {
+    var item = $listaProductos.filter(x => x.id === id)[0];
+
+    $('#catePro').html('<option value="-1"> --- SELECCIONE UNA OPCIÓN ---</option>');
+    $.each($listaCate, function( index, value ) {
+        $('#catePro').append('<option value="'+value.id+'">'+value.nombre+'</option>')
+    });
+
+    $('#nombrePro').val(item.nombre);
+    $('#desPro').val(item.descripcion);
+
+    document.getElementById('fileDoc').value = "";
+
+    $('#btnGuardarPro').attr('onclick', "editarDoc("+id+",'"+item.img+"')");
+    $('#modalProductos').modal('show');
 }
 
 function registrarProducto() {
@@ -83,36 +111,39 @@ function iniciar_Tabla() {
         data: $listaProductos,
         columns: [
 
-            { title: "ID", data: "id"  },
             { title: "Nombre", data: "nombre"  },
             { title: "Descripcion", data: "descripcion"  },
-            { title: "Categoria", data: "categoria"  },
-
-
+            { title: "Categoria", data: "cate"  },
             { title: "Editar" },
             { title: "Eliminar" },
 
         ],
-        "language": {"url": "json/configDatatable.json"},
+        "language": {"url": "../../public/configDatatable.json"},
         "columnDefs": [
             {
-                "targets": 4,
-                "data": null,
-                "orderable": false,
+                "targets": 3,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "orderable": false,
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='modificarProducto' type='button' data-toggle='tooltip' data-placement='top' title='Modificar selección' class='cont-icono btn btn-outline-succes'><i class='fas fa-edit' onclick='abrirEditar(" + data.id + ")' ></i></button>";
+                    return (
+                        '<button class="btn btn-outline-primary" onclick="abrirModalEditar('+data.id+')">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</button>'
+                    );
                 }
             },
             {
-                "targets": 5,
-                "data": null,
+                "targets": 4,
                 "orderable": false,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='eliminarProducto' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar selección' class='cont-icono btn btn-outline-danger'><i class='far fa-trash-alt' onclick='eliminar_servicios(" + data.id + ")'></i></button>";
+                    return (
+                        '<button class="btn btn-outline-danger" onclick="eliminarCategoria('+data.id+')">' +
+                        '<i class="fas fa-trash-alt"></i>' +
+                        '</button>'
+                    );
                 }
             }
         ],
@@ -130,6 +161,7 @@ function nombreFile() {
 function alertas(result) {
     if(result.status === 1){
         alertify.success(result.mensaje);
+        obtener_productos();
     }else if(result.status === 0){
         Swal.fire({
             icon: 'warning',

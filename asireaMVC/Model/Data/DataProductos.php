@@ -13,7 +13,7 @@ class DataProductos   {
             $stmt = $con->getConexion()->prepare("call sp_leerProductos();");
 
             $stmt->execute();
-            $stmt->bind_result($id, $img, $nombre, $descripcion, $cate);
+            $stmt->bind_result($id, $img, $nombre, $descripcion, $id_cate, $cate);
 
             $array = array();
 
@@ -23,7 +23,8 @@ class DataProductos   {
                     'nombre'=> $nombre,
                     'descripcion'=> $descripcion,
                     'img'=> $img,
-                    'id_cate' => $cate
+                    'id_cate' => $id_cate,
+                    'cate' => $cate
                 ];
 
                 array_push($array, $obj);
@@ -55,7 +56,7 @@ class DataProductos   {
                 ];
                 return $msm;
             }else{
-                //unlink('../../public/documentos/'.$nombre);
+                unlink('../../public/img/productos/'.$imagen);
                 $msm = [
                     'status' => 0,
                     'mensaje' => "El producto ".$nombre." no fue agregado"
@@ -64,7 +65,7 @@ class DataProductos   {
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
-            //unlink('../../public/documentos/'.$archivo);
+            unlink('../../public/img/productos/'.$imagen);
             $msm = [
                 'status' => -1,
                 'mensaje' => $e->getMessage()

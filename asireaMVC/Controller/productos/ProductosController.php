@@ -10,12 +10,8 @@ class ProductosController
         return json_encode(DataProductos::getProductos());
     }
 
-    public function insertarProducto(){
-        $msm = [
-            'status' => 1,
-            'mensaje' => "Accion correcta."
-        ];
-        return json_encode($msm);
+    public function insertarProducto($nombre, $cate, $descrip, $foto){
+        return json_encode(DataProductos::insertproductos($foto, $nombre, $descrip, $cate));
     }
 
 }

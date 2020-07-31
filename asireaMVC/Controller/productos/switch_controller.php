@@ -23,7 +23,7 @@ if (isset($_POST["accion"])) {
 
             if($ext == 'png' || $ext == 'jpg' || $ext == 'jpge'){
                 if(move_uploaded_file($fileTemp, "../../public/img/productos/".$fileName)){
-                    $result = $controller->insertarProducto();
+                    $result = $controller->insertarProducto($_REQUEST['nombrePro'], $_REQUEST['catePro'], $_REQUEST['descripPro'], $fileName);
                 }else{
                     $msm = [
                         'status' => -1,
