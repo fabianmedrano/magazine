@@ -1,0 +1,50 @@
+.container {
+	margin: 50px  auto  0px!important;
+	justify-content: center;
+}
+
+.row { 
+	justify-content: center;
+	}
+	.card{
+		padding: 19px;
+	height: 380px;
+	border-color: rgb(177, 177, 177);
+		}
+
+	img {
+		vertical-align: middle;
+		border-style: none;
+		max-width: 100%;
+		margin-bottom: 5px;
+	}
+	.contenedor_resumen_servicio{
+margin-bottom: 5px;
+overflow: hidden;
+
+	}
+	.wrapper {
+		-webkit-column-width: auto;
+		column-width: 200px;
+		height: 100%;
+	}
+	
+	.resumen_servicio{
+		text-align : justify;
+		
+		}
+	 .contenedor_msg {
+		text-align: center;
+		padding: 20px 40px;
+		margin: 10% auto;
+	}
+	.mensaje {
+		font-size: 24px;
+		font-weight: 600;
+		margin: 20px 0;
+	}
+	.descripcion_msg {
+		font-size: 16px;
+		line-height: 24px;
+		margin: 16px 0;
+	}

@@ -1,5 +1,7 @@
 <?php
 
+
+
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once CONEXION_PATH;
 
