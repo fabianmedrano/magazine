@@ -4,102 +4,77 @@ require_once CONEXION_PATH;
 
 class DataProductos   {
 
-
-
     static public function getProductos()
     {
+        $con = null;
         try {
-            $productos = array();;
             $con = new Conexion();
-            $resultado = $con->getConexion()->query("CALL sp_leerProudctos();");
-            if ($resultado) {
-                while ($fila = $resultado->fetch_row()) {
-                    array_push(
-                        $productos,
-                        array(
-                            "id" => $fila[0],
-                            "imagen" => $fila[1],
-                            "nombre" => $fila[2],
-                            "descripcion" => $fila[3],
-                            "id_categoria" => $fila[4]
-                        )
-                    );
-                }
-                $resultado->close();
+
+            $stmt = $con->getConexion()->prepare("call sp_leerProductos();");
+
+            $stmt->execute();
+            $stmt->bind_result($id, $img, $nombre, $descripcion, $cate);
+
+            $array = array();
+
+            while($stmt->fetch()){
+                $obj = (object)[
+                    'id' => $id,
+                    'nombre'=> $nombre,
+                    'descripcion'=> $descripcion,
+                    'img'=> $img,
+                    'id_cate' => $cate
+                ];
+
+                array_push($array, $obj);
             }
-            return $productos;
+
+            return $array;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return false;
+            return $e->getMessage();
         } finally {
             $con->cerrarConexion();
         }
     }
 
-/*
-    public function obtener_producto(){
+    static public function insertproductos($imagen, $nombre, $descripcion, $idCategoria){
 
-         try{
-            $noticias = array();;
+        $con = null;
+        try {
             $con = new Conexion();
-            $resultado = $con->getConexion()->query("CALL sp_getNoticias();");
-             //crear conexion para obtener lista
 
-             $conexion->prepare("call sp_leerProudctos()");
+            $stmt = $con->getConexion()->prepare("CALL  sp_insertarProductos(?,?,?,?);");
+            $stmt->bind_param("sssi",$imagen, $nombre, $descripcion,$idCategoria);
+            $stmt->execute();
 
-             $conexion->execute();
+            if($stmt->affected_rows > 0){
+                $msm = [
+                    'status' => 1,
+                    'mensaje' => "El producto ".$nombre." fue agregado correctamente"
+                ];
+                return $msm;
+            }else{
+                //unlink('../../public/documentos/'.$nombre);
+                $msm = [
+                    'status' => 0,
+                    'mensaje' => "El producto ".$nombre." no fue agregado"
+                ];
+                return $msm;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            //unlink('../../public/documentos/'.$archivo);
+            $msm = [
+                'status' => -1,
+                'mensaje' => $e->getMessage()
+            ];
+            return $msm;
+        } finally {
+            $con->cerrarConexion();
+        }
 
-             $conexion->bind_result($id, $imagen, $nombre, $descripcion,$idCategoria);
-
-             $lista = array();
-
-             while($conexion->fetch()){
-                 $producto =(object)[
-                     "id" => $id,
-                     "imagen" => ($imagen),
-                     "nombre" => ($nombre),
-                     "descripcion" => ($descripcion),
-                     "id_categoria" => $idCategoria
-                 ];
-                 array_push($lista, $producto);
-
-             }
-
-             return json_encode($lista);
-
-
-         }catch (Exception $e){
-             return $e;
-
-         } finally {
-             mysqli_close($this->get_Conexion());
-         }
     }
-*/
-
-static public function insertproductos($imagen, $nombre, $descripcion, $idCategoria){
-    try{
-        $con = new Conexion();
-        $stmt = $con->getConexion()->prepare("CALL  sp_insertarProductos(?,?,?,?);");
-        $stmt->bind_param("sssi",$imagen, $nombre, $descripcion,$idCategoria);
-        $stmt->execute();
-        
-        $response = [
-            'status' => 'success',
-            'msg' => 'producto insertado exitosamente'
-        ];
-
-    } catch (PDOException $e) {
-        //echo $e->getMessage();   
-       $response = [
-            'status' => 'error',
-            'errors' => $e->getMessage()
-        ];
-    } finally {
-        $con->cerrarConexion();
-    }
-    exit(json_encode($response));
-}
 
  
 

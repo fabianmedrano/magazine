@@ -1,9 +1,9 @@
 <?php
 
-
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 require_once DATA_PATH . "/DataCategoria.php";
-class Categorias_Controller
+
+class Categorias_controller
 {
 
     public function obtener_categoria(){
@@ -20,14 +20,10 @@ class Categorias_Controller
     }
 
     public function eliminar_categoria($id){
-        return DataCategoria::eliminar_producto($id);
+        return DataCategoria::eliminar_categoria($id);
     }
 
-
 }
-
-
-
 
 $categoria = new Categorias_Controller();
 
@@ -40,7 +36,7 @@ if(isset($_REQUEST["registrar_categoria"])){
 }
 
 if(isset($_REQUEST["eliminar_producto"])){
-    echo $producto->eliminar_producto($_REQUEST["id"]);
+    echo $categoria->eliminar_categoria($_REQUEST["id"]);
 }
 
 if(isset($_REQUEST["editar_categoria"])){

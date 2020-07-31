@@ -50,6 +50,15 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
               <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
                
               <fieldset>
+
+              <div id="error_autor" class="error" role="alert"></div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Autor</span>
+  </div>
+  <input id="autor_noticia" name="autor_noticia" type="text" class="form-control" aria-describedby="basic-addon3"value="<?php echo $noticia['autor'] ?>">
+</div>
               
             <div id="error_titulo" class="error" role="alert"></div>
               <div class="input-group mb-3">

@@ -2,8 +2,6 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
-
 ?>
 
 <!doctype html>

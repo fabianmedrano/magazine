@@ -12,11 +12,11 @@ if (isset($_POST["btn_accion"])) {
     switch ($_POST["btn_accion"]) {
 
         case 'Actualizar':
-            $controlador_noticia->uptateNoticia($_POST["id_noticia"], $_POST["titulo_noticia"], $_POST["editor_noticia"]);
+            $controlador_noticia->uptateNoticia($_POST["id_noticia"], $_POST["titulo_noticia"], $_POST["editor_noticia"] ,$_POST["autor_noticia"] );
             break;
 
         case 'Guardar':
-            $controlador_noticia->insertNoticia($_POST["titulo_noticia"], $_POST["editor_noticia"]);
+            $controlador_noticia->insertNoticia($_POST["titulo_noticia"], $_POST["editor_noticia"], $_POST["autor_noticia"]);
 
             break;
 

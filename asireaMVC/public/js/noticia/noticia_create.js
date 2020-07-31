@@ -27,6 +27,21 @@ var $ruleti = [
     },
 ];
 
+var $ruleau = [
+    {
+    error: "required_content",
+    msg: "Debe ingresar un autor"
+},
+{
+    error: "max_content",
+    msg: "Excedio el tamaño para el autor"
+},
+{
+    error: "letter_content",
+    msg: "Solo se permiten letras"
+},
+];
+
 
     var $texto ="";
     var $titulo ="";
@@ -45,6 +60,10 @@ var $ruleti = [
         validado = validarTitle($titulo,$ruleti, $('#error_titulo'));
     });
     
+    $("#autor_noticia").bind(" change click keyup input paste", function(event){
+        $autor =  $("#autor_noticia").val().trim();
+        validado =     validarAutor($autor,$ruleau, $('#error_autor'));
+    });
 
     $("#form-noticia-create").submit(function (ev) {
         ev.preventDefault();
@@ -52,8 +71,9 @@ var $ruleti = [
         $texto = CKEDITOR.instances.editor_noticia.getData().replace(/<[^>]*>/gi, '').trim();
         $texto = $texto.replace(/(\r\n|\n|\r)/gm, "");
         $titulo =  $("#titulo_noticia").val().trim();
+        $autor =  $("#autor_noticia").val().trim();
         
-        if(validarCkeditor($texto,$ruleck, $('#error_noticia')) &&  validarTitle($titulo,$ruleti, $('#error_titulo'))  ){
+        if(validarCkeditor($texto,$ruleck, $('#error_noticia')) &&  validarTitle($titulo,$ruleti, $('#error_titulo')) && validarAutor($autor,$ruleau, $('#error_autor')) ){
 
 
 

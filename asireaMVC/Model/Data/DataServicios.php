@@ -167,6 +167,61 @@ class DataServicios {
 
 
 
+    static public function getServiciosCantidad()
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getCantidadServicio();");
+            $stmt->execute();
+            $stmt->bind_result($cantidad);
+            $stmt->fetch();
+            return $cantidad;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+    static public function getServiciosPaginado($pagina, $cantidad)
+    {
+        try {
+            $Servicios = array();;
+            $con = new Conexion();
+            $resultado = $con->getConexion()->prepare("CALL sp_getServiciosPaginado(?, ? );");
+            $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
+            $resultado->execute();
+        $resultado->store_result();
+    $resultado->bind_result($id, $imagen, $nombre,$descripcion);
+           
+            while ($resultado->fetch()) {
+                array_push(
+                    $Servicios,
+                    array(
+                        "id" => $id,
+                        "imagen" => $imagen,
+                        "nombre" => $nombre,
+                        "descripcion" => $descripcion
+                        
+                    )
+                );
+            }
+        
+            /* cerrar la sentencia */
+            $resultado->close();
+             
+            return $Servicios;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+
+
+
 }
 
 

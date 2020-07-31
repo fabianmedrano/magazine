@@ -8,7 +8,7 @@ $login = new Login();
 if(isset($_REQUEST["submit"])){
     $result = $login->validarSesion($_REQUEST["user"], $_REQUEST["pass"]);
     if($result == 1){
-        header("Location: ../../View/Biblioteca/index.php");
+        header("Location: ../../View/Nosotros/nosotros_edit.php");
     }else{
         header("Location: ../../View/Login/Login.php");
     }

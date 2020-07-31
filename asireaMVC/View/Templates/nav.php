@@ -5,11 +5,22 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i> </button>
             <div class="collapse navbar-collapse ml-lg-5" id="navbarSupportedContent">
 
-                <ul class="navbar-nav mr-auto">
-                  
-                    <li class="nav-item ">
-                        <a class="nav-link " href=""> PRODUCTOS </a>
+                <ul class="navbar-nav mr-auto ml-xl-5">
 
+                    <li class="nav-item ">
+                        <a class="nav-link " href="../Nosotros/nosotros_edit.php"> NOSOTROS </a>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navPro" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            PRODUCTOS
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navPro" style="background: #00a072">
+                            <a class="nav-link" href="../Productos/productos_edit.php" >PRODUCTOS</a>
+                            <a class="nav-link" href="../Productos/categorias_edit.php" >CATEGORIA</a>
+                        </div>
                     </li>
 
                     <li class="nav-item ">
@@ -33,6 +44,13 @@
                         <a class="nav-link " href="../Biblioteca/biblio_edit.php" > BIBLIOTECA </a>
                     </li>
                 </ul>
+                <div class=" my-2 my-lg-0 mr-5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../salir.php" > CERRAR SESIÓN </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

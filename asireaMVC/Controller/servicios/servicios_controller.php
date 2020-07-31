@@ -24,6 +24,21 @@ class ServiciosController
         return DataCategoria::eliminar_servicio($id);
     }
 
+
+    static public function getServiciosPaginado($pagina,$Servicios_pagina)
+    {
+        
+        
+        $Servicios_pagina =3;
+
+        $cantidad_servicios = DataServicios::getServiciosCantidad();
+        $paginas = ceil($cantidad_servicios / $Servicios_pagina);
+
+        $respuesta = DataServicios::getServiciosPaginado( ($pagina -1)*$Servicios_pagina , $Servicios_pagina);
+     
+        return array('servicios'=>$respuesta,'paginas'=>$paginas);
+    }
+
 }
 
 

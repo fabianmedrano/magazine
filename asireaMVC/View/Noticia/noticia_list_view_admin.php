@@ -37,7 +37,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 </head>
 
 <body>
-    <?php include(TEMPLATES_PATH . "/nav.php") ?>
+    <?php include(TEMPLATES_PATH . "/header.php") ?>
     <div class="container">
         <div class="row mb-3">
 
