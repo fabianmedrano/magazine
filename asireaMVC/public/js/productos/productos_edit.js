@@ -1,8 +1,6 @@
 $listaProductos = {};
-$listaCate = [];
 
 $(document).ready(function () {
-    obtener_categorias();
     obtener_productos();
 });
 
@@ -21,85 +19,44 @@ function obtener_productos() {
     });
 }
 
-function obtener_categorias() {
-    $.ajax({
-        url: "../../Controller/productos/Categorias_controller.php",
-        type: "POST",
-        data: {obtener_categoria: "true"},
-        success: function (result) {
-            $listaCate = jQuery.parseJSON(result);
-        }
-    });
-}
-
-function abriModalRegistrar() {
-    $('#catePro').html('<option value="-1"> --- SELECCIONE UNA OPCIÓN ---</option>');
-    $('#nombrePro').val('');
-    $('#desPro').val('');
-
-    $.each($listaCate, function( index, value ) {
-        $('#catePro').append('<option value="'+value.id+'">'+value.nombre+'</option>')
-    });
-
-    $('#btnGuardarPro').attr('onclick', "registrarProducto()");
-    $("#modalProductos").modal('show');
-}
-
-function abrirModalEditar(id) {
+function abrirModal(id) {
     var item = $listaProductos.filter(x => x.id === id)[0];
 
-    $('#catePro').html('<option value="-1"> --- SELECCIONE UNA OPCIÓN ---</option>');
-    $.each($listaCate, function( index, value ) {
-        $('#catePro').append('<option value="'+value.id+'">'+value.nombre+'</option>')
-    });
+    $('#modalBody').html(
+        '<img src="../../public/img/productos/'+item.img+'" alt="Foto" style="height: 100%; width: 100%;">'
+    );
 
-    $('#nombrePro').val(item.nombre);
-    $('#desPro').val(item.descripcion);
-
-    document.getElementById('fileDoc').value = "";
-
-    $('#btnGuardarPro').attr('onclick', "editarDoc("+id+",'"+item.img+"')");
-    $('#modalProductos').modal('show');
+    $('#modalImg').modal('show');
 }
 
-function registrarProducto() {
-    $('#btnGuardarSpinner').css('visibility', 'visible');
-    var nombre = $('#nombrePro').val();
-    var cate = $('#catePro').val();
-    var descrip = $('#desPro').val();
-    var file = document.getElementById('fileDoc');
+function eliminarProducto(id) {
+    alert(id);
+    Swal.fire({
+        title: 'Eliminar',
+        text: "Esta acción no es reversible",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: 'btn btn-secondary',
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
 
-    if(nombre !== "" && cate !== "-1" && descrip !== "" && file.value !== ""){
-        var data = new FormData();
-        data.append('accion', 'insert');
-        data.append('nombrePro', nombre);
-        data.append('catePro', cate);
-        data.append('descripPro', descrip);
-        data.append('file', file.files[0]);
+        if (result.value) {
+            var item = $listaProductos.filter(x => x.id === id)[0];
+            $.ajax({
+                url: '../../Controller/productos/switch_controller.php',
+                type: 'POST',
+                data: { accion: 'delete', 'id': id, 'archivo':item.img},
+                success: function (res) {
+                    console.log(res);
+                    var result = JSON.parse(res);
+                    alertas(result);
+                }
+            });
 
-        $.ajax({
-            url: '../../Controller/productos/switch_controller.php',
-            type: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                $('#btnGuardarSpinner').css('visibility', 'hidden');
-
-                $('#modalProductos').modal('hide');
-
-                var result = JSON.parse(res);
-                alertas(result);
-            }
-        });
-    }else{
-        $('#btnGuardarSpinner').css('visibility', 'hidden');
-        Swal.fire({
-            icon: 'warning',
-            title: 'Oops...',
-            text: 'Tiene datos vacios!!'
-        })
-    }
+        }
+    });
 }
 
 function iniciar_Tabla() {
@@ -114,6 +71,7 @@ function iniciar_Tabla() {
             { title: "Nombre", data: "nombre"  },
             { title: "Descripcion", data: "descripcion"  },
             { title: "Categoria", data: "cate"  },
+            { title: "Foto" },
             { title: "Editar" },
             { title: "Eliminar" },
 
@@ -127,20 +85,33 @@ function iniciar_Tabla() {
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        '<button class="btn btn-outline-primary" onclick="abrirModalEditar('+data.id+')">' +
-                        '<i class="fas fa-edit"></i>' +
+                        '<button class="btn btn-outline-secondary" onclick="abrirModal('+data.id+')">' +
+                        '<i class="fas fa-images"></i>' +
                         '</button>'
                     );
                 }
             },
             {
                 "targets": 4,
+                "width": "5%",
+                "orderable": false,
+                "className": "text-center",
+                "mData": function (data, type, val) {
+                    return (
+                        '<a class="btn btn-outline-primary" href="producto_edit_admin.php?producto='+data.id+'">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</a>'
+                    );
+                }
+            },
+            {
+                "targets": 5,
                 "orderable": false,
                 "width": "5%",
                 "className": "text-center",
                 "mData": function (data, type, val) {
                     return (
-                        '<button class="btn btn-outline-danger" onclick="eliminarCategoria('+data.id+')">' +
+                        '<button class="btn btn-outline-danger" onclick="eliminarProducto('+data.id+')">' +
                         '<i class="fas fa-trash-alt"></i>' +
                         '</button>'
                     );
@@ -150,12 +121,6 @@ function iniciar_Tabla() {
         "order": [[0, "desc"]],
         "autoWidth": false
     });
-}
-
-function nombreFile() {
-    var name = document.getElementById("fileDoc").value.split("\\").pop();
-
-    $('#nameFileDoc').text(name);
 }
 
 function alertas(result) {
