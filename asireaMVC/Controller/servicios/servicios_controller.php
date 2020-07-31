@@ -39,6 +39,12 @@ class ServiciosController
         return array('servicios'=>$respuesta,'paginas'=>$paginas);
     }
 
+    static public function getServicioID($id)
+    {
+        $respuesta = DataServicios::getServicioID($id);
+        return $respuesta;
+    }
+
 }
 
 
