@@ -99,8 +99,6 @@ CKEDITOR.replace('editor_noticia', {
       </section>
     </div>
 
-
-    <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 </html>

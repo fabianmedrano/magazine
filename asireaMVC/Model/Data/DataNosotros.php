@@ -198,6 +198,12 @@ class DataNosotros
         }
     }
 
+    static public function escribirDirreccion($direccion){
+        $file = fopen(DATA_PATH."/direccion.txt", "w");
+        echo( $file);
+        fwrite($file, $direccion . PHP_EOL);
+        fclose($file);
+    }
     
     static public function deleteContactoID($id)
     {

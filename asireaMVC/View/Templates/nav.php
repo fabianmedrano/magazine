@@ -7,9 +7,16 @@
 
                 <ul class="navbar-nav mr-auto ml-xl-5">
 
-                    <li class="nav-item ">
-                        <a class="nav-link " href="../Nosotros/nosotros_edit.php"> NOSOTROS </a>
-
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navPro" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            NOSOTROS
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navPro" style="background: #00a072">
+                            <a class="nav-link" href="../Nosotros/nosotros_edit.php" >Cuerpo</a>
+                            <a class="nav-link" href="../Nosotros/carrusel_admin.php" > Carrusel</a>
+                            <a class="nav-link" href="../Nosotros/contacto_admin.php" > Contacto</a>
+                        </div>
                     </li>
 
                     <li class="nav-item dropdown">

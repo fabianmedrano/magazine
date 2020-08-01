@@ -51,6 +51,10 @@ if (isset($_POST["btn_accion"])) {
             $controlador_nosotros->updateContacto($_POST["id_contacto"] ,$_POST["input_contacto_edit"]);
 
             break;
+            case 'guardar_direccion':
+                $controlador_nosotros->escribirDirreccion($_REQUEST["direccion"]);
+    
+                break;
 
         default:
 

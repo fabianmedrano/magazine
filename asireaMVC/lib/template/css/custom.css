@@ -1307,10 +1307,11 @@ Home Page Content End
 Footer Start
 *********************************/
 .footer {
-	background: url(../images/footerbg.jpg) no-repeat;
+	margin-top: 30px;
+	background-color: #00A072;
 	width: 100%;
 	float: left;
-	padding: 60px 0 0;
+	padding: 15px 0 0;
 	background-size: cover;
 }
 .footer-widget {
@@ -3662,9 +3663,9 @@ a.read-post:hover {
 	font-weight: 600;
 }
 .gt-pagination .page-item.active .page-link, .gt-pagination .page-link:hover {
-	background: #66bb6a;
+	background: #00A072;
 	color: #fff;
-	border-color: #66bb6a;
+	border-color: #00A072;
 }
 .blog .blog-small-post .post-txt h5 {
 	font-weight: 600;

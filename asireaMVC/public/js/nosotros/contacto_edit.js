@@ -1,9 +1,12 @@
 var listaCate = [];
 
 $(document).ready(function () {
-    iniciarTablaTelefonos();
-    iniciarTablaRedes();
-    iniciarTablaCorreos();
+    $tel =getTelefonos();
+ $red=getRedes();
+ $email=getCorreos();
+    iniciarTablaTelefonos($tel);
+    iniciarTablaRedes( $red);
+    iniciarTablaCorreos($email);
 
     $(".Telefono").mask("9999-9999");
 
@@ -169,16 +172,41 @@ $(document).ready(function () {
 });
 
 
-async function iniciarTablaRedes() {
+function guardarDireccion() {
+
+    var data = new FormData();
+
+    data.append('btn_accion', 'guardar_direccion');
+    data.append('direccion',  $('#direccion').val());
+
+    $.ajax({
+        method: 'POST',
+        url: '../../Controller/nosotros/switch_controller.php',
+        data:data,
+        async: false,
+        dataType: "json",
+        processData: false,
+contentType: false,
+
+        success: function () {
+
+        },
+        error: function () {
+ 
+        }
+    });
+}
+
+
+async function iniciarTablaRedes($datos) {
     $('#red_list').dataTable({
-        data: getRedes(),
+        data: $datos,
         language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
         paging: false,
         scrollY: "170px",
         scrollCollapse: true,
-        scrollX: false,
         searching: false,
         columns: [
             { title: "Redes:", data: "contacto" },
@@ -211,16 +239,15 @@ async function iniciarTablaRedes() {
     });
 }
 
-async function iniciarTablaTelefonos() {
+async function iniciarTablaTelefonos($datos) {
     $('#telefonos_list').dataTable({
-        data: getTelefonos(),
+        data: $datos,
         language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
         paging: false,
         scrollY: "170px",
         scrollCollapse: true,
-        scrollX: false,
         searching: false,
         columns: [
             { title: "Teléfonos :", data: "contacto" },
@@ -253,15 +280,14 @@ async function iniciarTablaTelefonos() {
     });
 }
 
-async function iniciarTablaCorreos() {
+async function iniciarTablaCorreos($datos) {
     $('#correos_list').dataTable({
-        data: getCorreos(),
+        data:$datos ,
         language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
         paging: false,
         scrollY: "170px",
-        scrollX: false,
         scrollCollapse: true,
         searching: false,
         columns: [

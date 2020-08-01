@@ -48,7 +48,7 @@ $numnews = $controlador_proyecto->createFile();
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
 
 
@@ -96,7 +96,6 @@ $numnews = $controlador_proyecto->createFile();
   </div>
   <!--   FIN CKEDITOR   -->
 
-  <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 </html>

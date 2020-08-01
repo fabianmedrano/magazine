@@ -42,13 +42,13 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
 
 
 
   <div class="container">
-      <button class="btn btn-success " onclick="abrirModalRegistro()"><i class="far fa-plus-square"></i> Contacto</button>
+    <button class="btn btn-success " onclick="abrirModalRegistro()"><i class="far fa-plus-square"></i> Contacto</button>
     <div class="row">
       <div class="col">
 
@@ -79,9 +79,26 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
       </div>
 
     </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <textarea class="form-control" rows="5" id="direccion" name="direccion">
+          <?php
+          $file = fopen(DATA_PATH . "/direccion.txt", "r");
+          while (!feof($file)) {
 
+            echo trim( fgets($file));
+          }
+          fclose($file);
+          ?></textarea>
+        </div>
+
+        <button class="btn btn-success" id="guardar_direccion" onclick=" guardarDireccion()">Guardar dirreción</button>
+      </div>
+    </div>
   </div>
-  <?php include(TEMPLATES_PATH . "/footer.php") ?>
 
 
   <!--- START MODAL REGISTRO-->
@@ -98,7 +115,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
           <!-- START FORM -->
           <form id="form_contacto_create" name="form_contacto_create" method="post" action="../../Controller/nosotros/switch_controller.php">
 
-          <div id="error_contacto" class="error" role="alert"></div>
+            <div id="error_contacto" class="error" role="alert"></div>
             <div class="input-group mb-3">
               <div class="input-group-append">
                 <label class="input-group-text" for="select_tipo_contacto">Tipo de contacto</label>
@@ -122,7 +139,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="submit" form="form_contacto_create" class="btn btn-success" id="btn_accion"  disabled="true">
+          <button type="submit" form="form_contacto_create" class="btn btn-success" id="btn_accion" disabled="true">
 
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="btnGuardarSpinner" style="visibility: hidden"></span>
             Guardar
@@ -145,9 +162,9 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
         <div class="modal-body">
           <!-- START FORM -->
           <form id="form_contacto_edit" name="form_contacto_edit" method="post" action="../../Controller/nosotros/switch_controller.php">
-            
+
             <input type="hidden" id="id_contacto" name="id_contacto" value="">
-            
+
             <div id="error_contacto_edit" class="error" role="alert"></div>
             <div class="input-group">
               <div class="input-group-prepend">

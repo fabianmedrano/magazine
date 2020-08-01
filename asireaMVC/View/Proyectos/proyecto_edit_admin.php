@@ -32,7 +32,7 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
   <div class="container">
     <?php
@@ -90,8 +90,6 @@ CKEDITOR.replace('editor_proyecto', {
       </section>
     </div>
 
-
-    <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 </html>

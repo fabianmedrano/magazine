@@ -53,7 +53,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
 
 
@@ -92,7 +92,6 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
   </div>
-  <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 

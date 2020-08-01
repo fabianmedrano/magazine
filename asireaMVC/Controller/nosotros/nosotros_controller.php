@@ -61,4 +61,10 @@ class NosotrosController
             $respuesta = DataNosotros::updateContacto($id,$contacto);
             return $respuesta; 
     }
+        static public function escribirDirreccion($direccion)
+    {
+            $respuesta = DataNosotros::escribirDirreccion($direccion);
+            return $respuesta; 
+    }
+    
 }

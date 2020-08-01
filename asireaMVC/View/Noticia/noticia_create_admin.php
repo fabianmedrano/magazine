@@ -43,7 +43,7 @@ $numnews = $controlador_noticia->createFile();
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+  <?php include(TEMPLATES_PATH . "/nav.php") ?>
 
 
 
@@ -102,7 +102,6 @@ $numnews = $controlador_noticia->createFile();
   </div>
   <!--   FIN CKEDITOR   -->
 
-  <?php include(TEMPLATES_PATH . "/footer.php") ?>
 </body>
 
 </html>
