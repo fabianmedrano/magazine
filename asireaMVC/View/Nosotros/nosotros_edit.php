@@ -64,20 +64,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </h3>
   </div>
 
-      <div class="row">
-        <!-- INICIO File Input -->
-        
-      <div id="error_fileinput" style="width:100%" class="error" role="alert"></div>
-        
-        <div id="container-fileinput-carrusel">
-        <div class="form-group">
-              <label for="inputcarrusel" class="control-label">Carrusel</label>
-          <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
-        </div>
-        </div>
-    
-        <!-- FIN File Input -->
-      </div>
+
+      
       <div class="row">
         <div id="error_nosotros" style="width:100%" class="error" role="alert"></div>
       </div>

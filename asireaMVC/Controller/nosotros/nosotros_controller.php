@@ -24,5 +24,41 @@ class NosotrosController
         return $respuesta;
     }
 
+    public function insertContacto($tipo, $contacto)
+    {
+        $respuesta = DataNosotros::insertContacto($tipo, $contacto);
+        return $respuesta;
+    }
 
+
+    public function getTelefonos()
+    {
+        $respuesta = DataNosotros::getTelefonos();
+        return $respuesta;
+    }
+    
+    public function getRedes()
+    {
+        $respuesta = DataNosotros::getRedes();
+        return $respuesta;
+    }
+    public function getCorreos()
+    {
+        $respuesta = DataNosotros::getCorreos();
+        return $respuesta;
+    }
+
+    static public function deleteContacto($id)
+    {
+        $respuesta = DataNosotros::deleteContactoID($id);
+    
+        exit(json_encode($respuesta)); 
+    }
+
+    
+    static public function updateContacto($id,$contacto)
+    {
+            $respuesta = DataNosotros::updateContacto($id,$contacto);
+            return $respuesta; 
+    }
 }

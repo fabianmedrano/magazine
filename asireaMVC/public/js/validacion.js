@@ -17,6 +17,24 @@
         return (min && max && especiales);
     }
 
+    function validarURL($texto, $msg, $idError) {
+        return (!isUrlValid($texto)) ? pintarError($msg[1], $idError) : borrarError($msg[1], $idError);
+    }
+
+    function validarEmail($texto, $msg, $idError) {
+        return (isEmail($texto)) ? pintarError($msg[1], $idError) : borrarError($msg[1], $idError);
+    }
+    function validarTelefono($texto, $msg, $idError) {
+        return (!($texto.length === 9)) ? pintarError($msg[0], $idError) : borrarError($msg[0], $idError);
+    }
+    
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return (!regex.test(email));
+      }
+    function isUrlValid(url) {
+        return /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(url);
+    }
     function validarFileInput($FileInput, $msg, $idError) {
         return   (  !($FileInput)[0]  ) ? pintarError($msg[2], $idError) : borrarError($msg[2], $idError);
     }
@@ -33,5 +51,10 @@
             $("#" + $msg['error']).remove();
         }
         return true;
+    }
+
+    function limpiarError() {
+            $(".alert-warning").remove();
+    
     }
 
