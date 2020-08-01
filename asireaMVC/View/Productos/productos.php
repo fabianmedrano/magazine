@@ -2,7 +2,7 @@
 
   include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-  require_once CONTROLLER_PATH . "/servicios/servicios_controller.php";
+  require_once CONTROLLER_PATH . "/productos/ProductosController.php";
 
   ?>
 <!DOCTYPE html>
@@ -13,19 +13,19 @@
    <!-- CSS FILES START-->
    <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
-   <link href="<?php echo PUBLIC_PATH ?>/css/servicios/servicios.css" rel="stylesheet">
+   <link href="<?php echo PUBLIC_PATH ?>/css/productos/productos.css" rel="stylesheet">
    <!-- CSS FILES START-->
    <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
    
     
-    <title>Servicios</title>
+    <title>Productos</title>
 </head>
 <body>
 
 <?php include(TEMPLATES_PATH . "/header.php");
 
-    $controlador_servicio = new ServiciosController();
-    $servicio = $controlador_servicio->getServicioID($_GET["servicio"]);
+    $controlador_producto = new ProductosController();
+    $producto = $controlador_producto->getProductoID($_GET["producto"]);
 
     ?>
 
@@ -35,17 +35,30 @@
          <div class="col-md-7">
            <div class="card shadow p-3 mb-5 bg-white ">
 
+           <div class="page-header">
+               <ul class="post-meta">
+                 
+                 <li id="cat">
+                   <i class="fas fa-bars"></i>
+                   <?php
+                    echo ($producto['nombre_categoria']);
+                    ?></li>
+               </ul>
+               <hr />
+
+             </div>
+
              <div class="page-header">
                <h2>
                  <?php
-                  echo ($servicio['nombre']);
+                  echo ($producto['nombre']);
                   ?>
                  </h1>
              </div>
 
              <div class="cuerpo">
                <?php
-                echo ($servicio['descripcion']);
+                echo ($producto['descripcion']);
                 ?>
              </div>
              <input type="button" onclick="history.back()" style='width:110px; ' name="volver atrás" class="btn btn-success " value="volver atrás">

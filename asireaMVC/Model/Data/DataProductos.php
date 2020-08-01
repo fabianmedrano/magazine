@@ -13,7 +13,7 @@ class DataProductos   {
             $stmt = $con->getConexion()->prepare("call sp_leerProductos();");
 
             $stmt->execute();
-            $stmt->bind_result($id, $img, $nombre, $descripcion, $cate);
+            $stmt->bind_result($id, $img, $nombre, $descripcion, $id_cate, $cate);
 
             $array = array();
 
@@ -23,7 +23,43 @@ class DataProductos   {
                     'nombre'=> $nombre,
                     'descripcion'=> $descripcion,
                     'img'=> $img,
-                    'id_cate' => $cate
+                    'id_cate' => $id_cate,
+                    'cate' => $cate
+                ];
+
+                array_push($array, $obj);
+            }
+
+            return $array;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return $e->getMessage();
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+    static public function getProducto($id)
+    {
+        $con = null;
+        try {
+            $con = new Conexion();
+
+            $stmt = $con->getConexion()->prepare("call sp_getProducto(?);");
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $stmt->bind_result($id, $img, $nombre, $descripcion, $id_cate, $cate);
+
+            $array = array();
+
+            while($stmt->fetch()){
+                $obj = (object)[
+                    'id' => $id,
+                    'nombre'=> $nombre,
+                    'descripcion'=> $descripcion,
+                    'img'=> $img,
+                    'id_cate' => $id_cate,
+                    'cate' => $cate
                 ];
 
                 array_push($array, $obj);
@@ -55,7 +91,7 @@ class DataProductos   {
                 ];
                 return $msm;
             }else{
-                //unlink('../../public/documentos/'.$nombre);
+                unlink('../../public/img/productos/'.$imagen);
                 $msm = [
                     'status' => 0,
                     'mensaje' => "El producto ".$nombre." no fue agregado"
@@ -64,7 +100,7 @@ class DataProductos   {
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
-            //unlink('../../public/documentos/'.$archivo);
+            unlink('../../public/img/productos/'.$imagen);
             $msm = [
                 'status' => -1,
                 'mensaje' => $e->getMessage()
@@ -78,27 +114,41 @@ class DataProductos   {
 
  
 
-    static public function deleteProductos($id)
+    static public function deleteProductos($id, $archivo)
     {
+        $con = null;
         try {
             $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("call sp_eliminarProductos(?);");
-            $stmt->bind_param("i", $id);
+
+            $stmt = $con->getConexion()->prepare("CALL sp_eliminarProducto(?);");
+            $stmt->bind_param("i",$id);
             $stmt->execute();
-            $response = [
-                'status' => 'success',
-                'msg' => 'producto eliminado exitosamente'
-            ];
+
+            if($stmt->affected_rows > 0){
+                unlink('../../public/img/productos/'.$archivo);
+                $msm = [
+                    'status' => 1,
+                    'mensaje' => "El producto  fue eliminado correctamente"
+                ];
+                return $msm;
+            }else{
+                $msm = [
+                    'status' => 0,
+                    'mensaje' => "El producto no fue eliminado"
+                ];
+                return $msm;
+            }
+
         } catch (PDOException $e) {
-            echo $e->getMessage();   
-            $response = [
-                'status' => 'error',
-                'errors' => $e->getMessage()
+            echo $e->getMessage();
+            $msm = [
+                'status' => -1,
+                'mensaje' => $e->getMessage()
             ];
-        } finally { 
+            return $msm;
+        } finally {
             $con->cerrarConexion();
-       }
-        return (json_encode($response));
+        }
     }
     static public function getProductosID($id)
     {
@@ -126,13 +176,23 @@ class DataProductos   {
         try {
             $con = new Conexion();
             $stmt = $con->getConexion()->prepare("call sp_editarProductos(?,?,?,?,?);");
-            $stmt->bind_param("iisss",$id,$categoria, $nombre, $descripcion,$imagen);
+            $stmt->bind_param("isssi",$id,$imagen, $nombre, $descripcion, $categoria);
             $stmt->execute();
 
-            $response = [
-                'status' => 'success',
-                'msg' => 'producto actualizado'
-            ];
+            if($stmt->affected_rows > 0){
+                $msm = [
+                    'status' => 1,
+                    'mensaje' => "El producto ".$nombre." fue editdo correctamente"
+                ];
+                return $msm;
+            }else{
+                unlink('../../public/img/productos/'.$imagen);
+                $msm = [
+                    'status' => 0,
+                    'mensaje' => "El producto ".$nombre." no fue editdo"
+                ];
+                return $msm;
+            }
         } catch (PDOException $e) {
 
             echo $e->getMessage();
@@ -146,30 +206,88 @@ class DataProductos   {
 
         exit(json_encode($response));
     }
+
+
+<<<<<<< HEAD
+}
+=======
+    static public function getProductosCantidad()
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getCantidadProducto();");
+            $stmt->execute();
+            $stmt->bind_result($cantidad);
+            $stmt->fetch();
+            return $cantidad;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+    static public function getProductosPaginado($pagina, $cantidad)
+    {
+        try {
+            $Productos = array();;
+            $con = new Conexion();
+            $resultado = $con->getConexion()->prepare("CALL sp_getProductosPaginado(?, ? );");
+            $resultado->bind_param("ii", $pagina,$cantidad);// revisar como hace esto
+            $resultado->execute();
+        $resultado->store_result();
+    $resultado->bind_result($id, $imagen, $nombre,$descripcion, $id_categoria, $nombre_categoria);
+           
+            while ($resultado->fetch()) {
+                array_push(
+                    $Productos,
+                    array(
+                        "id" => $id,
+                        "imagen" => $imagen,
+                        "nombre" => $nombre,
+                        "descripcion" => $descripcion,
+                        "id_categoria" => $id_categoria,
+                        "nombre_categoria" => $nombre_categoria
+                        
+                    )
+                );
+            }
+        
+            /* cerrar la sentencia */
+            $resultado->close();
+             
+            return $Productos;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
+    static public function getProductoID($id)
+    {
+        try {
+            $con = new Conexion();
+            $stmt = $con->getConexion()->prepare("CALL sp_getProductoID(?);");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+
+            $stmt->bind_result($id, $imagen, $nombre, $descripcion, $id_categoria, $nombre_categoria);
+            $stmt->fetch();
+            return array('id' => $id, 'imagen' => $imagen, 'nombre' => $nombre, 'descripcion' => $descripcion, 'id_categoria' => $id_categoria, 'nombre_categoria' => $nombre_categoria);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } finally {
+            $con->cerrarConexion();
+        }
+    }
+
  
 
 
 
 }
 
-/*
-
-$producto = new BDProductos();
-
-if(isset($_REQUEST["obtener_producto"])){
-    echo $prueba->obtener_producto();
-}
-
-if(isset($_REQUEST["registrar_producto"])){
-    echo $prueba->registrar_producto($_REQUEST["imagen"],$_REQUEST["nombre"], $_REQUEST["descripcion"],$_REQUEST["id_categoria"]);
-}
-
-
-if(isset($_REQUEST["eliminar_producto"])){
-    echo $prueba->eliminar_producto($_REQUEST["id"]);
-}
-
-if(isset($_REQUEST["editar_producto"])){
-    echo $prueba->editar_producto($_REQUEST["id"], $_REQUEST["imagen"],$_REQUEST["nombre"], $_REQUEST["descripcion"],$_REQUEST["id_categoria"]);
-}
-*/
+>>>>>>> develop

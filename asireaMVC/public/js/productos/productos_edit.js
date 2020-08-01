@@ -1,77 +1,62 @@
 $listaProductos = {};
-$listaCate = [
-    {"id": 1, "nombre": "Peces"},
-    {"id": 2, "nombre": "Animales"},
-    {"id": 3, "nombre": "Plantas"},
-];
 
 $(document).ready(function () {
-    //obtener_productos();
+    obtener_productos();
 });
 
 function obtener_productos() {
+    $('#divCargando').css('visibility', 'visible');
     $.ajax({
         url: "../../Controller/productos/switch_controller.php",
         type: "POST",
         data: {accion: 'get'},
         success: function (result) {
+            $('#divCargando').css('visibility', 'hidden');
+            console.log(result);
             $listaProductos = jQuery.parseJSON(result);
             iniciar_Tabla();
         }
     });
 }
 
-function abriModalRegistrar() {
-    $('#catePro').html('<option value="-1"> --- SELECCIONE UNA OPCIÓN ---</option>');
-    $('#nombrePro').val('');
-    $('#desPro').val('');
+function abrirModal(id) {
+    var item = $listaProductos.filter(x => x.id === id)[0];
 
-    $.each($listaCate, function( index, value ) {
-        $('#catePro').append('<option value="'+value.id+'">'+value.nombre+'</option>')
-    });
+    $('#modalBody').html(
+        '<img src="../../public/img/productos/'+item.img+'" alt="Foto" style="height: 100%; width: 100%;">'
+    );
 
-    $('#btnGuardarPro').attr('onclick', "registrarProducto()");
-    $("#modalProductos").modal('show');
+    $('#modalImg').modal('show');
 }
 
-function registrarProducto() {
-    $('#btnGuardarSpinner').css('visibility', 'visible');
-    var nombre = $('#nombrePro').val();
-    var cate = $('#catePro').val();
-    var descrip = $('#desPro').val();
-    var file = document.getElementById('fileDoc');
+function eliminarProducto(id) {
+    alert(id);
+    Swal.fire({
+        title: 'Eliminar',
+        text: "Esta acción no es reversible",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: 'btn btn-secondary',
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
 
-    if(nombre !== "" && cate !== "-1" && descrip !== "" && file.value !== ""){
-        var data = new FormData();
-        data.append('accion', 'insert');
-        data.append('nombrePro', nombre);
-        data.append('catePro', cate);
-        data.append('descripPro', descrip);
-        data.append('file', file.files[0]);
+        if (result.value) {
+            var item = $listaProductos.filter(x => x.id === id)[0];
+            $.ajax({
+                url: '../../Controller/productos/switch_controller.php',
+                type: 'POST',
+                data: { accion: 'delete', 'id': id, 'archivo':item.img},
+                success: function (res) {
+                    console.log(res);
+                    var result = JSON.parse(res);
+                    alertas(result);
+                }
+            });
 
-        $.ajax({
-            url: '../../Controller/productos/switch_controller.php',
-            type: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                $('#btnGuardarSpinner').css('visibility', 'hidden');
-
-                $('#modalProductos').modal('hide');
-
-                var result = JSON.parse(res);
-                alertas(result);
-            }
-        });
-    }else{
-        $('#btnGuardarSpinner').css('visibility', 'hidden');
-        Swal.fire({
-            icon: 'warning',
-            title: 'Oops...',
-            text: 'Tiene datos vacios!!'
-        })
-    }
+        }
+    });
 }
 
 function iniciar_Tabla() {
@@ -83,36 +68,53 @@ function iniciar_Tabla() {
         data: $listaProductos,
         columns: [
 
-            { title: "ID", data: "id"  },
             { title: "Nombre", data: "nombre"  },
             { title: "Descripcion", data: "descripcion"  },
-            { title: "Categoria", data: "categoria"  },
-
-
+            { title: "Categoria", data: "cate"  },
+            { title: "Foto" },
             { title: "Editar" },
             { title: "Eliminar" },
 
         ],
-        "language": {"url": "json/configDatatable.json"},
+        "language": {"url": "../../public/configDatatable.json"},
         "columnDefs": [
             {
-                "targets": 4,
-                "data": null,
-                "orderable": false,
+                "targets": 3,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "orderable": false,
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='modificarProducto' type='button' data-toggle='tooltip' data-placement='top' title='Modificar selección' class='cont-icono btn btn-outline-succes'><i class='fas fa-edit' onclick='abrirEditar(" + data.id + ")' ></i></button>";
+                    return (
+                        '<button class="btn btn-outline-secondary" onclick="abrirModal('+data.id+')">' +
+                        '<i class="fas fa-images"></i>' +
+                        '</button>'
+                    );
+                }
+            },
+            {
+                "targets": 4,
+                "width": "5%",
+                "orderable": false,
+                "className": "text-center",
+                "mData": function (data, type, val) {
+                    return (
+                        '<a class="btn btn-outline-primary" href="producto_edit_admin.php?producto='+data.id+'">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</a>'
+                    );
                 }
             },
             {
                 "targets": 5,
-                "data": null,
                 "orderable": false,
                 "width": "5%",
-                "className": "text-center bg-white",
+                "className": "text-center",
                 "mData": function (data, type, val) {
-                    return "<button id='eliminarProducto' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar selección' class='cont-icono btn btn-outline-danger'><i class='far fa-trash-alt' onclick='eliminar_servicios(" + data.id + ")'></i></button>";
+                    return (
+                        '<button class="btn btn-outline-danger" onclick="eliminarProducto('+data.id+')">' +
+                        '<i class="fas fa-trash-alt"></i>' +
+                        '</button>'
+                    );
                 }
             }
         ],
@@ -121,15 +123,10 @@ function iniciar_Tabla() {
     });
 }
 
-function nombreFile() {
-    var name = document.getElementById("fileDoc").value.split("\\").pop();
-
-    $('#nameFileDoc').text(name);
-}
-
 function alertas(result) {
     if(result.status === 1){
         alertify.success(result.mensaje);
+        obtener_productos();
     }else if(result.status === 0){
         Swal.fire({
             icon: 'warning',

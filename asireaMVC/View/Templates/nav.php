@@ -18,13 +18,13 @@
                             PRODUCTOS
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navPro" style="background: #00a072">
-                            <a class="nav-link" href="../Productos/productos_edit.php" >PRODUCTOS</a>
+                            <a class="nav-link" href="../Productos/productos_list_view_admin.php" >PRODUCTOS</a>
                             <a class="nav-link" href="../Productos/categorias_edit.php" >CATEGORIA</a>
                         </div>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link " href=""> SERVICIOS </a>
+                        <a class="nav-link " href="../Servicios/servicios_edit.php"> SERVICIOS </a>
 
                     </li>
                     <li class="nav-item ">

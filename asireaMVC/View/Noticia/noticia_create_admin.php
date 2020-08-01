@@ -1,8 +1,6 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
-
 $controlador_noticia = new NoticiaController();
 $numnews = $controlador_noticia->createFile();
 
