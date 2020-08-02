@@ -25,6 +25,13 @@ require_once CONTROLLER_PATH . "/proyectos/proyecto_controller.php";
   <script src="<?php echo PUBLIC_PATH ?>/js/proyectos/proyecto_edit.js"></script>
   
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
+  
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/textmatch/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autolink/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autoembed/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/image2/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embedbase/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embed/plugin.js"></script>
   <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
 
 

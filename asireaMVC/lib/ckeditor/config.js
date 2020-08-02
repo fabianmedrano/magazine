@@ -27,7 +27,8 @@ CKEDITOR.editorConfig = function (config) {
 		{ name: 'others', groups: [ 'others' ] },
 		{ name: 'about', groups: [ 'about' ] }
 	];
-
-	config.removeButtons = 'Save,NewPage,Print,Preview,Source,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CreateDiv,BidiLtr,BidiRtl,Language,PageBreak,Iframe,About,Smiley,ShowBlocks,Flash,Anchor';
-
+	config.resize_enabled = true;
+	config.removeButtons = 'Save,NewPage,Print,Preview,Source,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CreateDiv,BidiLtr,BidiRtl,Language,PageBreak,About,Smiley,ShowBlocks,Flash,Anchor';
+	config.extraPlugins = 'textmatch,autoembed,image2,embedbase,embed';
+	config.embed_provider = '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
 };

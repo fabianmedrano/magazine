@@ -31,6 +31,12 @@ $numnews = $controlador_proyecto->createFile();
   <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
 
 
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/textmatch/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autolink/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autoembed/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/image2/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embedbase/plugin.js"></script>
+  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embed/plugin.js"></script>
 
   
   <!--   JS Files END  -->

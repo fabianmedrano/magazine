@@ -13,7 +13,6 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
   <?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
-  <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/nosotros/nosotros.css" rel="stylesheet">
   <title>Nosotros</title>
 
@@ -72,7 +71,8 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
       <!-- FIN CARRUSEL -->
 
       <div class="container">
-
+<div class="row d-flex justify-content-center">
+  <div class="col-md-9">
       <!-- INICIO CUERPO INFORMACION NOSOTROS-->
       <div class="card shadow p-3 mb-5 bg-white ">
       <div class="nosotros-cuerpo">
@@ -83,8 +83,10 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
       </div>
       </div>
       <!-- INICIO CUERPO INFORMACION NOSOTROS-->
-
+      </div>
     </div>
+    </div>
+    
     <?php include(TEMPLATES_PATH . "/footer.php")
     ?>
 </body>
